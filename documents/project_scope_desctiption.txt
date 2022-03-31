@@ -1,0 +1,4 @@
+Projektet syftar skapa en android-applikation som kan användas för att recensera och betygsätta filmer och serier. 
+Användaren ska kunna se vilka filmer/serier den har sett och vad den tyckte om dem. 
+Användaren ska få tillgång till data såsom vilka dens favoritfilmer är och hur den upplever att en series kvalitet förändrats genom säsongen.
+Användaren ska kunna söka efter existerande filmer och serier och få information om dem.
