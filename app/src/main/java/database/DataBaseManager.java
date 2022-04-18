@@ -24,16 +24,23 @@ public class DataBaseManager extends SQLiteOpenHelper{
      * @param context is the main activity
      */
     public DataBaseManager(@Nullable Context context) {
-        super(context, "name", null, 1);
+        super(context, null, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        createRatingTable(sqLiteDatabase);
+    }
 
+    private void createRatingTable(SQLiteDatabase sqLiteDatabase) {
+        String createTableRating = " CREATE TABLE " + "RATING_TABLE" +
+                " ( " + "RATING_VALUE" + " INTEGER "
+                + " ) ";
+
+        sqLiteDatabase.execSQL(createTableRating);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {}
 
-    }
 }
