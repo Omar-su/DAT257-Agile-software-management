@@ -1,4 +1,4 @@
-package com.example.eurythmics.models;
+package com.example.eurythmics.api.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

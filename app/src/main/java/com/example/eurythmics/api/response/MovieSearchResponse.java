@@ -1,6 +1,6 @@
-package com.example.eurythmics.response;
+package com.example.eurythmics.api.response;
 
-import com.example.eurythmics.models.Movie;
+import com.example.eurythmics.api.models.Movie;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

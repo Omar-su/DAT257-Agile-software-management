@@ -1,4 +1,4 @@
-package com.example.eurythmics;
+package com.example.eurythmics.api;
 
 public class Credentials {
 

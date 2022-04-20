@@ -1,6 +1,6 @@
-package com.example.eurythmics;
+package com.example.eurythmics.api;
 
-import com.example.eurythmics.response.MovieSearchResponse;
+import com.example.eurythmics.api.response.MovieSearchResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

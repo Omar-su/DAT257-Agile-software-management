@@ -1,7 +1,7 @@
-package com.example.eurythmics.request;
+package com.example.eurythmics.api.request;
 
-import com.example.eurythmics.Credentials;
-import com.example.eurythmics.MovieApi;
+import com.example.eurythmics.api.Credentials;
+import com.example.eurythmics.api.MovieApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
