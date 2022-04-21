@@ -23,12 +23,13 @@ public class MainActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottom_bar_nav);
 
         // init compoments
-        //initBottomNavigationOnClick();
+        initBottomNavigationOnClick();
 
 
 
     }
     private  void  initBottomNavigationOnClick(){
+        /*
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment fragment = null;
             switch (item.getItemId()){
@@ -44,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new profileFragment();
                     break;
             }
+            getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
             return true;
         });
+        */
     }
 }
