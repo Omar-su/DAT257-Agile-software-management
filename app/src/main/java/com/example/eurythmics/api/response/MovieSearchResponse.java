@@ -1,6 +1,6 @@
 package com.example.eurythmics.api.response;
 
-import com.example.eurythmics.api.models.Movie;
+import com.example.eurythmics.api.models.MovieModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,13 +13,13 @@ public class MovieSearchResponse {
 
     @SerializedName("total_results") @Expose() private int total_count;
 
-    @SerializedName("result") @Expose() private List<Movie> movies;
+    @SerializedName("result") @Expose() private List<MovieModel> movies;
 
     public int getTotal_count(){
         return total_count;
     }
 
-    public List<Movie> getMovies(){
+    public List<MovieModel> getMovies(){
         return movies;
     }
 

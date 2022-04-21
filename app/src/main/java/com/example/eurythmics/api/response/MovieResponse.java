@@ -1,6 +1,6 @@
 package com.example.eurythmics.api.response;
 
-import com.example.eurythmics.api.models.Movie;
+import com.example.eurythmics.api.models.MovieModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,9 +9,9 @@ import com.google.gson.annotations.SerializedName;
  */
 public class MovieResponse {
 
-    @SerializedName("result") @Expose() private Movie movie;
+    @SerializedName("result") @Expose() private MovieModel movie;
 
-    public Movie getMovie(){
+    public MovieModel getMovie(){
         return movie;
     }
 
