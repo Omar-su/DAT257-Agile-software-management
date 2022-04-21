@@ -3,16 +3,18 @@
 
     <item
         android:id ="@+id/homeFragment"
+        android:icon="@drawable/ic_home"
         android:title="Home"
-        android:icon="@drawable/ic_home"/>
+        />
 
     <item
         android:id ="@+id/ratingFragment"
-        android:title="Rating"
         android:icon="@drawable/ic_ratingstar"
-        android:iconTint="#DBC9CD"/>
+        android:title="Rating"
+         />
 
     <item android:id ="@+id/profileFragment"
+        android:icon="@drawable/ic_profile"
         android:title="Profile"
-        android:icon="@drawable/ic_profile"/>
+        />
 </menu>
