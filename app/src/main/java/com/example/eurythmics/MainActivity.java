@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottom_bar_nav);
 
         // init compoments
-        initBottomNavigationOnClick();
+        //initBottomNavigationOnClick();
 
 
 
