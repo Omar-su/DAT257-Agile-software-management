@@ -2,25 +2,33 @@ package com.example.eurythmics;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
+
 
 import android.os.Bundle;
 
+import com.example.eurythmics.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    ActivityMainBinding binding;
     private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        bottomNav = findViewById(R.id.bottom_bar_nav);
+
+        bottomNav = findViewById(R.id.bottomNav);
+        // start app with displaying Home Fragment
+        getSupportFragmentManager().beginTransaction().add(R.id.FrameLayout_main, new HomeFragment()).commit();
+
+
+
+
 
         // init compoments
         initBottomNavigationOnClick();
@@ -28,26 +36,29 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     private  void  initBottomNavigationOnClick(){
-        /*
+
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment fragment = null;
             switch (item.getItemId()){
-                case R.id.homeFragment:
+                case R.id.nav_home:
                     fragment = new HomeFragment();
                     break;
 
-                case R.id.ratingFragment:
+                case R.id.nav_rating:
                     fragment = new ratingFragment();
                     break;
 
-                case R.id.profileFragment:
+                case R.id.nav_profile:
                     fragment = new profileFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
             return true;
         });
-        */
+
     }
+
+
 }

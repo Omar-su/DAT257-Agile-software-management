@@ -3,19 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/jenny/StudioProjects/DAT257-Agile-software-management/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/jenny/StudioProjects/DAT257-Agile-software-management/app/src/main/res/layout/fragment_base.xml" value="0.21557971014492755" />
-        <entry key="..\:/Users/jenny/StudioProjects/DAT257-Agile-software-management/app/src/main/res/layout/fragment_home.xml" value="0.21693840579710144" />
-        <entry key="..\:/Users/jenny/StudioProjects/DAT257-Agile-software-management/app/src/main/res/layout/fragment_profile.xml" value="0.21693840579710144" />
-        <entry key="..\:/Users/jenny/StudioProjects/DAT257-Agile-software-management/app/src/main/res/layout/fragment_rating.xml" value="0.21693840579710144" />
-        <entry key="..\:/Users/jenny/StudioProjects/DAT257-Agile-software-management/app/src/main/res/menu/bottom_menu.xml" value="0.25" />
+        <entry key="..\:/Users/omars/Downloads/DAT257-Agile-project/app/src/main/res/layout/activity_main.xml" value="0.29583333333333334" />
+        <entry key="..\:/Users/omars/Downloads/DAT257-Agile-project/app/src/main/res/layout/fragment_home.xml" value="0.29583333333333334" />
+        <entry key="..\:/Users/omars/Downloads/DAT257-Agile-project/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Users/omars/Downloads/DAT257-Agile-project/app/src/main/res/layout/fragment_rating.xml" value="0.2015625" />
+        <entry key="..\:/Users/omars/Downloads/DAT257-Agile-project/app/src/main/res/menu/bottom_menu.xml" value="0.5" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="16" project-jdk-type="JavaSDK" />
 </project>

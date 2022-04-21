@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_bar_nav"
-    app:startDestination="@id/ratingFragment"
+    app:startDestination="@id/nav_rating"
     app:itemIconTint = "@drawable/bottom_nav_icon_selector"
     app:itemTextColor="@drawable/bottom_nav_icon_selector">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_home"
         android:name="com.example.eurythmics.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/ratingFragment"
+        android:id="@+id/nav_rating"
         android:name="com.example.eurythmics.ratingFragment"
         android:label="fragment_rating"
         tools:layout="@layout/fragment_rating" />
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/nav_profile"
         android:name="com.example.eurythmics.profileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
