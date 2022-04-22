@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-public class MovieController {
+public class MovieService {
+
+
 
     public void saveMovieToDB(Movie movie){
         try{
