@@ -10,7 +10,7 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#6e2032"
+        android:background="#6F303B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -34,7 +34,7 @@
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:background="#6e2032"
+        android:background="#6F303B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
