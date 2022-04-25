@@ -8,6 +8,15 @@
 
     tools:context=".ratingFragment">
 
+    <android.widget.ImageView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#6F303B"
+        app:layout_constraintBottom_toBottomOf="@+id/action_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/action_search" />
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/action_search"
         android:layout_width="273dp"
