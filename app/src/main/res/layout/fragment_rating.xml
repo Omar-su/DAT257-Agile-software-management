@@ -5,7 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6F0000"
+
     tools:context=".ratingFragment">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/action_search"
+        android:layout_width="273dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:showAsAction="ifRoom|collapseActionView"
+        tools:ignore="MissingConstraints" />
+
 
     <TextView
         android:id="@+id/textView"
