@@ -2,13 +2,16 @@ package com.example.eurythmics;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SearchView;
+
+import com.example.eurythmics.api.MovieApi;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,10 +72,12 @@ public class ratingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rating, container, false);
 
-        //searchBar = view.findViewById(R.id.action_search);
+
+
+        searchBar = view.findViewById(R.id.action_search);
         nextButton = view.findViewById(R.id.next_but);
 
-        //initSearchBar();
+        initSearchBar();
         initNextButton();
         return view;
     }
@@ -91,11 +96,13 @@ public class ratingFragment extends Fragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
+                Log.d("myTag", s);
                 return false;
             }
         });
