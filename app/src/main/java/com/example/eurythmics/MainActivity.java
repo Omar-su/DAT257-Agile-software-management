@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.example.eurythmics.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.eurythmics.Movie.*;
 
 import database.DataBaseManager;
 
@@ -28,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
         //initialise database manager and thus database
         dataBaseManager = new DataBaseManager(this);
-        System.out.println("Added?: " + dataBaseManager.addMovie("Mulle Meck", "Han var typ taliban eller nåt"));
+
+        //initialise movie service
+        MovieService ms = new MovieService(dataBaseManager);
+
 
         bottomNav = findViewById(R.id.bottomNav);
         // start app with displaying Home Fragment
