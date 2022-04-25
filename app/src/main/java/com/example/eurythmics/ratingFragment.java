@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +20,9 @@ public class ratingFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    // Search view
+    private SearchView searchBar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -60,6 +64,25 @@ public class ratingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rating, container, false);
+
+        searchBar = view.findViewById(R.id.action_search);
+
+        initSearch();
+
         return view;
+    }
+
+    private void initSearch() {
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
     }
 }
