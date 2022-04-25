@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.example.eurythmics.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import database.DataBaseManager;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -15,12 +18,17 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private BottomNavigationView bottomNav;
 
+    DataBaseManager dataBaseManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //initialise database manager and thus database
+        dataBaseManager = new DataBaseManager(this);
+        System.out.println("Added?: " + dataBaseManager.addMovie("Mulle Meck", "Han var typ taliban eller nåt"));
 
         bottomNav = findViewById(R.id.bottomNav);
         // start app with displaying Home Fragment
