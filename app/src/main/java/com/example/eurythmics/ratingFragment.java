@@ -69,10 +69,10 @@ public class ratingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rating, container, false);
 
-        searchBar = view.findViewById(R.id.action_search);
+        //searchBar = view.findViewById(R.id.action_search);
         nextButton = view.findViewById(R.id.next_but);
 
-        initSearchBar();
+        //initSearchBar();
         initNextButton();
         return view;
     }
