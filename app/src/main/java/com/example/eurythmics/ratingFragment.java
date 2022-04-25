@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SearchView;
 
 /**
@@ -23,6 +24,9 @@ public class ratingFragment extends Fragment {
 
     // Search view
     private SearchView searchBar;
+
+    //next button
+    private Button nextButton;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -66,13 +70,24 @@ public class ratingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_rating, container, false);
 
         searchBar = view.findViewById(R.id.action_search);
+        nextButton = view.findViewById(R.id.next_but);
 
-        initSearch();
-
+        initSearchBar();
+        initNextButton();
         return view;
     }
 
-    private void initSearch() {
+    private void initNextButton() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, new EditRatingFragment()).commit();
+
+            }
+        });
+    }
+
+    private void initSearchBar() {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
