@@ -19,28 +19,96 @@ import java.util.List;
  */
 public class DataBaseManager extends SQLiteOpenHelper{
 
+    private static final String DATABASE_NAME = "moviesDatabase";
+    private static final int DATABSE_VERSION = 4;
+
+    private static final String TABLE_MOVIES = "movies";
+    private static final String TABLE_REVIEWS = "reviews";
+
+    private static final String COLUMN_MOVIES_TITLE = "title";
+    private static final String COLUMN_MOVIES_DESCRIPTION = "description";
+    private static final String COLUMN_REVIEW_OVERALL = "overallRating";
+    private static final String COLUMN_REVIEW_THOUGHTS = "thoughts";
+
+
     /**
      * Generates a database for storing the created tables
      * @param context is the main activity
      */
     public DataBaseManager(@Nullable Context context) {
-        super(context, null, null, 1);
+        super(context, DATABASE_NAME, null, DATABSE_VERSION);
+    }
+
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        createRatingTable(sqLiteDatabase);
+        createMovieTable(sqLiteDatabase);
+        createReviewsTable(sqLiteDatabase);
     }
 
-    private void createRatingTable(SQLiteDatabase sqLiteDatabase) {
-        String createTableRating = " CREATE TABLE " + "RATING_TABLE" +
-                " ( " + "RATING_VALUE" + " INTEGER "
-                + " ) ";
+    private void createMovieTable(SQLiteDatabase sqLiteDatabase) {
+        String sMovieTable = "CREATE TABLE "+ TABLE_MOVIES +" ( " +
+                COLUMN_MOVIES_TITLE + " TEXT PRIMARY KEY, " +
+                COLUMN_MOVIES_DESCRIPTION + " TEXT" +
+                " )";
 
-        sqLiteDatabase.execSQL(createTableRating);
+        sqLiteDatabase.execSQL(sMovieTable);
+    }
+
+    private void createReviewsTable(SQLiteDatabase sqLiteDatabase) {
+        String sReviewTable = "CREATE TABLE "+ TABLE_REVIEWS +" ( " +
+                COLUMN_MOVIES_TITLE + " TEXT PRIMARY KEY, " +
+                COLUMN_REVIEW_OVERALL + " REAL, " +
+                COLUMN_REVIEW_THOUGHTS + " TEXT, " +
+                "FOREIGN KEY ("+COLUMN_MOVIES_TITLE+") REFERENCES "+TABLE_MOVIES+"("+COLUMN_MOVIES_TITLE+")" +
+                " )";
+
+        sqLiteDatabase.execSQL(sReviewTable);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {}
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldV, int newV) {
+        if(oldV != newV){
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MOVIES);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_REVIEWS);
+            onCreate(sqLiteDatabase);
+        }
+    }
+
+    public boolean addMovie(String title, String description){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_MOVIES_TITLE, title);
+        contentValues.put(COLUMN_MOVIES_DESCRIPTION, description);
+
+        return sqLiteDatabase.insert(TABLE_MOVIES, null, contentValues) != -1;
+    }
+
+    public boolean addReview(String title, double overallRating, String thoughts){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_MOVIES_TITLE, title);
+        contentValues.put(COLUMN_REVIEW_OVERALL, overallRating);
+        contentValues.put(COLUMN_REVIEW_THOUGHTS, thoughts);
+
+        return sqLiteDatabase.insert(TABLE_REVIEWS, null, contentValues) != -1;
+    }
+
+    public Cursor getAllMovies(){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_MOVIES, null);
+    }
+
+    public Cursor getAllReviews(){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_REVIEWS, null);
+    }
 
 }

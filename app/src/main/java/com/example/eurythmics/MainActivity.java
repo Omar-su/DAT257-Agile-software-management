@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.example.eurythmics.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.eurythmics.Movie.*;
+
+import database.DataBaseManager;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -15,11 +19,19 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private BottomNavigationView bottomNav;
 
+    DataBaseManager dataBaseManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //initialise database manager and thus database
+        dataBaseManager = new DataBaseManager(this);
+
+        //initialise movie service
+        MovieService ms = new MovieService(dataBaseManager);
 
 
         bottomNav = findViewById(R.id.bottomNav);
