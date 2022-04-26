@@ -12,9 +12,9 @@
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:background="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/decrement"
         app:layout_constraintTop_toTopOf="@+id/number"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="40dp" />
+        tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/increment"
@@ -22,10 +22,10 @@
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:src="@drawable/ic_baseline_arrow_circle_right_24"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="80dp" />
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/number"
@@ -35,9 +35,9 @@
         android:gravity="center"
         android:inputType="number"
         android:selectAllOnFocus="true"
+        app:layout_constraintStart_toEndOf="@+id/decrement"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="40dp"
         tools:text="99" />
 
     <ImageButton
