@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.eurythmics.api.models.MovieModel;
+import com.example.eurythmics.api.request.MovieApiClient;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class MovieRepo {
 
     private static MovieRepo instance;
 
-    private MutableLiveData<List<MovieModel>> mMovies = new MutableLiveData<>();
+    private MovieApiClient movieApiClient;
 
     public static MovieRepo getInstance(){
         if (instance  == null){
@@ -21,10 +22,10 @@ public class MovieRepo {
     }
 
     private MovieRepo(){
-        mMovies = new MutableLiveData<>();
+        movieApiClient = MovieApiClient.getInstance();
     }
 
     public LiveData<List<MovieModel>> getMovies(){
-        return mMovies;
+        return movieApiClient.getMovies();
     }
 }
