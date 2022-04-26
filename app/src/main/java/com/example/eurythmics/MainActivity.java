@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private BottomNavigationView bottomNav;
 
-    private MovieListViewModel movieListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +38,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.FrameLayout_main, new HomeFragment()).commit();
 
 
-        movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
 
-        observerAnyChange();
+
 
         // init compoments
         initBottomNavigationOnClick();
@@ -52,17 +50,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-    private void observerAnyChange() {
-        movieListViewModel.getMovies().observe(this, new Observer<List<MovieModel>>() {
-            @Override
-            public void onChanged(List<MovieModel> movieModels) {
-                // observing for any data change
-
-            }
-        });
-    }
 
 
 

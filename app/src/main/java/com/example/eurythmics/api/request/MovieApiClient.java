@@ -1,7 +1,6 @@
 package com.example.eurythmics.api.request;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -46,6 +45,8 @@ public class MovieApiClient {
     }
 
 
+
+    // Method that will be called in other classes
     public void searchMoviesApi(String query){
         if (retrieveMoviesRunnable != null){
             retrieveMoviesRunnable = null;
@@ -61,9 +62,20 @@ public class MovieApiClient {
                 // Canceling the retrofit call
                 myHandler.cancel(true);
             }
-        },5000, TimeUnit.MICROSECONDS );
+        },3000, TimeUnit.MILLISECONDS );
 
     }
+
+
+
+
+
+
+
+
+
+
+
 
     // retrieving data from rest api by runnable class
     private class RetrieveMoviesRunnable implements Runnable{
@@ -81,13 +93,14 @@ public class MovieApiClient {
 
             // getting the response
             try{
-                Response response = getMovies(query).execute();
+                Response<MovieSearchResponse> response = getMovies(query).execute();
 
                 if (cancelRequest){
                     return;
                 }
 
                 if (response.code() == 200){
+                    assert response.body() != null;
                     List<MovieModel> movies = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
                     mMovies.postValue(movies);
                 }else {
