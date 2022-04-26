@@ -11,7 +11,7 @@ public interface MovieApi {
 
 //    https://api.themoviedb.org/3/movie/popular?api_key=0279281a6298491c6675460bbefb7ccf
 
-    @GET("3/movie/{category}")
+    @GET("3/movie/{category}?")
     Call<MovieSearchResponse> searchMovieByCategory(
             @Path("category") String category,
             @Query("api_key") String key
@@ -19,7 +19,7 @@ public interface MovieApi {
 
 
     // https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher
-    @GET("3/search/movie")
+    @GET("3/search/movie?")
     Call<MovieSearchResponse> searchMovieByName(
             @Query("api_key") String key,
             @Query("query") String query

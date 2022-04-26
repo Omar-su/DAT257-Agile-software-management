@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.nav_rating:
-                    fragment = new ratingFragment();
+                    fragment = new RatingFragment();
                     break;
 
                 case R.id.nav_profile:
-                    fragment = new profileFragment();
+                    fragment = new ProfileFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();

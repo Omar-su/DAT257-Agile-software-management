@@ -10,15 +10,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.MovieApi;
+import com.example.eurythmics.api.models.MovieModel;
+import com.example.eurythmics.api.request.ServiceApi;
+import com.example.eurythmics.api.response.MovieSearchResponse;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ratingFragment#newInstance} factory method to
+ * Use the {@link RatingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ratingFragment extends Fragment {
+public class RatingFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +48,7 @@ public class ratingFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ratingFragment() {
+    public RatingFragment() {
         // Required empty public constructor
     }
 
@@ -48,8 +61,8 @@ public class ratingFragment extends Fragment {
      * @return A new instance of fragment ratingFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ratingFragment newInstance(String param1, String param2) {
-        ratingFragment fragment = new ratingFragment();
+    public static RatingFragment newInstance(String param1, String param2) {
+        RatingFragment fragment = new RatingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -102,9 +115,61 @@ public class ratingFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                Log.d("myTag", s);
+                getRetrofitResponse(s);
                 return false;
             }
         });
+    }
+
+    private void getRetrofitResponse(String searchString) {
+
+        MovieApi movieApi = ServiceApi.getMovieApi();
+
+        Call<MovieSearchResponse> movieCategory = movieApi.searchMovieByName( Credentials.API_KEY, searchString);
+
+        movieCategory.enqueue(new Callback<MovieSearchResponse>() {
+            @Override
+            public void onResponse(Call<MovieSearchResponse> call, Response<MovieSearchResponse> response) {
+                if (response.code() == 200){
+
+                    List<MovieModel> movies = new ArrayList<>(response.body().getMovies());
+
+                    for (MovieModel movieModel: movies){
+                        Log.d("Tag", "successful  =============" + movieModel.getTitle());
+                    }
+
+                }else {
+                    try {
+                        makeToast(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieSearchResponse> call, Throwable t) {
+                makeToast("failed attempt to search, try again");
+            }
+        });
+
+
+
+
+
+
+
+    }
+
+
+
+    //Method to make a Toast. Use to test
+    Toast t;
+    private void makeToast(String s){
+        if(t != null) {
+            t.cancel();
+        }
+        t = Toast.makeText(requireActivity().getApplicationContext(), s, Toast.LENGTH_SHORT);
+        t.show();
     }
 }
