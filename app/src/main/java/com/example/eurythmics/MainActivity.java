@@ -2,18 +2,30 @@ package com.example.eurythmics;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 
 
 import android.os.Bundle;
 
+import com.example.eurythmics.api.models.MovieModel;
 import com.example.eurythmics.databinding.ActivityMainBinding;
+import com.example.eurythmics.fragments.HomeFragment;
+import com.example.eurythmics.fragments.ProfileFragment;
+import com.example.eurythmics.fragments.RatingFragment;
+import com.example.eurythmics.viewmodels.MovieListViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     private BottomNavigationView bottomNav;
+
+    private MovieListViewModel movieListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.FrameLayout_main, new HomeFragment()).commit();
 
 
+        movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
 
+        observerAnyChange();
 
         // init compoments
         initBottomNavigationOnClick();
@@ -36,6 +50,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+    private void observerAnyChange() {
+        movieListViewModel.getMovies().observe(this, new Observer<List<MovieModel>>() {
+            @Override
+            public void onChanged(List<MovieModel> movieModels) {
+                // observing for any data change
+
+            }
+        });
+    }
+
+
+
+
 
     private  void  initBottomNavigationOnClick(){
 

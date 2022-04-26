@@ -1,4 +1,4 @@
-package com.example.eurythmics;
+package com.example.eurythmics.fragments;
 
 import android.os.Bundle;
 
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.eurythmics.R;
 import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.MovieApi;
 import com.example.eurythmics.api.models.MovieModel;

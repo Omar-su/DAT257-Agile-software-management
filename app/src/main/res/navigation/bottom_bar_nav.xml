@@ -9,17 +9,17 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.eurythmics.HomeFragment"
+        android:name="com.example.eurythmics.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_rating"
-        android:name="com.example.eurythmics.RatingFragment"
+        android:name="com.example.eurythmics.fragments.RatingFragment"
         android:label="fragment_rating"
         tools:layout="@layout/fragment_rating" />
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.eurythmics.ProfileFragment"
+        android:name="com.example.eurythmics.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
