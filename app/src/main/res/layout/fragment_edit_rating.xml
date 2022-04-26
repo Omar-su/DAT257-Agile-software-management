@@ -112,7 +112,7 @@
 
 
     <include
-        android:id="storyNumberPicker"
+        android:id="@+id/storyNumberPicker"
         layout="@layout/number_picker_view"
         android:layout_width="120dp"
         android:layout_height="30dp"
@@ -120,7 +120,7 @@
         tools:layout_editor_absoluteY="258dp" />
 
     <include
-        android:id="characterNumberPicker"
+        android:id="@+id/characterNumberPicker"
         layout="@layout/number_picker_view"
         android:layout_width="120dp"
         android:layout_height="30dp"
@@ -128,7 +128,7 @@
         tools:layout_editor_absoluteY="297dp" />
 
     <include
-        android:id="scoreNumberPicker"
+        android:id="@+id/scoreNumberPicker"
         layout="@layout/number_picker_view"
         android:layout_width="120dp"
         android:layout_height="30dp"
@@ -136,7 +136,7 @@
         tools:layout_editor_absoluteY="339dp" />
 
     <include
-        android:id="sceneryNumberPicker"
+        android:id="@+id/sceneryNumberPicker"
         layout="@layout/number_picker_view"
         android:layout_width="120dp"
         android:layout_height="30dp"
@@ -144,7 +144,7 @@
         tools:layout_editor_absoluteY="376dp" />
 
     <include
-        android:id="overallRatingNumberPicker"
+        android:id="@+id/overallRatingNumberPicker"
         layout="@layout/number_picker_view"
         android:layout_width="120dp"
         android:layout_height="30dp"
