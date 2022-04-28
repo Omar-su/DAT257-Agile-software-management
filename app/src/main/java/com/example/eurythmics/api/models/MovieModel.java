@@ -9,30 +9,33 @@ import android.os.Parcelable;
 public class MovieModel implements Parcelable {
 
     private String title;
-    private String posterPath;
+    private String poster_path;
     private String releaseDate;
     private int movie_id;
     private float voteAverage;
     private String movie_overView;
+    private int runtime;
 
 
-    public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView) {
+    public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, int runtime) {
         this.title = title;
-        this.posterPath = posterPath;
+        this.poster_path = posterPath;
         this.releaseDate = releaseDate;
         this.movie_id = movie_id;
         this.voteAverage = voteAverage;
         this.movie_overView = movie_overView;
+        this.runtime = runtime;
     }
 
 
     protected MovieModel(Parcel in) {
         title = in.readString();
-        posterPath = in.readString();
+        poster_path = in.readString();
         releaseDate = in.readString();
         movie_id = in.readInt();
         voteAverage = in.readFloat();
         movie_overView = in.readString();
+        runtime = in.readInt();
     }
 
     public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
@@ -52,7 +55,7 @@ public class MovieModel implements Parcelable {
     }
 
     public String getPosterPath() {
-        return posterPath;
+        return poster_path;
     }
 
     public String getReleaseDate() {
@@ -71,6 +74,8 @@ public class MovieModel implements Parcelable {
         return movie_overView;
     }
 
+    public int getRuntime(){return runtime;}
+
     @Override
     public int describeContents() {
         return 0;
@@ -79,7 +84,7 @@ public class MovieModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(title);
-        parcel.writeString(posterPath);
+        parcel.writeString(poster_path);
         parcel.writeString(releaseDate);
         parcel.writeInt(movie_id);
         parcel.writeFloat(voteAverage);

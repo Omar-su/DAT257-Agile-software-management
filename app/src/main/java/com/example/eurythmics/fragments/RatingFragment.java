@@ -1,5 +1,6 @@
 package com.example.eurythmics.fragments;
 
+import android.media.AudioManager;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.eurythmics.R;
+import com.example.eurythmics.adapters.OnMovieCardListener;
+import com.example.eurythmics.adapters.RatingRecycleViewAdapter;
 import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.MovieApi;
 import com.example.eurythmics.api.models.MovieModel;
@@ -32,7 +37,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class RatingFragment extends Fragment {
+public class RatingFragment extends Fragment implements OnMovieCardListener {
 
 
     // Search view
@@ -40,6 +45,11 @@ public class RatingFragment extends Fragment {
 
     //next button
     private Button nextButton;
+
+    // recycle view
+    private RecyclerView recyclerView;
+
+    private RatingRecycleViewAdapter ratingViewAdapter;
 
     private MovieListViewModel movieListViewModel;
 
@@ -53,13 +63,19 @@ public class RatingFragment extends Fragment {
 
         searchBar = view.findViewById(R.id.action_search);
         nextButton = view.findViewById(R.id.next_but);
+        recyclerView = view.findViewById(R.id.recycle_view);
 
 
 
         initSearchBar();
         initNextButton();
 
+        configureRecycleView();
         observerAnyChange();
+        searchMovieApi("fast");
+
+
+
         return view;
     }
 
@@ -77,13 +93,13 @@ public class RatingFragment extends Fragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                searchMovieApi("batman");
+                searchMovieApi(s);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                //getRetrofitResponse(s);
+                searchMovieApi(s);
                 return false;
             }
         });
@@ -134,6 +150,8 @@ public class RatingFragment extends Fragment {
                 if (movieModels!=null){
                     for (MovieModel movieModel: movieModels){
                         Log.d("TAG", "onchanged" + movieModel.getTitle());
+
+                        ratingViewAdapter.setmMovies(movieModels);
                     }
                 }
 
@@ -149,6 +167,15 @@ public class RatingFragment extends Fragment {
     }
 
 
+    // Initializing recycle view and adding list items
+    private void configureRecycleView(){
+        // Live data can not be passed to a constructor
+        ratingViewAdapter = new RatingRecycleViewAdapter(this);
+        recyclerView.setAdapter(ratingViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+
 
     //Method to make a Toast. Use to test
     Toast t;
@@ -158,5 +185,11 @@ public class RatingFragment extends Fragment {
         }
         t = Toast.makeText(requireActivity().getApplicationContext(), s, Toast.LENGTH_SHORT);
         t.show();
+    }
+
+
+    @Override
+    public void onMovieClick(int position) {
+
     }
 }

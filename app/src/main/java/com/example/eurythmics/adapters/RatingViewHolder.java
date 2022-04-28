@@ -27,6 +27,10 @@ public class RatingViewHolder extends RecyclerView.ViewHolder implements View.On
         super(itemView);
 
         title = itemView.findViewById(com.example.eurythmics.R.id.movie_title);
+        description = itemView.findViewById(com.example.eurythmics.R.id.description);
+        poster = itemView.findViewById(com.example.eurythmics.R.id.poster_img);
+        ratingBar = itemView.findViewById(com.example.eurythmics.R.id.rating_bar_movie);
+
 
         itemView.setOnClickListener(this);
     }
