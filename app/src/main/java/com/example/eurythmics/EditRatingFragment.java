@@ -20,4 +20,6 @@ public class EditRatingFragment extends Fragment {
 
         return view;
     }
+
+
 }
