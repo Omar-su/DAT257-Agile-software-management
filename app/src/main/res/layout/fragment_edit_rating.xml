@@ -11,122 +11,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/iceberg"
+        android:maxLength="100"
         android:text="Rating"
         android:textColor="#FFFFFF"
         android:textSize="32dp"
-        android:maxLength="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.127" />
-
-    <include
-        android:id="@+id/characterNumberPicker"
-        layout="@layout/number_picker_view"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="129dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/characterRatingLabel"
-        app:layout_constraintTop_toBottomOf="@+id/storyNumberPicker" />
-
-    <include
-        android:id="@+id/sceneryNumberPicker"
-        layout="@layout/number_picker_view"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="129dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/sceneryRatingLabel"
-        app:layout_constraintTop_toBottomOf="@+id/scoreNumberPicker" />
-
-    <TextView
-        android:id="@+id/sceneryRatingLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/be_vietnam"
-        android:text="Scenery:"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/titleRating"
-        app:layout_constraintHorizontal_bias="0.732"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleRating"
-        app:layout_constraintVertical_bias="0.276" />
-
-    <TextView
-        android:id="@+id/notesRatingLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/be_vietnam"
-        android:text="Notes:"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/titleRating"
-        app:layout_constraintHorizontal_bias="0.767"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleRating"
-        app:layout_constraintVertical_bias="0.396" />
-
-    <TextView
-        android:id="@+id/movieScoreRatingLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/be_vietnam"
-        android:text="Movie Score:"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/titleRating"
-        app:layout_constraintHorizontal_bias="0.619"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleRating"
-        app:layout_constraintVertical_bias="0.207" />
+        app:layout_constraintVertical_bias="0.195" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="0dp"
         android:layout_height="137dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="22dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/notesRatingLabel"
-        app:layout_constraintTop_toBottomOf="@+id/overallRatingNumberPicker"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="436dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="227dp"
-            android:layout_height="match_parent"
+            android:layout_height="130dp"
             android:hint="note..."
             android:maxLength="100" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/characterRatingLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/be_vietnam"
-        android:text="Characters:"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/titleRating"
-        app:layout_constraintHorizontal_bias="0.662"
-        app:layout_constraintStart_toStartOf="parent"
+    <include
+        android:id="@+id/storyNumberPicker"
+        layout="@layout/number_picker_view"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="129dp"
+        app:layout_constraintBottom_toTopOf="@+id/characterNumberPicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/storyRatingLabel"
         app:layout_constraintTop_toBottomOf="@+id/titleRating"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintVertical_bias="0.153" />
 
     <TextView
         android:id="@+id/storyRatingLabel"
@@ -138,10 +63,81 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/titleRating"
-        app:layout_constraintHorizontal_bias="0.776"
+        app:layout_constraintHorizontal_bias="0.739"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleRating"
-        app:layout_constraintVertical_bias="0.073" />
+        app:layout_constraintVertical_bias="0.069" />
+
+    <include
+        android:id="@+id/sceneryNumberPicker"
+        layout="@layout/number_picker_view"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/overallRatingNumberPicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/sceneryRatingLabel" />
+
+    <TextView
+        android:id="@+id/characterRatingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/be_vietnam"
+        android:text="Characters:"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/titleRating"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleRating"
+        app:layout_constraintVertical_bias="0.146" />
+
+    <TextView
+        android:id="@+id/sceneryRatingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/be_vietnam"
+        android:text="Scenery:"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/titleRating"
+        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleRating"
+        app:layout_constraintVertical_bias="0.303" />
+
+    <TextView
+        android:id="@+id/movieScoreRatingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/be_vietnam"
+        android:text="Movie Score:"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/titleRating"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleRating"
+        app:layout_constraintVertical_bias="0.225" />
+
+    <include
+        android:id="@+id/scoreNumberPicker"
+        layout="@layout/number_picker_view"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/sceneryNumberPicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/movieScoreRatingLabel" />
 
     <TextView
         android:id="@+id/overallRatingLabel"
@@ -153,51 +149,50 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/titleRating"
-        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintHorizontal_bias="0.456"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleRating"
-        app:layout_constraintVertical_bias="0.343" />
+        app:layout_constraintVertical_bias="0.384" />
 
     <include
-        android:id="@+id/storyNumberPicker"
+        android:id="@+id/characterNumberPicker"
         layout="@layout/number_picker_view"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="27dp"
-        android:layout_marginTop="35dp"
         android:layout_marginEnd="129dp"
-        android:layout_marginBottom="9dp"
-        app:layout_constraintBottom_toTopOf="@+id/characterNumberPicker"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/scoreNumberPicker"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/storyRatingLabel"
-        app:layout_constraintTop_toBottomOf="@+id/titleRating" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/characterRatingLabel" />
+
+    <TextView
+        android:id="@+id/notesRatingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/be_vietnam"
+        android:text="Notes:"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/titleRating"
+        app:layout_constraintHorizontal_bias="0.783"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleRating"
+        app:layout_constraintVertical_bias="0.491" />
 
     <include
         android:id="@+id/overallRatingNumberPicker"
         layout="@layout/number_picker_view"
-        android:layout_width="0dp"
+        android:layout_width="125dp"
         android:layout_height="30dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="129dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/overallRatingLabel"
-        app:layout_constraintTop_toBottomOf="@+id/sceneryNumberPicker" />
-
-    <include
-        android:id="@+id/scoreNumberPicker"
-        layout="@layout/number_picker_view"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="129dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/movieScoreRatingLabel"
-        app:layout_constraintTop_toBottomOf="@+id/characterNumberPicker" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/overallRatingLabel" />
 
     <Button
         android:id="@+id/saveButton"
@@ -213,7 +208,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <include
+        android:id="@+id/movie_serie_row"
+        layout="@layout/movie_serie_card_row_item"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

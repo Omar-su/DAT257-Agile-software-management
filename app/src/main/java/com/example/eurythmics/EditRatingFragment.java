@@ -37,7 +37,7 @@ public class EditRatingFragment extends Fragment {
                 String newOverallRating = overallRating.getText().toString();
                 String newNotes = notes.getText().toString();
                 if (overallRating.length() != 0 && notes.length() != 0){
-                    AddRating(/** the movie title */, newOverallRating, newNotes);
+                    AddRating("test", newOverallRating, newNotes);
                 }
             }
         });
