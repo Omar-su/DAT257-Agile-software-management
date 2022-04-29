@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,8 +20,8 @@ import database.DataBaseManager;
 public class EditRatingFragment extends Fragment {
 
     DataBaseManager dbHelper;
-    private EditText overallRating;
-    private EditText notes;
+    private TextView overallRating;
+    private TextView notes;
     private Button btnSave;
 
     @Nullable
@@ -37,7 +39,7 @@ public class EditRatingFragment extends Fragment {
                 String newOverallRating = overallRating.getText().toString();
                 String newNotes = notes.getText().toString();
                 if (overallRating.length() != 0 && notes.length() != 0){
-                    AddRating(/** the movie title */, newOverallRating, newNotes);
+                    //AddRating(/** the movie title */, newOverallRating, newNotes);
                 }
             }
         });
