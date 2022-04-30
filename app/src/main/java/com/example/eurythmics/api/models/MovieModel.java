@@ -3,36 +3,41 @@ package com.example.eurythmics.api.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * A class representing a movie
  */
 public class MovieModel implements Parcelable {
 
     private String title;
-    private String posterPath;
-    private String releaseDate;
+    private String poster_path;
+    private String release_date;
     private int movie_id;
-    private float voteAverage;
-    private String movie_overView;
+    private float vote_average;
+    private String overview;
+    private List<Integer> genre_ids;
 
 
-    public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView) {
+    public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, int runtime, List<Integer> genre_ids) {
         this.title = title;
-        this.posterPath = posterPath;
-        this.releaseDate = releaseDate;
+        this.poster_path = posterPath;
+        this.release_date = releaseDate;
         this.movie_id = movie_id;
-        this.voteAverage = voteAverage;
-        this.movie_overView = movie_overView;
+        this.vote_average = voteAverage;
+        this.overview = movie_overView;
+        this.genre_ids = genre_ids;
     }
 
 
     protected MovieModel(Parcel in) {
         title = in.readString();
-        posterPath = in.readString();
-        releaseDate = in.readString();
+        poster_path = in.readString();
+        release_date = in.readString();
         movie_id = in.readInt();
-        voteAverage = in.readFloat();
-        movie_overView = in.readString();
+        vote_average = in.readFloat();
+        overview = in.readString();
+        in.readList(genre_ids, genre_ids.getClass().getClassLoader());
     }
 
     public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
@@ -52,11 +57,11 @@ public class MovieModel implements Parcelable {
     }
 
     public String getPosterPath() {
-        return posterPath;
+        return poster_path;
     }
 
     public String getReleaseDate() {
-        return releaseDate;
+        return release_date;
     }
 
     public int getMovie_id() {
@@ -64,12 +69,14 @@ public class MovieModel implements Parcelable {
     }
 
     public float getVoteAverage() {
-        return voteAverage;
+        return vote_average;
     }
 
-    public String getMovie_overView() {
-        return movie_overView;
+    public String getOverview() {
+        return overview;
     }
+
+    public List<Integer> getGenre_ids(){return genre_ids;}
 
     @Override
     public int describeContents() {
@@ -79,10 +86,11 @@ public class MovieModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(title);
-        parcel.writeString(posterPath);
-        parcel.writeString(releaseDate);
+        parcel.writeString(poster_path);
+        parcel.writeString(release_date);
         parcel.writeInt(movie_id);
-        parcel.writeFloat(voteAverage);
-        parcel.writeString(movie_overView);
+        parcel.writeFloat(vote_average);
+        parcel.writeString(overview);
+        parcel.writeList(genre_ids);
     }
 }

@@ -6,7 +6,7 @@ import com.example.eurythmics.api.MovieApi;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Service {
+public class ServiceApi {
 
 
     // A retrofit builder constructor
@@ -16,7 +16,7 @@ public class Service {
 
     private static MovieApi movieApi = retrofit.create(MovieApi.class);
 
-    public MovieApi getMovieApi(){
+    public static MovieApi getMovieApi(){
         return movieApi;
     }
 
