@@ -1,5 +1,6 @@
 package com.example.eurythmics.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
         ((RatingViewHolder)holder).description.setText(mMovies.get(i).getOverview());
 
 
-        //((RatingViewHolder)holder).durationTextView.setText(mMovies.get(i).getRuntime());
+        ((RatingViewHolder)holder).durationTextView.setText(String.valueOf(mMovies.get(i).getReleaseDate()));
         //((RatingViewHolder)holder).categoryTextView.setText(mMovies.get(i).getCategory);
 
 

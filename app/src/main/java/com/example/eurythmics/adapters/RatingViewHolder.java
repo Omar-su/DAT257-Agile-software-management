@@ -26,6 +26,8 @@ public class RatingViewHolder extends RecyclerView.ViewHolder implements View.On
     public RatingViewHolder(@NonNull View itemView, OnMovieCardListener onMovieCardListener) {
         super(itemView);
 
+        this.onMovieCardListener = onMovieCardListener;
+
         title = itemView.findViewById(com.example.eurythmics.R.id.movie_title);
         description = itemView.findViewById(com.example.eurythmics.R.id.description);
         poster = itemView.findViewById(com.example.eurythmics.R.id.poster_img);

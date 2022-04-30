@@ -190,6 +190,6 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
     @Override
     public void onMovieClick(int position) {
-
+        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, new EditRatingFragment()).commit();
     }
 }

@@ -10,9 +10,9 @@ public class MovieModel implements Parcelable {
 
     private String title;
     private String poster_path;
-    private String releaseDate;
+    private String release_date;
     private int movie_id;
-    private float voteAverage;
+    private float vote_average;
     private String overview;
     private int runtime;
 
@@ -20,9 +20,9 @@ public class MovieModel implements Parcelable {
     public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, int runtime) {
         this.title = title;
         this.poster_path = posterPath;
-        this.releaseDate = releaseDate;
+        this.release_date = releaseDate;
         this.movie_id = movie_id;
-        this.voteAverage = voteAverage;
+        this.vote_average = voteAverage;
         this.overview = movie_overView;
         this.runtime = runtime;
     }
@@ -31,9 +31,9 @@ public class MovieModel implements Parcelable {
     protected MovieModel(Parcel in) {
         title = in.readString();
         poster_path = in.readString();
-        releaseDate = in.readString();
+        release_date = in.readString();
         movie_id = in.readInt();
-        voteAverage = in.readFloat();
+        vote_average = in.readFloat();
         overview = in.readString();
         runtime = in.readInt();
     }
@@ -59,7 +59,7 @@ public class MovieModel implements Parcelable {
     }
 
     public String getReleaseDate() {
-        return releaseDate;
+        return release_date;
     }
 
     public int getMovie_id() {
@@ -67,7 +67,7 @@ public class MovieModel implements Parcelable {
     }
 
     public float getVoteAverage() {
-        return voteAverage;
+        return vote_average;
     }
 
     public String getOverview() {
@@ -85,9 +85,9 @@ public class MovieModel implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(title);
         parcel.writeString(poster_path);
-        parcel.writeString(releaseDate);
+        parcel.writeString(release_date);
         parcel.writeInt(movie_id);
-        parcel.writeFloat(voteAverage);
+        parcel.writeFloat(vote_average);
         parcel.writeString(overview);
     }
 }
