@@ -1,18 +1,15 @@
 package com.example.eurythmics.adapters;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.eurythmics.R;
+import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.models.MovieModel;
 
 import java.util.List;
@@ -36,15 +33,20 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
 
-        ((RatingViewHolder)holder).title.setText(mMovies.get(position).getTitle());
-        ((RatingViewHolder)holder).description.setText(mMovies.get(position).getMovie_overView());
-        ((RatingViewHolder)holder).ratingBar.setRating((mMovies.get(position).getVoteAverage())/2);
+        ((RatingViewHolder)holder).title.setText(mMovies.get(i).getTitle());
+        ((RatingViewHolder)holder).description.setText(mMovies.get(i).getOverview());
+
+
+        //((RatingViewHolder)holder).durationTextView.setText(mMovies.get(i).getRuntime());
+        //((RatingViewHolder)holder).categoryTextView.setText(mMovies.get(i).getCategory);
+
+
 
         // Image using glide library
 
-        Glide.with(holder.itemView.getContext()).load("https://image.tmdb.org/t/p/w500"+mMovies.get(position).getPosterPath()).into(((RatingViewHolder)holder).poster);
+        Glide.with(holder.itemView.getContext()).load(Credentials.IMG_BASE_URL +mMovies.get(i).getPosterPath()).into(((RatingViewHolder)holder).poster);
 
 
 

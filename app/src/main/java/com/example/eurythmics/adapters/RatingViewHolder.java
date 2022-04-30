@@ -15,9 +15,9 @@ import com.example.eurythmics.R;
 public class RatingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-    TextView title, description;
+    TextView title, description, categoryTextView, durationTextView;
     ImageView poster;
-    RatingBar ratingBar;
+
 
     // Click listener
     OnMovieCardListener onMovieCardListener;
@@ -29,7 +29,9 @@ public class RatingViewHolder extends RecyclerView.ViewHolder implements View.On
         title = itemView.findViewById(com.example.eurythmics.R.id.movie_title);
         description = itemView.findViewById(com.example.eurythmics.R.id.description);
         poster = itemView.findViewById(com.example.eurythmics.R.id.poster_img);
-        ratingBar = itemView.findViewById(com.example.eurythmics.R.id.rating_bar_movie);
+        categoryTextView = itemView.findViewById(com.example.eurythmics.R.id.category_textView);
+        durationTextView = itemView.findViewById(com.example.eurythmics.R.id.duration_text);
+
 
 
         itemView.setOnClickListener(this);
