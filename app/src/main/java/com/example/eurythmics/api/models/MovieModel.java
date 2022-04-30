@@ -3,6 +3,8 @@ package com.example.eurythmics.api.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * A class representing a movie
  */
@@ -14,17 +16,17 @@ public class MovieModel implements Parcelable {
     private int movie_id;
     private float vote_average;
     private String overview;
-    private int runtime;
+    private List<Integer> genre_ids;
 
 
-    public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, int runtime) {
+    public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, int runtime, List<Integer> genre_ids) {
         this.title = title;
         this.poster_path = posterPath;
         this.release_date = releaseDate;
         this.movie_id = movie_id;
         this.vote_average = voteAverage;
         this.overview = movie_overView;
-        this.runtime = runtime;
+        this.genre_ids = genre_ids;
     }
 
 
@@ -35,7 +37,7 @@ public class MovieModel implements Parcelable {
         movie_id = in.readInt();
         vote_average = in.readFloat();
         overview = in.readString();
-        runtime = in.readInt();
+        in.readList(genre_ids, genre_ids.getClass().getClassLoader());
     }
 
     public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
@@ -74,7 +76,7 @@ public class MovieModel implements Parcelable {
         return overview;
     }
 
-    public int getRuntime(){return runtime;}
+    public List<Integer> getGenre_ids(){return genre_ids;}
 
     @Override
     public int describeContents() {
@@ -89,5 +91,6 @@ public class MovieModel implements Parcelable {
         parcel.writeInt(movie_id);
         parcel.writeFloat(vote_average);
         parcel.writeString(overview);
+        parcel.writeList(genre_ids);
     }
 }

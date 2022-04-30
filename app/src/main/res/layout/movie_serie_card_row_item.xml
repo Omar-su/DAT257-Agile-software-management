@@ -52,7 +52,7 @@
                 android:textColor="#FFFFFF" />
 
             <TextView
-                android:id="@+id/duration_text"
+                android:id="@+id/releaseDate_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
