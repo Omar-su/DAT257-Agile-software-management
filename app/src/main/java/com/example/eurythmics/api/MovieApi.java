@@ -18,11 +18,12 @@ public interface MovieApi {
     );
 
 
-    // https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher
+    // https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher&page=1
     @GET("3/search/movie?")
     Call<MovieSearchResponse> searchMovieByName(
             @Query("api_key") String key,
-            @Query("query") String query
+            @Query("query") String query,
+            @Query("page") int pageNumber
     );
 
 

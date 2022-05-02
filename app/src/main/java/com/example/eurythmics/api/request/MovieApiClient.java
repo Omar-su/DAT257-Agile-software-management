@@ -93,7 +93,7 @@ public class MovieApiClient {
 
             // getting the response
             try{
-                Response<MovieSearchResponse> response = getMovies(query).execute();
+                Response<MovieSearchResponse> response = getMovies(query,1).execute();
 
                 if (cancelRequest){
                     return;
@@ -123,8 +123,8 @@ public class MovieApiClient {
 
 
         // Search method/query
-        private Call<MovieSearchResponse> getMovies(String query){
-            return ServiceApi.getMovieApi().searchMovieByName(Credentials.API_KEY, query);
+        private Call<MovieSearchResponse> getMovies(String query, int pageNumber){
+            return ServiceApi.getMovieApi().searchMovieByName(Credentials.API_KEY, query, pageNumber);
         }
 
         private void cancelRequest(){
