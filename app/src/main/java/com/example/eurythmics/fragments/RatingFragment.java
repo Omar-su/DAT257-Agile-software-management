@@ -43,8 +43,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
     // Search view
     private SearchView searchBar;
 
-    //next button
-    private Button nextButton;
+
 
     // recycle view
     private RecyclerView recyclerView;
@@ -62,13 +61,13 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
         searchBar = view.findViewById(R.id.action_search);
-        nextButton = view.findViewById(R.id.next_but);
+
         recyclerView = view.findViewById(R.id.recycle_view);
 
 
 
         initSearchBar();
-        initNextButton();
+
 
         configureRecycleView();
         observerAnyChange();
@@ -79,15 +78,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         return view;
     }
 
-    private void initNextButton() {
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, new EditRatingFragment()).commit();
 
-            }
-        });
-    }
 
     private void initSearchBar() {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
