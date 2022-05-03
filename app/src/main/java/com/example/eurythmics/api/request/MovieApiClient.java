@@ -47,12 +47,12 @@ public class MovieApiClient {
 
 
     // Method that will be called in other classes
-    public void searchMoviesApi(String query){
+    public void searchMoviesApi(String query, int pageNumber){
         if (retrieveMoviesRunnable != null){
             retrieveMoviesRunnable = null;
         }
 
-        retrieveMoviesRunnable = new RetrieveMoviesRunnable(query);
+        retrieveMoviesRunnable = new RetrieveMoviesRunnable(query, pageNumber);
 
         final Future myHandler = AppExecutors.getInstance().networkIO().submit(retrieveMoviesRunnable);
 
@@ -82,10 +82,12 @@ public class MovieApiClient {
 
         private String query;
         private boolean cancelRequest;
+        private int pageNumber;
 
-        public RetrieveMoviesRunnable(String query) {
+        public RetrieveMoviesRunnable(String query, int pageNumber) {
             this.query = query;
             this.cancelRequest = false;
+            this.pageNumber = pageNumber;
         }
 
         @Override
@@ -93,7 +95,7 @@ public class MovieApiClient {
 
             // getting the response
             try{
-                Response<MovieSearchResponse> response = getMovies(query).execute();
+                Response<MovieSearchResponse> response = getMovies(query,pageNumber).execute();
 
                 if (cancelRequest){
                     return;
@@ -102,7 +104,13 @@ public class MovieApiClient {
                 if (response.code() == 200){
                     assert response.body() != null;
                     List<MovieModel> movies = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
-                    mMovies.postValue(movies);
+                    if (pageNumber==1){
+                        mMovies.postValue(movies);
+                    }else {
+                        List<MovieModel> currentMovies = mMovies.getValue();
+                        currentMovies.addAll(movies);
+                        mMovies.postValue(currentMovies);
+                    }
                 }else {
                     assert response.errorBody() != null;
                     String error = response.errorBody().string();
@@ -123,8 +131,8 @@ public class MovieApiClient {
 
 
         // Search method/query
-        private Call<MovieSearchResponse> getMovies(String query){
-            return ServiceApi.getMovieApi().searchMovieByName(Credentials.API_KEY, query);
+        private Call<MovieSearchResponse> getMovies(String query, int pageNumber){
+            return ServiceApi.getMovieApi().searchMovieByName(Credentials.API_KEY, query, pageNumber);
         }
 
         private void cancelRequest(){

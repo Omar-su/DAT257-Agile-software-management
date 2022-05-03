@@ -14,6 +14,9 @@ public class MovieRepo {
 
     private MovieApiClient movieApiClient;
 
+    private String mQuery;
+    private int mPageNumber;
+
     public static MovieRepo getInstance(){
         if (instance  == null){
             instance = new MovieRepo();
@@ -30,8 +33,18 @@ public class MovieRepo {
     }
 
 
-    public void searchMovieApi(String query){
-        movieApiClient.searchMoviesApi(query);
+    public void searchMovieApi(String query, int pageNumber){
+
+        mQuery = query;
+        mPageNumber = pageNumber;
+
+        movieApiClient.searchMoviesApi(query, pageNumber);
+
+
+    }
+
+    public void searchNextPage(){
+        searchMovieApi(mQuery,mPageNumber + 1);
     }
 
 
