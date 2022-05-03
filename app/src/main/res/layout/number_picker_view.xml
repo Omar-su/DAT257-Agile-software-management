@@ -34,6 +34,7 @@
         android:background="@android:color/transparent"
         android:gravity="center"
         android:inputType="number"
+        android:textColor="#000000"
         android:selectAllOnFocus="true"
         app:layout_constraintStart_toEndOf="@+id/decrement"
         app:layout_constraintTop_toTopOf="parent"
