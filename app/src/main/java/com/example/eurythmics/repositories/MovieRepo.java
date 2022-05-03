@@ -34,11 +34,17 @@ public class MovieRepo {
 
 
     public void searchMovieApi(String query, int pageNumber){
-        movieApiClient.searchMoviesApi(query);
 
         mQuery = query;
-        mPageNumber = mPageNumber;
+        mPageNumber = pageNumber;
 
+        movieApiClient.searchMoviesApi(query, pageNumber);
+
+
+    }
+
+    public void searchNextPage(){
+        searchMovieApi(mQuery,mPageNumber + 1);
     }
 
 
