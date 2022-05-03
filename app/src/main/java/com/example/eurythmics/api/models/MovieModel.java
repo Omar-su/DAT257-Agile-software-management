@@ -3,6 +3,7 @@ package com.example.eurythmics.api.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class MovieModel implements Parcelable {
     private List<Integer> genre_ids;
 
 
-    public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, int runtime, List<Integer> genre_ids) {
+    public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, List<Integer> genre_ids) {
         this.title = title;
         this.poster_path = posterPath;
         this.release_date = releaseDate;
@@ -37,6 +38,7 @@ public class MovieModel implements Parcelable {
         movie_id = in.readInt();
         vote_average = in.readFloat();
         overview = in.readString();
+        this.genre_ids = new ArrayList<Integer>();
         in.readList(genre_ids, genre_ids.getClass().getClassLoader());
     }
 
