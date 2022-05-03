@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.models.MovieModel;
 
 public class MovieDetailActivity extends AppCompatActivity {
@@ -31,11 +33,19 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private void getDataFromIntent() {
 
-        //if (getIntent().hasExtra("movie")){
+        if (getIntent().hasExtra("movie")){
 
             MovieModel movieModel = (MovieModel) getIntent().getParcelableExtra("movie");
-            Log.d("Tag", "incoming intent " + movieModel);
-        //}
+
+            title.setText(movieModel.getTitle());
+            releaseDate.setText(movieModel.getReleaseDate());
+
+
+            Glide.with(this).load(Credentials.IMG_BASE_URL + movieModel.getPosterPath()).into(poster);
+
+
+
+        }
     }
 
 }
