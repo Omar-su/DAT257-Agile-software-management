@@ -26,7 +26,7 @@
         layout="@layout/number_picker_view"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="42dp"
         app:layout_constraintStart_toEndOf="@+id/overallRatingLabel"
         app:layout_constraintTop_toTopOf="@+id/overallRatingLabel" />
 
@@ -35,7 +35,7 @@
         layout="@layout/number_picker_view"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="39dp"
         app:layout_constraintStart_toEndOf="@+id/sceneryRatingLabel"
         app:layout_constraintTop_toTopOf="@+id/sceneryRatingLabel" />
 
@@ -112,8 +112,8 @@
         android:id="@+id/overallRatingLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:fontFamily="@font/be_vietnam_bold"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/be_vietnam_extrabold"
         android:text="Overall Rating:"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
