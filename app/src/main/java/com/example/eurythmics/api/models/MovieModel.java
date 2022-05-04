@@ -56,8 +56,7 @@ public class MovieModel implements Parcelable {
     };
 
     public MovieModel(MovieModel selectedMovie) {
-        this.movieModel = new MovieModel(selectedMovie.getTitle(), selectedMovie.getPosterPath(), selectedMovie.getReleaseDate()
-        ,selectedMovie.getMovie_id(),selectedMovie.getVoteAverage(),selectedMovie.getOverview(),selectedMovie.getGenre_ids());
+        this.movieModel = selectedMovie;
     }
 
     public String getTitle() {
