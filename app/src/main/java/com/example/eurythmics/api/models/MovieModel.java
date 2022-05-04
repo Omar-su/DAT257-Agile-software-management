@@ -18,9 +18,10 @@ public class MovieModel implements Parcelable {
     private float vote_average;
     private String overview;
     private List<Integer> genre_ids;
+    private String backdrop_path;
 
 
-    public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, List<Integer> genre_ids) {
+    public MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, List<Integer> genre_ids, String backdrop_path) {
         this.title = title;
         this.poster_path = posterPath;
         this.release_date = releaseDate;
@@ -28,6 +29,7 @@ public class MovieModel implements Parcelable {
         this.vote_average = voteAverage;
         this.overview = movie_overView;
         this.genre_ids = genre_ids;
+        this.backdrop_path = backdrop_path;
     }
 
 
@@ -40,6 +42,7 @@ public class MovieModel implements Parcelable {
         overview = in.readString();
         this.genre_ids = new ArrayList<Integer>();
         in.readList(genre_ids, genre_ids.getClass().getClassLoader());
+        backdrop_path = in.readString();
     }
 
     public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
@@ -80,6 +83,8 @@ public class MovieModel implements Parcelable {
 
     public List<Integer> getGenre_ids(){return genre_ids;}
 
+    public String getBackdrop_path(){return backdrop_path;}
+
     @Override
     public int describeContents() {
         return 0;
@@ -94,5 +99,6 @@ public class MovieModel implements Parcelable {
         parcel.writeFloat(vote_average);
         parcel.writeString(overview);
         parcel.writeList(genre_ids);
+        parcel.writeString(backdrop_path);
     }
 }
