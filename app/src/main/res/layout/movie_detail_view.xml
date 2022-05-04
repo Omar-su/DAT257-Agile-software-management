@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#6F0000">
 
     <ImageView
         android:id="@+id/poster_detail_view"
@@ -17,9 +18,11 @@
     <TextView
         android:id="@+id/title_detail_view"
         android:layout_width="324dp"
-        android:layout_height="30dp"
+        android:layout_height="35dp"
         android:layout_marginTop="20dp"
+        android:textSize="30dp"
         android:text="TextView"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +34,7 @@
         android:layout_height="67dp"
         android:layout_marginTop="40dp"
         android:text="TextView"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +47,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="36dp"
         android:text="TextView"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/description_detail_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_detail_view"
@@ -55,6 +60,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="76dp"
         android:text="TextView"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/category_detail_view"
