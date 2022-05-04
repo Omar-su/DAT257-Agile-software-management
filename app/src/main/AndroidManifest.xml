@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Eurythmics"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MovieDetailActivity"
+            android:name=".fragments.MovieDetailFragment"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
