@@ -1,6 +1,5 @@
 package com.example.eurythmics.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.eurythmics.MovieDetailActivity;
 import com.example.eurythmics.R;
 import com.example.eurythmics.adapters.OnMovieCardListener;
 import com.example.eurythmics.adapters.RatingRecycleViewAdapter;
@@ -194,9 +192,11 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
     @Override
     public void onMovieClick(int position) {
-        Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-        intent.putExtra("movie", ratingViewAdapter.getSelectedMovie(position));
-        startActivity(intent);
+        Fragment fragment = new MovieDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("CHOSEN_TRANSACTION", new MovieModel(ratingViewAdapter.getSelectedMovie(position)));
+        fragment.setArguments(bundle);
+        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
 
     }
 }
