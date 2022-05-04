@@ -6,14 +6,13 @@
     android:id="@+id/movie_serie_row"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:background="#6F0000">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#6F0000"
-        app:cardElevation="50dp">
+        app:cardBackgroundColor="#6F0000">
 
         <RelativeLayout
             android:layout_width="match_parent"
