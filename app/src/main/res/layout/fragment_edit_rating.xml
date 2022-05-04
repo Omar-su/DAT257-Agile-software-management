@@ -143,16 +143,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
-        android:layout_width="206dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="188dp"
+        android:layout_width="199dp"
+        android:layout_height="127dp"
+        android:layout_marginStart="200dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/notesRatingLabel"
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText"
-            android:layout_width="206dp"
+            android:layout_width="195dp"
             android:layout_height="121dp"
             android:hint="note..."
             android:maxLength="100" />
