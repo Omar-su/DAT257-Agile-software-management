@@ -17,6 +17,9 @@ public class MovieRepo {
     private String mQuery;
     private int mPageNumber;
 
+    private String filterQ;
+    private int categoryPageNumber;
+
     public static MovieRepo getInstance(){
         if (instance  == null){
             instance = new MovieRepo();
@@ -30,6 +33,10 @@ public class MovieRepo {
 
     public LiveData<List<MovieModel>> getMovies(){
         return movieApiClient.getMovies();
+    }
+
+    public LiveData<List<MovieModel>> getMoviesCategory(){
+        return movieApiClient.getMoviesCategory();
     }
 
 
@@ -48,7 +55,13 @@ public class MovieRepo {
     }
 
 
+    public void searchMovieApiByCategory(String filterQ, int pageNumber) {
+        this.filterQ = filterQ;
+        this.categoryPageNumber = pageNumber;
+        movieApiClient.searchMoviesApiByCategory(filterQ,pageNumber);
+    }
 
-
-
+    public void searchNextPageCategory() {
+        searchMovieApiByCategory(filterQ, categoryPageNumber + 1);
+    }
 }

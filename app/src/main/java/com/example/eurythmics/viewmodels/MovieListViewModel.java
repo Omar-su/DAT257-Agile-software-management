@@ -30,4 +30,11 @@ public class MovieListViewModel extends ViewModel {
     }
 
 
+    public void searchMovieApiByCategory(String filterQ, int pageNumber) {
+        movieRepo.searchMovieApiByCategory(filterQ, pageNumber);
+    }
+
+    public void searchNextPageCategory() {
+        movieRepo.searchNextPageCategory();
+    }
 }

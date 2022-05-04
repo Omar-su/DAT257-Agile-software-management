@@ -14,7 +14,8 @@ public interface MovieApi {
     @GET("3/movie/{category}?")
     Call<MovieSearchResponse> searchMovieByCategory(
             @Path("category") String category,
-            @Query("api_key") String key
+            @Query("api_key") String key,
+            @Query("page") int pageNumber
     );
 
 

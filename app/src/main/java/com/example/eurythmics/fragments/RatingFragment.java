@@ -69,7 +69,9 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
         configureRecycleView();
         observerAnyChange();
-        searchMovieApi("fast",1);
+
+        // Show popular movies first page
+        searchMovieApiByCategory("popular",1);
 
 
 
@@ -155,6 +157,10 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         movieListViewModel.searchMovieApi(query, pageNumber);
     }
 
+    private void searchMovieApiByCategory(String filterQ, int pageNumber){
+        movieListViewModel.searchMovieApiByCategory(filterQ, pageNumber);
+    }
+
 
     // Initializing recycle view and adding list items
     private void configureRecycleView(){
@@ -171,7 +177,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 if (!recyclerView.canScrollVertically(1)){
                     // Here we need to display the rest of pages from the api
-                    movieListViewModel.searchNextPage();
+                    movieListViewModel.searchNextPageCategory();
                 }
             }
         });

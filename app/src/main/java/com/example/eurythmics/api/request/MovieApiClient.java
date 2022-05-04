@@ -26,8 +26,12 @@ public class MovieApiClient {
 
     private MutableLiveData<List<MovieModel>> mMovies;
 
+    private MutableLiveData<List<MovieModel>> moviesCategory;
+
     //Making a global runnable request
     private RetrieveMoviesRunnable retrieveMoviesRunnable;
+    //Making a global runnable request
+    private RetrieveMoviesRunnableCategory retrieveMoviesRunnableCategory;
 
     public static MovieApiClient getInstance() {
         if (instance == null){
@@ -38,12 +42,16 @@ public class MovieApiClient {
 
     private MovieApiClient(){
         mMovies = new MutableLiveData<>();
+        moviesCategory = new MutableLiveData<>();
     }
 
     public LiveData<List<MovieModel>> getMovies(){
         return mMovies;
     }
 
+    public LiveData<List<MovieModel>> getMoviesCategory(){
+        return moviesCategory;
+    }
 
 
     // Method that will be called in other classes
@@ -67,7 +75,25 @@ public class MovieApiClient {
     }
 
 
+    // Method that will be called in other classes
+    public void searchMoviesApiByCategory(String filterQ, int pageNumber){
+        if (retrieveMoviesRunnableCategory != null){
+            retrieveMoviesRunnableCategory = null;
+        }
 
+        retrieveMoviesRunnableCategory = new RetrieveMoviesRunnableCategory(filterQ, pageNumber);
+
+        final Future myHandler2 = AppExecutors.getInstance().networkIO().submit(retrieveMoviesRunnableCategory);
+
+        AppExecutors.getInstance().networkIO().schedule(new Runnable() {
+            @Override
+            public void run() {
+                // Canceling the retrofit call
+                myHandler2.cancel(true);
+            }
+        },3000, TimeUnit.MILLISECONDS );
+
+    }
 
 
 
@@ -144,6 +170,72 @@ public class MovieApiClient {
 
     }
 
+    // retrieving data from rest api by runnable class
+    private class RetrieveMoviesRunnableCategory implements Runnable{
+
+        private String query;
+        private boolean cancelRequest;
+        private int pageNumber;
+
+        public RetrieveMoviesRunnableCategory(String filterQ, int pageNumber) {
+            this.query = filterQ;
+            this.cancelRequest = false;
+            this.pageNumber = pageNumber;
+        }
+
+        @Override
+        public void run() {
+
+            // getting the response
+            try{
+                Response<MovieSearchResponse> response = getMovies(query,pageNumber).execute();
+
+                if (cancelRequest){
+                    return;
+                }
+
+                if (response.code() == 200){
+                    assert response.body() != null;
+                    List<MovieModel> movies = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
+                    if (pageNumber==1){
+                        mMovies.postValue(movies);
+                    }else {
+                        List<MovieModel> currentMovies = mMovies.getValue();
+                        currentMovies.addAll(movies);
+                        mMovies.postValue(currentMovies);
+                    }
+                }else {
+                    assert response.errorBody() != null;
+                    String error = response.errorBody().string();
+                    Log.d("TAG","Error" + error);
+                    mMovies.postValue(null);
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                mMovies.postValue(null);
+            }
+
+
+
+
+        }
+
+
+        // Search method/query
+        private Call<MovieSearchResponse> getMovies(String query, int pageNumber){
+            return ServiceApi.getMovieApi().searchMovieByCategory(query, Credentials.API_KEY, pageNumber);
+        }
+
+        private void cancelRequest(){
+            Log.d("TAG", "Cancelling request");
+            cancelRequest = true;
+        }
+
+
+
+    }
 
 
 }
