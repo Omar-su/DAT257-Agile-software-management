@@ -8,9 +8,4 @@ public class Credentials {
     public static final String IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 
-
-
-
-
-
 }
