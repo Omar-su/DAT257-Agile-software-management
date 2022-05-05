@@ -19,11 +19,11 @@ public class MovieService {
     private List<Review> reviewList = new ArrayList<>();
 
     public MovieService(DataBaseManager dataBaseManager){
-        if(instance != null){
-            throw new RuntimeException("Use getMovieService() to get already initialised MovieService");
+        if(instance == null){
+            this.dataBaseManager = dataBaseManager;
+            instance = this;
         }
-        this.dataBaseManager = dataBaseManager;
-        instance = this;
+
     }
 
     public static MovieService getMovieService(){

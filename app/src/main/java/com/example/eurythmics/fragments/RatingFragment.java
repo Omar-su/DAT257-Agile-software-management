@@ -69,6 +69,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
         configureRecycleView();
         observerAnyChange();
+        observerAnyChangeCat();
 
         // Show popular movies first page
         searchMovieApiByCategory("popular",1);
@@ -150,7 +151,22 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         });
     }
 
+    private void observerAnyChangeCat() {
+        movieListViewModel.getMoviesByCategory().observe(getViewLifecycleOwner(), new Observer<List<MovieModel>>() {
+            @Override
+            public void onChanged(List<MovieModel> movieModels) {
+                // observing for any data change
+                if (movieModels!=null){
+                    for (MovieModel movieModel: movieModels){
+                        Log.d("TAG", "onchanged" + movieModel.getTitle());
 
+                        ratingViewAdapter.setmMovies(movieModels);
+                    }
+                }
+
+            }
+        });
+    }
 
 
     private void searchMovieApi(String query, int pageNumber){

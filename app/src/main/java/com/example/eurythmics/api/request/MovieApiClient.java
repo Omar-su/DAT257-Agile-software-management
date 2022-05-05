@@ -121,15 +121,15 @@ public class MovieApiClient {
 
             // getting the response
             try{
-                Response<MovieSearchResponse> response = getMovies(query,pageNumber).execute();
+                Response<MovieSearchResponse> response2 = getMovies(query,pageNumber).execute();
 
                 if (cancelRequest){
                     return;
                 }
 
-                if (response.code() == 200){
-                    assert response.body() != null;
-                    List<MovieModel> movies = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
+                if (response2.code() == 200){
+                    assert response2.body() != null;
+                    List<MovieModel> movies = new ArrayList<>(((MovieSearchResponse)response2.body()).getMovies());
                     if (pageNumber==1){
                         mMovies.postValue(movies);
                     }else {
@@ -138,8 +138,8 @@ public class MovieApiClient {
                         mMovies.postValue(currentMovies);
                     }
                 }else {
-                    assert response.errorBody() != null;
-                    String error = response.errorBody().string();
+                    assert response2.errorBody() != null;
+                    String error = response2.errorBody().string();
                     Log.d("TAG","Error" + error);
                     mMovies.postValue(null);
                 }
