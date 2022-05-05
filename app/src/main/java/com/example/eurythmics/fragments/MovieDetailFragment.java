@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.eurythmics.R;
@@ -24,7 +26,11 @@ public class MovieDetailFragment extends Fragment {
 
     private TextView title, category, releaseDate;
 
+    private Button addRatingButton;
+
     private MovieModel chosenMovie;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +51,9 @@ public class MovieDetailFragment extends Fragment {
         category = view.findViewById(R.id.category_detail_view);
         releaseDate = view.findViewById(R.id.release_date_detail_view);
         poster = view.findViewById(R.id.poster_detail_view);
+        addRatingButton = view.findViewById(R.id.addrating_detail_view);
+
+        initAddRatingView();
 
 
         getDataFromIntent();
@@ -53,8 +62,22 @@ public class MovieDetailFragment extends Fragment {
 
     }
 
+    private void initAddRatingView() {
+        addRatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new EditRatingFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("movie_rating", chosenMovie);
+                fragment.setArguments(bundle);
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();            }
+        });
+    }
+
     private void getDataFromIntent() {
 
+        String categoryName = chosenMovie.getCategory();
+        category.setText(categoryName);
 
         title.setText(chosenMovie.getTitle());
         releaseDate.setText(chosenMovie.getReleaseDate());

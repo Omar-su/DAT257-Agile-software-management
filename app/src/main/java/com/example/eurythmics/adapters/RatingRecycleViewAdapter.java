@@ -75,7 +75,8 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
 
         ((RatingViewHolder)holder).releaseDateTextView.setText(String.valueOf(mMovies.get(i).getReleaseDate()));
 
-        setCategory((RatingViewHolder) holder, i);
+        String category = getCategory(i);
+        ((RatingViewHolder)holder).categoryTextView.setText(category);
 
 
         setPoster(holder, i);
@@ -91,7 +92,7 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    private void setCategory(RatingViewHolder holder, int i) {
+    public String getCategory(int i) {
         int genreId = 0;
         String category = "";
 
@@ -104,7 +105,10 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
 
         }
 
-        holder.categoryTextView.setText(category);
+        mMovies.get(i).setCategory(category);
+
+
+        return category;
     }
 
     @Override

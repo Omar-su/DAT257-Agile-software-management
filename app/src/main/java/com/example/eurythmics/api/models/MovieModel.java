@@ -20,6 +20,8 @@ public class MovieModel implements Parcelable {
     private List<Integer> genre_ids;
     public MovieModel movieModel;
 
+    private String category;
+
 
     protected MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, List<Integer> genre_ids) {
         this.title = title;
@@ -84,6 +86,14 @@ public class MovieModel implements Parcelable {
     }
 
     public List<Integer> getGenre_ids(){return genre_ids;}
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     @Override
     public int describeContents() {
