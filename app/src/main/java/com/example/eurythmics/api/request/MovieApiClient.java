@@ -198,23 +198,23 @@ public class MovieApiClient {
                     assert response.body() != null;
                     List<MovieModel> movies = new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
                     if (pageNumber==1){
-                        mMovies.postValue(movies);
+                        moviesCategory.postValue(movies);
                     }else {
-                        List<MovieModel> currentMovies = mMovies.getValue();
+                        List<MovieModel> currentMovies = moviesCategory.getValue();
                         currentMovies.addAll(movies);
-                        mMovies.postValue(currentMovies);
+                        moviesCategory.postValue(currentMovies);
                     }
                 }else {
                     assert response.errorBody() != null;
                     String error = response.errorBody().string();
                     Log.d("TAG","Error" + error);
-                    mMovies.postValue(null);
+                    moviesCategory.postValue(null);
                 }
 
 
             } catch (IOException e) {
                 e.printStackTrace();
-                mMovies.postValue(null);
+                moviesCategory.postValue(null);
             }
 
 
