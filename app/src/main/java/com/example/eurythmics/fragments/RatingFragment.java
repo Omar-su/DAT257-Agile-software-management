@@ -50,6 +50,8 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
     private MovieListViewModel movieListViewModel;
 
+    private boolean isCategorySearch = true;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -85,12 +87,14 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                isCategorySearch = false;
                 searchMovieApi(s,1);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
+                isCategorySearch = false;
                 searchMovieApi(s,1);
                 return false;
             }
@@ -193,7 +197,11 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 if (!recyclerView.canScrollVertically(1)){
                     // Here we need to display the rest of pages from the api
-                    movieListViewModel.searchNextPageCategory();
+                    if (isCategorySearch){
+                        movieListViewModel.searchNextPageCategory();
+                    }else {
+                        movieListViewModel.searchNextPage();
+                    }
                 }
             }
         });
