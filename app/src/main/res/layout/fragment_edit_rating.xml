@@ -106,10 +106,12 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/notes_edit_text"
             android:layout_width="227dp"
             android:layout_height="match_parent"
             android:hint="note..."
-            android:maxLength="100" />
+            android:maxLength="100"
+            android:textAlignment="inherit" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -201,8 +203,8 @@
 
     <Button
         android:id="@+id/saveButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="121dp"
+        android:layout_height="45dp"
         android:layout_marginStart="158dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="165dp"
