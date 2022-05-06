@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/numberPicker"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/numberPicker">
+    android:scaleX="1">
 
 
     <android.widget.ImageView
@@ -21,7 +22,10 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="40dp"
         android:layout_height="30dp"
-        android:src="@drawable/ic_baseline_arrow_circle_right_24"
+        android:rotation="0"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:src="@drawable/vector2"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
@@ -46,7 +50,10 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="40dp"
         android:layout_height="30dp"
-        android:src="@drawable/ic_baseline_arrow_circle_left_24"
+        android:rotation="0"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:src="@drawable/vector"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
