@@ -81,7 +81,7 @@ public class EditRatingFragment extends Fragment {
         incrementOverall = view.findViewById(R.id.overallRatingNumberPicker).findViewById(R.id.increment);
         decrementOverall = view.findViewById(R.id.overallRatingNumberPicker).findViewById(R.id.decrement);
 
-        notes = view.findViewById(R.id.notes_edit_text);
+        notes = view.findViewById(R.id.textInputEditText);
 
         btnSave = view.findViewById(R.id.saveButton);
 
