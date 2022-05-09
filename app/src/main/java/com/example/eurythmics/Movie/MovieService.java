@@ -5,7 +5,9 @@ import android.database.Cursor;
 import com.example.eurythmics.Review.Review;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import database.DataBaseManager;
@@ -100,5 +102,17 @@ public class MovieService {
 
     public void addReview(String title, double overallRating, String thoughts){
         addReview(new Review(getMovie(title), overallRating, thoughts));
+    }
+
+    public List<Review> getAllReviews(){
+        return reviewList;
+    }
+
+    public Map<String, Double> getOverallRatings(){
+        HashMap<String, Double> overallRatings = new HashMap<>();
+        for(Review review : reviewList){
+            overallRatings.put(review.getMovie().getTitle(), review.getOverallRating());
+        }
+        return overallRatings;
     }
 }
