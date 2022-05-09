@@ -236,4 +236,13 @@
         app:layout_constraintEnd_toStartOf="@+id/imageButton"
         app:srcCompat="@drawable/ic_baseline_share_24" />
 
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#6F0000"
+        app:layout_constraintBottom_toBottomOf="@+id/rating_movie_with_existing"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+        app:srcCompat="@drawable/ic_baseline_edit_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
