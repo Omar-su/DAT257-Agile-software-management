@@ -54,7 +54,6 @@ public class EditRatingFragment extends Fragment {
 
         init(view);
 
-
         return view;
     }
 
