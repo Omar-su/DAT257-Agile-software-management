@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.eurythmics.Movie.Movie;
 import com.example.eurythmics.Movie.MovieService;
 import com.example.eurythmics.R;
 import com.example.eurythmics.adapters.InputFilterMinMax;
@@ -288,26 +289,58 @@ public class EditRatingFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                double newStoryRating = 0;
+                double newCharactersRating = 0;
+                double newScoreRating = 0;
+                double newSceneryRating = 0;
+                double newOverallRating = 0;
                 if (overallRating.length() != 0) {
-                    double newStoryRating = Double.parseDouble(storyRating.getText().toString());
-                    double newCharactersRating = Double.parseDouble(charactersRating.getText().toString());
-                    double newScoreRating = Double.parseDouble(scoreRating.getText().toString());
-                    double newSceneryRating = Double.parseDouble(sceneryRating.getText().toString());
-                    double newOverallRating = Double.parseDouble(overallRating.getText().toString());
+                    try {
+                        newStoryRating = Double.parseDouble(storyRating.getText().toString());
+                    } catch (NumberFormatException nfe) {}
+
+                    try {
+                        newCharactersRating = Double.parseDouble(charactersRating.getText().toString());
+                    } catch (NumberFormatException nfe) {}
+
+                    try {
+                        newScoreRating = Double.parseDouble(scoreRating.getText().toString());
+                    } catch (NumberFormatException nfe) {}
+
+                    try {
+                        newSceneryRating = Double.parseDouble(sceneryRating.getText().toString());
+                    } catch (NumberFormatException nfe) {}
+
+                    try {
+                        newOverallRating = Double.parseDouble(overallRating.getText().toString());
+                    } catch (NumberFormatException nfe) {}
+
                     String newNotes = notes.getText().toString();
 
                     Log.d("TAG", "------" + newNotes);
 
-                    Toast toast = Toast.makeText(getContext(), newNotes, Toast.LENGTH_LONG);
-                    toast.show();
-
                     ms.addReview( chosenMovie.getTitle(), newStoryRating, newCharactersRating,
                             newScoreRating, newSceneryRating, newOverallRating, newNotes);
 
-                    Fragment fragment = new MovieDetailFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("CHOSEN_TRANSACTION", chosenMovie);
-                    fragment.setArguments(bundle);
+                    // isReviewed needs Movie Class object, we have MovieModel.
+                    // this confirms that the movie is actually added to the list of reviewed ones,
+                    // meaning it was successfully saved.
+                    Movie currentMovie = new Movie(chosenMovie.getTitle(), chosenMovie.getOverview());
+
+                    if (ms.isReviewed(currentMovie)) {
+                        Toast toast = Toast.makeText(getContext(), "Successfully saved rating!", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+
+                    //sends you back to movie detail fragment after saving review
+                    Fragment fragment = new RatingFragment();
+
+                    // ideally want it to go back to MovieDetailFragment, but doesnt seem to work.
+
+                    //Fragment fragment = new MovieDetailFragment();
+                    //Bundle bundle = new Bundle();
+                    //bundle.putParcelable("CHOSEN_TRANSACTION", chosenMovie);
+                    //fragment.setArguments(bundle);
                     requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
                 }
                 else {
