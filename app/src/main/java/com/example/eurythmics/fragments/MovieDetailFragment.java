@@ -17,18 +17,21 @@ import com.bumptech.glide.Glide;
 import com.example.eurythmics.R;
 import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.models.MovieModel;
+import com.example.eurythmics.databinding.ActivityMainBinding;
 
 import java.util.MissingResourceException;
 
 public class MovieDetailFragment extends Fragment {
 
-    private ImageView poster;
+    private ImageView poster, likeButton;
 
     private TextView title, category, releaseDate;
 
     private Button addRatingButton;
 
     private MovieModel chosenMovie;
+
+    private boolean isFavorite = false;
 
 
 
@@ -53,6 +56,10 @@ public class MovieDetailFragment extends Fragment {
         poster = view.findViewById(R.id.poster_detail_view);
         addRatingButton = view.findViewById(R.id.addrating_detail_view);
 
+        likeButton = view.findViewById(R.id.likeButton);
+
+        initLikeButton();
+
         initAddRatingView();
 
 
@@ -60,6 +67,26 @@ public class MovieDetailFragment extends Fragment {
 
         return view;
 
+    }
+
+    private void initLikeButton() {
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO Check if movie is favorite
+                //TODO Add movie to favorite
+
+                // Add to favorites
+                if (!isFavorite){
+                    likeButton.setImageResource(R.drawable.ic_favorite);
+                    isFavorite = true;
+                }else {
+                    likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    isFavorite = false;
+                }
+
+            }
+        });
     }
 
     private void initAddRatingView() {
