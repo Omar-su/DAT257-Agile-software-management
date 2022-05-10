@@ -1,5 +1,7 @@
 package com.example.eurythmics.repositories;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -31,6 +33,7 @@ public class MovieRepo {
         movieApiClient = MovieApiClient.getInstance();
     }
 
+
     public LiveData<List<MovieModel>> getMovies(){
         return movieApiClient.getMovies();
     }
@@ -39,6 +42,12 @@ public class MovieRepo {
         return movieApiClient.getMoviesCategory();
     }
 
+
+    public MovieModel searchMovieApiById(int id){
+
+        return movieApiClient.searchMoviesApiById(id);
+
+    }
 
     public void searchMovieApi(String query, int pageNumber){
 

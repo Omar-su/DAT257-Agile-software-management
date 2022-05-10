@@ -1,5 +1,7 @@
 package com.example.eurythmics.api;
 
+import com.example.eurythmics.api.models.MovieModel;
+import com.example.eurythmics.api.response.MovieResponse;
 import com.example.eurythmics.api.response.MovieSearchResponse;
 
 import retrofit2.Call;
@@ -25,6 +27,14 @@ public interface MovieApi {
             @Query("api_key") String key,
             @Query("query") String query,
             @Query("page") int pageNumber
+    );
+
+    // https://api.themoviedb.org/3/movie/414906?api_key=0279281a6298491c6675460bbefb7ccf
+    // Get movie by id
+    @GET("3/movie/{id}?")
+    Call<MovieModel> searchMovieDetailById(
+            @Path("id") int id,
+            @Query("api_key") String key
     );
 
 

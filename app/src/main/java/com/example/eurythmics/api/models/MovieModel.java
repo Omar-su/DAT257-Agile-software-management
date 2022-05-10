@@ -3,6 +3,8 @@ package com.example.eurythmics.api.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,16 +16,16 @@ public class MovieModel implements Parcelable {
     private String title;
     private String poster_path;
     private String release_date;
-    private int movie_id;
+    @SerializedName("id") private int movie_id;
     private float vote_average;
     private String overview;
     private List<Integer> genre_ids;
+    @SerializedName("runtime") private int duration;
     public MovieModel movieModel;
-
     private String category;
 
 
-    protected MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, List<Integer> genre_ids) {
+    protected MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, List<Integer> genre_ids, int duration) {
         this.title = title;
         this.poster_path = posterPath;
         this.release_date = releaseDate;
@@ -31,6 +33,7 @@ public class MovieModel implements Parcelable {
         this.vote_average = voteAverage;
         this.overview = movie_overView;
         this.genre_ids = genre_ids;
+        this.duration = duration;
     }
 
 
@@ -43,6 +46,7 @@ public class MovieModel implements Parcelable {
         overview = in.readString();
         this.genre_ids = new ArrayList<Integer>();
         in.readList(genre_ids, genre_ids.getClass().getClassLoader());
+        duration = in.readInt();
     }
 
     public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
@@ -77,9 +81,7 @@ public class MovieModel implements Parcelable {
         return movie_id;
     }
 
-    public float getVoteAverage() {
-        return vote_average;
-    }
+    public int getDuration(){return duration;}
 
     public String getOverview() {
         return overview;
@@ -93,6 +95,10 @@ public class MovieModel implements Parcelable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     @Override
@@ -109,5 +115,6 @@ public class MovieModel implements Parcelable {
         parcel.writeFloat(vote_average);
         parcel.writeString(overview);
         parcel.writeList(genre_ids);
+        parcel.writeInt(duration);
     }
 }

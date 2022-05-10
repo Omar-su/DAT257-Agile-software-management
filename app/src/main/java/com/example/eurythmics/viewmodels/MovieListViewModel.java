@@ -1,5 +1,7 @@
 package com.example.eurythmics.viewmodels;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -26,6 +28,11 @@ public class MovieListViewModel extends ViewModel {
 
     public void searchMovieApi(String query, int pageNumber){
         movieRepo.searchMovieApi(query, pageNumber);
+    }
+
+    public MovieModel searchMovieApiById(int id){
+        return movieRepo.searchMovieApiById(id);
+
     }
 
     public void searchNextPage(){

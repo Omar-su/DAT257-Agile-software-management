@@ -5,23 +5,28 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.eurythmics.Movie.Movie;
 import com.example.eurythmics.R;
 import com.example.eurythmics.adapters.OnMovieCardListener;
 import com.example.eurythmics.adapters.RatingRecycleViewAdapter;
 import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.MovieApi;
 import com.example.eurythmics.api.models.MovieModel;
+import com.example.eurythmics.api.request.MovieApiClient;
 import com.example.eurythmics.api.request.ServiceApi;
 import com.example.eurythmics.api.response.MovieSearchResponse;
 import com.example.eurythmics.viewmodels.MovieListViewModel;
@@ -50,6 +55,8 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
     private MovieListViewModel movieListViewModel;
 
+    private MovieModel chosenMovie;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,7 +69,8 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
         recyclerView = view.findViewById(R.id.recycle_view);
 
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         initSearchBar();
 
@@ -97,42 +105,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         });
     }
 
-    private void getRetrofitResponse(String searchString) {
 
-        MovieApi movieApi = ServiceApi.getMovieApi();
-
-        Call<MovieSearchResponse> movieCategory = movieApi.searchMovieByName( Credentials.API_KEY, searchString,1);
-
-        movieCategory.enqueue(new Callback<MovieSearchResponse>() {
-            @Override
-            public void onResponse(Call<MovieSearchResponse> call, Response<MovieSearchResponse> response) {
-                if (response.code() == 200){
-
-                    List<MovieModel> movies = new ArrayList<>(response.body().getMovies());
-
-                    for (MovieModel movieModel: movies){
-                        Log.d("Tag", "successful  =============" + movieModel.getTitle());
-                    }
-
-                }else {
-                    try {
-                        makeToast(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MovieSearchResponse> call, Throwable t) {
-                makeToast("failed attempt to search, try again");
-            }
-        });
-
-
-
-
-    }
 
     private void observerAnyChange() {
         movieListViewModel.getMovies().observe(getViewLifecycleOwner(), new Observer<List<MovieModel>>() {
@@ -158,7 +131,6 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
                 // observing for any data change
                 if (movieModels!=null){
                     for (MovieModel movieModel: movieModels){
-                        Log.d("TAG", "onchanged" + movieModel.getTitle());
 
                         ratingViewAdapter.setmMovies(movieModels);
                     }
@@ -171,6 +143,10 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
     private void searchMovieApi(String query, int pageNumber){
         movieListViewModel.searchMovieApi(query, pageNumber);
+    }
+
+    private MovieModel searchMovieApiByID(int id){
+        return movieListViewModel.searchMovieApiById(id);
     }
 
     private void searchMovieApiByCategory(String filterQ, int pageNumber){
@@ -201,6 +177,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
 
 
+
     //Method to make a Toast. Use to test
     Toast t;
     private void makeToast(String s){
@@ -212,11 +189,29 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
     }
 
 
+
+
     @Override
     public void onMovieClick(int position) {
+        MovieModel currentMov = ratingViewAdapter.getSelectedMovie(position);
+        int id = currentMov.getMovie_id();
+
+
+        chosenMovie = searchMovieApiByID(id);
+
+        if (chosenMovie == null) {
+            makeToast("The movie was not found by the api, Please try again later");
+            return;
+        }
+        currentMov.setDuration(chosenMovie.getDuration());
+
+        makeToast(String.valueOf(currentMov.getDuration()));
+
+
+
         Fragment fragment = new MovieDetailFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable("CHOSEN_TRANSACTION", new MovieModel(ratingViewAdapter.getSelectedMovie(position)));
+        bundle.putParcelable("CHOSEN_TRANSACTION", new MovieModel(currentMov));
         fragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
 
