@@ -17,11 +17,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movie_collection_text"
+        app:layout_constraintTop_toBottomOf="@+id/series_collection_text"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/sort_button"
+        android:id="@+id/series_sort_button"
         android:layout_width="60dp"
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
@@ -29,13 +29,13 @@
         android:text="Sort By"
         android:textColor="@color/black"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/movieCollectionSearch"
-        app:layout_constraintStart_toEndOf="@+id/filter_button"
-        app:layout_constraintTop_toTopOf="@+id/movieCollectionSearch"
+        app:layout_constraintBottom_toBottomOf="@+id/seriesCollectionSearch"
+        app:layout_constraintStart_toEndOf="@+id/movies_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/seriesCollectionSearch"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/filter_button"
+        android:id="@+id/movies_filter_button"
         android:layout_width="60dp"
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
@@ -43,13 +43,13 @@
         android:text="Filter"
         android:textColor="@color/black"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/movieCollectionSearch"
-        app:layout_constraintStart_toEndOf="@+id/movieCollectionSearch"
-        app:layout_constraintTop_toTopOf="@+id/movieCollectionSearch"
+        app:layout_constraintBottom_toBottomOf="@+id/seriesCollectionSearch"
+        app:layout_constraintStart_toEndOf="@+id/seriesCollectionSearch"
+        app:layout_constraintTop_toTopOf="@+id/seriesCollectionSearch"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/movieCollectionSearch"
+        android:id="@+id/seriesCollectionSearch"
         android:layout_width="205dp"
         android:layout_height="42dp"
         android:layout_marginStart="25dp"
@@ -60,7 +60,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/movie_collection_text"
+        android:id="@+id/series_collection_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
