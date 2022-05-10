@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.example.eurythmics.Movie.Movie;
 import com.example.eurythmics.Movie.MovieService;
 import com.example.eurythmics.R;
+import com.example.eurythmics.Review.Review;
 import com.example.eurythmics.adapters.InputFilterMinMax;
 import com.example.eurythmics.api.models.MovieModel;
 
@@ -60,7 +61,7 @@ public class EditRatingFragment extends Fragment {
         dbHelper = new DataBaseManager(null);
 
         init(view);
-
+        checkForExistingReview(chosenMovie);
 
         return view;
     }
@@ -349,6 +350,20 @@ public class EditRatingFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void checkForExistingReview(MovieModel movieModel) {
+        Movie currentMovie = new Movie(movieModel.getTitle(), movieModel.getOverview());
+        if(ms.isReviewed(currentMovie)) {
+            Review existingReview = ms.getReview(currentMovie);
+
+            storyRating.setText("" + existingReview.getStoryRating());
+            charactersRating.setText("" + existingReview.getCharactersRating());
+            scoreRating.setText("" + existingReview.getScoreRating());
+            sceneryRating.setText("" + existingReview.getSceneryRating());
+            overallRating.setText("" + existingReview.getOverallRating());
+            notes.setText("" + existingReview.getThoughts());
+        }
     }
 
     //rounds to nearest value with a defined number of decimals

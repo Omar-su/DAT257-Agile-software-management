@@ -94,16 +94,30 @@ public class MovieService {
     }
 
     public void addReview(Review review){
-        reviewList.add(review);
-        dataBaseManager.addReview(
-                review.getMovie().getTitle(),
-                review.getStoryRating(),
-                review.getCharactersRating(),
-                review.getScoreRating(),
-                review.getSceneryRating(),
-                review.getOverallRating(),
-                review.getThoughts()
-        );
+
+        if(!isReviewed(review.getMovie())){
+            reviewList.add(review);
+            dataBaseManager.addReview(
+                    review.getMovie().getTitle(),
+                    review.getStoryRating(),
+                    review.getCharactersRating(),
+                    review.getScoreRating(),
+                    review.getSceneryRating(),
+                    review.getOverallRating(),
+                    review.getThoughts()
+            );
+        }
+        else {
+            dataBaseManager.editReview(
+                    review.getMovie().getTitle(),
+                    review.getStoryRating(),
+                    review.getCharactersRating(),
+                    review.getScoreRating(),
+                    review.getSceneryRating(),
+                    review.getOverallRating(),
+                    review.getThoughts()
+            );
+        }
     }
 
     public void addReview(String title, double storyRating, double charactersRating,
@@ -111,6 +125,13 @@ public class MovieService {
                           double overallRating, String thoughts){
         addReview(new Review(getMovie(title), storyRating, charactersRating,
                 scoreRating, sceneryRating, overallRating, thoughts));
+    }
+
+    public void removeReview(Review review){
+        if (isReviewed(review.getMovie())) {
+            reviewList.remove(review);
+            dataBaseManager.deleteReview(review);
+        }
     }
 
     public List<Review> getAllReviews(){

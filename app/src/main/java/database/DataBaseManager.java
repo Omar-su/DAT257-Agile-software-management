@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.eurythmics.Review.Review;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -116,6 +118,27 @@ public class DataBaseManager extends SQLiteOpenHelper{
         return sqLiteDatabase.insert(TABLE_REVIEWS, null, contentValues) != -1;
     }
 
+    public boolean editReview(String title, double storyRating, double charactersRating,
+                             double scoreRating, double sceneryRating,
+                             double overallRating, String thoughts){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_MOVIES_TITLE, title);
+        contentValues.put(COLUMN_REVIEW_STORY, storyRating);
+        contentValues.put(COLUMN_REVIEW_CHARACTERS, charactersRating);
+        contentValues.put(COLUMN_REVIEW_SCORE, scoreRating);
+        contentValues.put(COLUMN_REVIEW_SCENERY, sceneryRating);
+        contentValues.put(COLUMN_REVIEW_OVERALL, overallRating);
+        contentValues.put(COLUMN_REVIEW_THOUGHTS, thoughts);
+
+        return sqLiteDatabase.update(TABLE_REVIEWS, contentValues, COLUMN_MOVIES_TITLE + "=" + title, null) != -1;
+    }
+
+    public boolean deleteReview(Review review) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        return sqLiteDatabase.delete(TABLE_REVIEWS, COLUMN_MOVIES_TITLE + "=" + review.getMovie().getTitle(), null) > 0;
+    }
     public Cursor getAllMovies(){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_MOVIES, null);
