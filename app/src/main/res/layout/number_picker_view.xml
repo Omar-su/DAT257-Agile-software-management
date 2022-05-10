@@ -43,7 +43,7 @@
         app:layout_constraintStart_toEndOf="@+id/decrement"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:text="99" />
+        tools:text="0" />
 
     <ImageButton
         android:id="@+id/decrement"
