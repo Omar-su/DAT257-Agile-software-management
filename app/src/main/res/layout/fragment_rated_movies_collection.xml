@@ -12,12 +12,13 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layout_marginTop="20dp"
         android:background="#6F303B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="119dp" />
+        app:layout_constraintTop_toBottomOf="@+id/movie_collection_text"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/sort_button"
