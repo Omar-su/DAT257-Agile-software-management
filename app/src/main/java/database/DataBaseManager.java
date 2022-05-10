@@ -27,6 +27,11 @@ public class DataBaseManager extends SQLiteOpenHelper{
 
     private static final String COLUMN_MOVIES_TITLE = "title";
     private static final String COLUMN_MOVIES_DESCRIPTION = "description";
+
+    private static final String COLUMN_REVIEW_STORY = "storyRating";
+    private static final String COLUMN_REVIEW_CHARACTERS = "charactersRating";
+    private static final String COLUMN_REVIEW_SCORE = "scoreRating";
+    private static final String COLUMN_REVIEW_SCENERY = "sceneryRating";
     private static final String COLUMN_REVIEW_OVERALL = "overallRating";
     private static final String COLUMN_REVIEW_THOUGHTS = "thoughts";
 
@@ -63,6 +68,10 @@ public class DataBaseManager extends SQLiteOpenHelper{
     private void createReviewsTable(SQLiteDatabase sqLiteDatabase) {
         String sReviewTable = "CREATE TABLE "+ TABLE_REVIEWS +" ( " +
                 COLUMN_MOVIES_TITLE + " TEXT PRIMARY KEY, " +
+                COLUMN_REVIEW_STORY + " REAL, " +
+                COLUMN_REVIEW_CHARACTERS + " REAL, " +
+                COLUMN_REVIEW_SCORE + " REAL, " +
+                COLUMN_REVIEW_SCENERY + " REAL, " +
                 COLUMN_REVIEW_OVERALL + " REAL, " +
                 COLUMN_REVIEW_THOUGHTS + " TEXT, " +
                 "FOREIGN KEY ("+COLUMN_MOVIES_TITLE+") REFERENCES "+TABLE_MOVIES+"("+COLUMN_MOVIES_TITLE+")" +
@@ -90,11 +99,17 @@ public class DataBaseManager extends SQLiteOpenHelper{
         return sqLiteDatabase.insert(TABLE_MOVIES, null, contentValues) != -1;
     }
 
-    public boolean addReview(String title, double overallRating, String thoughts){
+    public boolean addReview(String title, double storyRating, double charactersRating,
+                             double scoreRating, double sceneryRating,
+                             double overallRating, String thoughts){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_MOVIES_TITLE, title);
+        contentValues.put(COLUMN_REVIEW_STORY, storyRating);
+        contentValues.put(COLUMN_REVIEW_CHARACTERS, charactersRating);
+        contentValues.put(COLUMN_REVIEW_SCORE, scoreRating);
+        contentValues.put(COLUMN_REVIEW_SCENERY, sceneryRating);
         contentValues.put(COLUMN_REVIEW_OVERALL, overallRating);
         contentValues.put(COLUMN_REVIEW_THOUGHTS, thoughts);
 

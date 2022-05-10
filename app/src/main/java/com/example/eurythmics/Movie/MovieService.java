@@ -55,7 +55,9 @@ public class MovieService {
                 return movie;
             }
         }
-        throw new NoSuchElementException("No such movie found");
+        Movie newMovie = new Movie(title, "");
+        addMovie(newMovie);
+        return newMovie;
     }
 
 
@@ -95,13 +97,20 @@ public class MovieService {
         reviewList.add(review);
         dataBaseManager.addReview(
                 review.getMovie().getTitle(),
+                review.getStoryRating(),
+                review.getCharactersRating(),
+                review.getScoreRating(),
+                review.getSceneryRating(),
                 review.getOverallRating(),
                 review.getThoughts()
         );
     }
 
-    public void addReview(String title, double overallRating, String thoughts){
-        addReview(new Review(getMovie(title), overallRating, thoughts));
+    public void addReview(String title, double storyRating, double charactersRating,
+                          double scoreRating, double sceneryRating,
+                          double overallRating, String thoughts){
+        addReview(new Review(getMovie(title), storyRating, charactersRating,
+                scoreRating, sceneryRating, overallRating, thoughts));
     }
 
     public List<Review> getAllReviews(){

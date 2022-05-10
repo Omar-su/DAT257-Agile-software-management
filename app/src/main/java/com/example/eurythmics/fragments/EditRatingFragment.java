@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.eurythmics.Movie.MovieService;
 import com.example.eurythmics.R;
 import com.example.eurythmics.adapters.InputFilterMinMax;
 import com.example.eurythmics.api.models.MovieModel;
@@ -37,13 +38,15 @@ public class EditRatingFragment extends Fragment {
 
 
     MovieModel chosenMovie;
+    MovieService ms;
 
     @Nullable
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_edit_rating,container,false);
+        View view = inflater.inflate(R.layout.fragment_edit_rating,container,false);
 
         Bundle bundle = this.getArguments();
+        ms = MovieService.getMovieService();
 
         if (bundle != null){
             chosenMovie = bundle.getParcelable("movie_rating");
@@ -62,7 +65,6 @@ public class EditRatingFragment extends Fragment {
     }
 
     private void init(View view) {
-
 
         storyRating = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.number);
         incrementStory = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.increment);
@@ -90,7 +92,6 @@ public class EditRatingFragment extends Fragment {
         overallRating.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "10")});
 
         notes = view.findViewById(R.id.textInputEditText);
-
         btnSave = view.findViewById(R.id.saveButton);
 
         //implement all buttons
@@ -287,23 +288,34 @@ public class EditRatingFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String newOverallRating = overallRating.getText().toString();
-                String newNotes = notes.getText().toString();
-                Log.d("TAG", "------" + newNotes);
-                Toast toast = Toast.makeText(getContext(), newNotes, Toast.LENGTH_LONG);
-                toast.show();
-                if (overallRating.length() != 0 && notes.length() != 0){
-                    //AddRating(/** the movie title */, newOverallRating, newNotes);
+                if (overallRating.length() != 0) {
+                    double newStoryRating = Double.parseDouble(storyRating.getText().toString());
+                    double newCharactersRating = Double.parseDouble(charactersRating.getText().toString());
+                    double newScoreRating = Double.parseDouble(scoreRating.getText().toString());
+                    double newSceneryRating = Double.parseDouble(sceneryRating.getText().toString());
+                    double newOverallRating = Double.parseDouble(overallRating.getText().toString());
+                    String newNotes = notes.getText().toString();
+
+                    Log.d("TAG", "------" + newNotes);
+
+                    Toast toast = Toast.makeText(getContext(), newNotes, Toast.LENGTH_LONG);
+                    toast.show();
+
+                    ms.addReview( chosenMovie.getTitle(), newStoryRating, newCharactersRating,
+                            newScoreRating, newSceneryRating, newOverallRating, newNotes);
+
+                    Fragment fragment = new MovieDetailFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("CHOSEN_TRANSACTION", chosenMovie);
+                    fragment.setArguments(bundle);
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+                }
+                else {
+                    Toast toast = Toast.makeText(getContext(), "An overall rating is required in order to submit!", Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         });
-    }
-
-
-    //TODO: make this method get the title of the movie being rated
-    public void AddRating(String movieTitle, String overallRating, String notes) {
-        //boolean insertData = dbHelper.addReview(overallRating, notes);
-
     }
 
     //rounds to nearest value with a defined number of decimals
