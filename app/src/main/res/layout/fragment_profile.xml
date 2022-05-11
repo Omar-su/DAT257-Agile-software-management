@@ -31,13 +31,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/profile_picture"
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rectangle_3"
         tools:srcCompat="@drawable/rectangle_3" />
 
     <TextView
@@ -50,7 +51,7 @@
         android:text="Username"
         android:textColor="#FFFFFF"
         android:textSize="24dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/profile_picture"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <ImageView
