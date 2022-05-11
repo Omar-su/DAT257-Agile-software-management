@@ -22,6 +22,8 @@ import com.example.eurythmics.R;
 import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.adapters.InputFilterMinMax;
 import com.example.eurythmics.api.models.MovieModel;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -35,7 +37,7 @@ public class EditRatingFragment extends Fragment {
     private EditText storyRating, charactersRating, scoreRating, sceneryRating, overallRating;
     private ImageButton incrementStory, incrementCharacters, incrementScore, incrementScenery, incrementOverall;
     private ImageButton decrementStory, decrementCharacters, decrementScore, decrementScenery, decrementOverall;
-    private TextView notes;
+    private TextInputEditText notes;
     private Button btnSave;
     private TextView movieTitle;
     private ImageView moviePoster;
@@ -99,7 +101,7 @@ public class EditRatingFragment extends Fragment {
         moviePoster = view.findViewById(R.id.moviePosterRating);
         Glide.with(this).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(moviePoster);
 
-        notes = view.findViewById(R.id.textInputEditText);
+        notes = view.findViewById(R.id.editTextInput);
 
         btnSave = view.findViewById(R.id.saveButton);
 

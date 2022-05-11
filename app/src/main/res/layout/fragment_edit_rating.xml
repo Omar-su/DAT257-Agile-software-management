@@ -152,11 +152,12 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditText"
+            android:id="@+id/editTextInput"
             android:layout_width="195dp"
             android:layout_height="121dp"
             android:hint="note..."
-            android:maxLength="100" />
+            android:maxLength="100"
+            tools:visibility="visible" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
