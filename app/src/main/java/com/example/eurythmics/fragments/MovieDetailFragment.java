@@ -1,23 +1,21 @@
 package com.example.eurythmics.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.eurythmics.R;
 import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.models.MovieModel;
-import com.example.eurythmics.databinding.ActivityMainBinding;
 
 import java.util.MissingResourceException;
 
@@ -25,7 +23,7 @@ public class MovieDetailFragment extends Fragment {
 
     private ImageView poster, likeButton;
 
-    private TextView title, category, releaseDate;
+    private TextView title, category, releaseDate, durationTime;
 
     private Button addRatingButton;
 
@@ -55,6 +53,7 @@ public class MovieDetailFragment extends Fragment {
         releaseDate = view.findViewById(R.id.release_date_detail_view);
         poster = view.findViewById(R.id.poster_detail_view);
         addRatingButton = view.findViewById(R.id.addrating_detail_view);
+        durationTime = view.findViewById(R.id.durationTime);
 
         likeButton = view.findViewById(R.id.likeButton);
 
@@ -109,7 +108,23 @@ public class MovieDetailFragment extends Fragment {
         title.setText(chosenMovie.getTitle());
         releaseDate.setText(chosenMovie.getReleaseDate());
 
+        Pair<Integer, Integer> hoursMinutes = getTime(chosenMovie.getDuration());
+        durationTime.setText(hoursMinutes.first + "h " + hoursMinutes.second + "m");
+
         Glide.with(this).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(poster);
+    }
+
+    private Pair<Integer, Integer> getTime(int duration) {
+        int minuteInHour = 60;
+
+        int hours = duration/minuteInHour;
+        int minutes = duration % minuteInHour;
+        Log.d("tag", "hours = " + hours + "minutes = " + minutes);
+
+        Pair<Integer, Integer> hMinute = new Pair<>(hours, minutes);
+
+        return hMinute;
+
     }
 
 }
