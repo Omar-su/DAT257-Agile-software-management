@@ -109,9 +109,7 @@ public class MovieDetailFragment extends Fragment {
         title.setText(chosenMovie.getTitle());
         releaseDate.setText(chosenMovie.getReleaseDate());
 
-
         Glide.with(this).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(poster);
-
     }
 
 }

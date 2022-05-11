@@ -5,8 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,14 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.eurythmics.Movie.Movie;
 import com.example.eurythmics.R;
 import com.example.eurythmics.adapters.OnMovieCardListener;
 import com.example.eurythmics.adapters.RatingRecycleViewAdapter;
 import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.MovieApi;
 import com.example.eurythmics.api.models.MovieModel;
-import com.example.eurythmics.api.request.MovieApiClient;
 import com.example.eurythmics.api.request.ServiceApi;
 import com.example.eurythmics.api.response.MovieSearchResponse;
 import com.example.eurythmics.viewmodels.MovieListViewModel;
@@ -54,6 +50,8 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
     private RatingRecycleViewAdapter ratingViewAdapter;
 
     private MovieListViewModel movieListViewModel;
+
+    private boolean isCategorySearch = true;
 
     private MovieModel chosenMovie;
 
@@ -93,12 +91,14 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                isCategorySearch = false;
                 searchMovieApi(s,1);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
+                isCategorySearch = false;
                 searchMovieApi(s,1);
                 return false;
             }
@@ -145,14 +145,13 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         movieListViewModel.searchMovieApi(query, pageNumber);
     }
 
-    private MovieModel searchMovieApiByID(int id){
-        return movieListViewModel.searchMovieApiById(id);
-    }
-
     private void searchMovieApiByCategory(String filterQ, int pageNumber){
         movieListViewModel.searchMovieApiByCategory(filterQ, pageNumber);
     }
 
+    private MovieModel searchMovieApiByID(int id){
+        return movieListViewModel.searchMovieApiById(id);
+    }
 
     // Initializing recycle view and adding list items
     private void configureRecycleView(){
@@ -169,12 +168,14 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 if (!recyclerView.canScrollVertically(1)){
                     // Here we need to display the rest of pages from the api
-                    movieListViewModel.searchNextPageCategory();
-                }
+                    if (isCategorySearch){
+                        movieListViewModel.searchNextPageCategory();
+                    }else {
+                        movieListViewModel.searchNextPage();
+                    }                }
             }
         });
     }
-
 
 
 
@@ -187,8 +188,6 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         t = Toast.makeText(requireActivity().getApplicationContext(), s, Toast.LENGTH_SHORT);
         t.show();
     }
-
-
 
 
     @Override

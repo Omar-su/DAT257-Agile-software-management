@@ -1,12 +1,15 @@
 package com.example.eurythmics.fragments;
 
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.eurythmics.R;
+import com.example.eurythmics.api.Credentials;
+import com.example.eurythmics.adapters.InputFilterMinMax;
 import com.example.eurythmics.api.models.MovieModel;
 
 import java.math.BigDecimal;
@@ -26,11 +32,13 @@ import database.DataBaseManager;
 public class EditRatingFragment extends Fragment {
 
     DataBaseManager dbHelper;
-    private TextView storyRating, charactersRating, scoreRating, sceneryRating, overallRating;
+    private EditText storyRating, charactersRating, scoreRating, sceneryRating, overallRating;
     private ImageButton incrementStory, incrementCharacters, incrementScore, incrementScenery, incrementOverall;
     private ImageButton decrementStory, decrementCharacters, decrementScore, decrementScenery, decrementOverall;
     private TextView notes;
     private Button btnSave;
+    private TextView movieTitle;
+    private ImageView moviePoster;
 
 
     MovieModel chosenMovie;
@@ -54,39 +62,48 @@ public class EditRatingFragment extends Fragment {
 
         init(view);
 
-
         return view;
     }
 
     private void init(View view) {
-
-
         storyRating = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.number);
         incrementStory = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.increment);
         decrementStory = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.decrement);
+        storyRating.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "10")});
 
         charactersRating = view.findViewById(R.id.characterNumberPicker).findViewById(R.id.number);
         incrementCharacters = view.findViewById(R.id.characterNumberPicker).findViewById(R.id.increment);
         decrementCharacters = view.findViewById(R.id.characterNumberPicker).findViewById(R.id.decrement);
+        charactersRating.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "10")});
 
         scoreRating = view.findViewById(R.id.scoreNumberPicker).findViewById(R.id.number);
         incrementScore = view.findViewById(R.id.scoreNumberPicker).findViewById(R.id.increment);
         decrementScore = view.findViewById(R.id.scoreNumberPicker).findViewById(R.id.decrement);
+        scoreRating.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "10")});
 
         sceneryRating = view.findViewById(R.id.sceneryNumberPicker).findViewById(R.id.number);
         incrementScenery = view.findViewById(R.id.sceneryNumberPicker).findViewById(R.id.increment);
         decrementScenery = view.findViewById(R.id.sceneryNumberPicker).findViewById(R.id.decrement);
+        sceneryRating.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "10")});
 
         overallRating = view.findViewById(R.id.overallRatingNumberPicker).findViewById(R.id.number);
         incrementOverall = view.findViewById(R.id.overallRatingNumberPicker).findViewById(R.id.increment);
         decrementOverall = view.findViewById(R.id.overallRatingNumberPicker).findViewById(R.id.decrement);
+        overallRating.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "10")});
 
-        notes = view.findViewById(R.id.notes_edit_text);
+        // Movie title
+        movieTitle = view.findViewById(R.id.movieTitleRating);
+        movieTitle.setText(chosenMovie.getTitle());
+
+        // Movie poster
+        moviePoster = view.findViewById(R.id.moviePosterRating);
+        Glide.with(this).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(moviePoster);
+
+        notes = view.findViewById(R.id.textInputEditText);
 
         btnSave = view.findViewById(R.id.saveButton);
 
         //implement all buttons
-
         incrementStory.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 double count = 0;
