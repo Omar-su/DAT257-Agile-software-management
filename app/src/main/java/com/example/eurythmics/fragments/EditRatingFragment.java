@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.eurythmics.R;
+import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.adapters.InputFilterMinMax;
 import com.example.eurythmics.api.models.MovieModel;
 
@@ -34,6 +37,8 @@ public class EditRatingFragment extends Fragment {
     private ImageButton decrementStory, decrementCharacters, decrementScore, decrementScenery, decrementOverall;
     private TextView notes;
     private Button btnSave;
+    private TextView movieTitle;
+    private ImageView moviePoster;
 
 
     MovieModel chosenMovie;
@@ -57,13 +62,10 @@ public class EditRatingFragment extends Fragment {
 
         init(view);
 
-
         return view;
     }
 
     private void init(View view) {
-
-
         storyRating = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.number);
         incrementStory = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.increment);
         decrementStory = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.decrement);
@@ -88,6 +90,14 @@ public class EditRatingFragment extends Fragment {
         incrementOverall = view.findViewById(R.id.overallRatingNumberPicker).findViewById(R.id.increment);
         decrementOverall = view.findViewById(R.id.overallRatingNumberPicker).findViewById(R.id.decrement);
         overallRating.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "10")});
+
+        // Movie title
+        movieTitle = view.findViewById(R.id.movieTitleRating);
+        movieTitle.setText(chosenMovie.getTitle());
+
+        // Movie poster
+        moviePoster = view.findViewById(R.id.moviePosterRating);
+        Glide.with(this).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(moviePoster);
 
         notes = view.findViewById(R.id.textInputEditText);
 
