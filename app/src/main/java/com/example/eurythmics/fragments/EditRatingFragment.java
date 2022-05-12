@@ -337,15 +337,14 @@ public class EditRatingFragment extends Fragment {
 
                     Log.d("TAG", "------" + newNotes);
 
-                    ms.addReview( chosenMovie.getTitle(), newStoryRating, newCharactersRating,
+                    ms.addReview( chosenMovie.getMovie_id(), newStoryRating, newCharactersRating,
                             newScoreRating, newSceneryRating, newOverallRating, newNotes);
 
                     // isReviewed needs Movie Class object, we have MovieModel.
                     // this confirms that the movie is actually added to the list of reviewed ones,
                     // meaning it was successfully saved.
-                    Movie currentMovie = new Movie(chosenMovie.getTitle(), chosenMovie.getOverview());
 
-                    if (ms.isReviewed(currentMovie)) {
+                    if (ms.isReviewed(chosenMovie.getMovie_id())) {
                         Toast toast = Toast.makeText(getContext(), "Successfully saved rating!", Toast.LENGTH_LONG);
                         toast.show();
                     }
@@ -370,9 +369,8 @@ public class EditRatingFragment extends Fragment {
     }
 
     public void checkForExistingReview(MovieModel movieModel) {
-        Movie currentMovie = new Movie(movieModel.getTitle(), movieModel.getOverview());
-        if(ms.isReviewed(currentMovie)) {
-            Review existingReview = ms.getReview(currentMovie);
+        if(ms.isReviewed(movieModel.getMovie_id())) {
+            Review existingReview = ms.getReview(movieModel.getMovie_id());
 
             storyRating.setText("" + existingReview.getStoryRating());
             charactersRating.setText("" + existingReview.getCharactersRating());

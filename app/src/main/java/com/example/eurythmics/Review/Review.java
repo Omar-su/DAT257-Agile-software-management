@@ -2,17 +2,15 @@ package com.example.eurythmics.Review;
 
 import com.example.eurythmics.Movie.Movie;
 
-import java.text.DecimalFormat;
-
 public class Review {
-    private Movie movie;
+    private int movieID;
     private double storyRating, charactersRating, scoreRating, sceneryRating, overallRating;
     private String thoughts;
 
-    public Review(Movie movie, double storyRating, double charactersRating,
+    public Review(int movieID, double storyRating, double charactersRating,
                   double scoreRating, double sceneryRating,
                   double overallRating, String thoughts){
-        this.movie = movie;
+        this.movieID = movieID;
         setOverallRating(overallRating);
         setStoryRating(storyRating);
         setCharactersRating(charactersRating);
@@ -57,5 +55,5 @@ public class Review {
     public double getSceneryRating(){return sceneryRating;}
     public double getOverallRating(){return overallRating;}
     public String getThoughts(){return thoughts;}
-    public Movie getMovie(){return movie;}
+    public int getMovieID(){return movieID;}
 }

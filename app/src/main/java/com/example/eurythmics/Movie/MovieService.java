@@ -17,13 +17,13 @@ public class MovieService {
     private DataBaseManager dataBaseManager;
     private static MovieService instance;
 
-    private List<Movie> movieList = new ArrayList<>();
     private List<Review> reviewList = new ArrayList<>();
 
     public MovieService(DataBaseManager dataBaseManager){
         if(instance == null){
             this.dataBaseManager = dataBaseManager;
             instance = this;
+            loadReviewsFromDB();
         }
 
     }
@@ -36,82 +36,52 @@ public class MovieService {
         }
     }
 
-    private void loadMoviesFromDB(){
-        Cursor cursor = dataBaseManager.getAllMovies();
-        movieList.clear();
-        if(cursor.moveToFirst()){
-            do{
-                movieList.add(new Movie(
-                        cursor.getString(0),
-                        cursor.getString(1)
-                ));
-            }while (cursor.moveToNext());
-        }
-    }
-
     public void loadReviewsFromDB(){
         Cursor cursor = dataBaseManager.getAllReviews();
-        movieList.clear();
         if(cursor.moveToFirst()){
             do{
-                movieList.add(new Movie(
-                        cursor.getString(0),
-                        cursor.getString(1)
+                reviewList.add(new Review(
+                        cursor.getInt(0),
+                        cursor.getDouble(1),
+                        cursor.getDouble(2),
+                        cursor.getDouble(3),
+                        cursor.getDouble(4),
+                        cursor.getDouble(5),
+                        cursor.getString(6)
                 ));
             }while (cursor.moveToNext());
         }
     }
 
-    public Movie getMovie(String title){
-        for(Movie movie : movieList){
-            if(movie.getTitle() == title){
-                return movie;
-            }
-        }
-        Movie newMovie = new Movie(title, "");
-        addMovie(newMovie);
-        return newMovie;
-    }
 
-
-
-    public Review getReview(Movie movie){
+    public Review getReview(int movieID){
         for(Review review : reviewList){
-            if(review.getMovie().getTitle().equals(movie.getTitle())){
+            if(review.getMovieID() == movieID){
                 return review;
             }
         }
-        throw new NoSuchElementException("No such review found");
+        return null;
     }
 
-    public boolean isReviewed(Movie movie){
+    public boolean isReviewed(int movieID){
         for(Review review : reviewList){
-            if(review.getMovie().getTitle().equals(movie.getTitle())){
+            if(review.getMovieID() == movieID){
                 return true;
             }
         }
         return false;
     }
 
-    public double getOverallRating(Movie movie){
-        return getReview(movie).getOverallRating();
-    }
-
-    public void addMovie(Movie movie){
-        movieList.add(movie);
-        dataBaseManager.addMovie(movie.getTitle(), movie.getDescription());
-    }
-
-    public void addMovie(String title, String description){
-        addMovie(new Movie(title, description));
+    public double getOverallRating(int movieID){
+        return getReview(movieID).getOverallRating();
     }
 
     public void addReview(Review review){
 
-        if(!isReviewed(review.getMovie())){
+        if(!isReviewed(review.getMovieID())){
             reviewList.add(review);
             dataBaseManager.addReview(
-                    review.getMovie().getTitle(),
+                    review.getMovieID(),
                     review.getStoryRating(),
                     review.getCharactersRating(),
                     review.getScoreRating(),
@@ -122,7 +92,7 @@ public class MovieService {
         }
         else {
             dataBaseManager.editReview(
-                    review.getMovie().getTitle(),
+                    review.getMovieID(),
                     review.getStoryRating(),
                     review.getCharactersRating(),
                     review.getScoreRating(),
@@ -133,15 +103,15 @@ public class MovieService {
         }
     }
 
-    public void addReview(String title, double storyRating, double charactersRating,
+    public void addReview(int movieID, double storyRating, double charactersRating,
                           double scoreRating, double sceneryRating,
                           double overallRating, String thoughts){
-        addReview(new Review(getMovie(title), storyRating, charactersRating,
+        addReview(new Review(movieID, storyRating, charactersRating,
                 scoreRating, sceneryRating, overallRating, thoughts));
     }
 
     public void removeReview(Review review){
-        if (isReviewed(review.getMovie())) {
+        if (isReviewed(review.getMovieID())) {
             reviewList.remove(review);
             dataBaseManager.deleteReview(review);
         }
@@ -151,10 +121,10 @@ public class MovieService {
         return reviewList;
     }
 
-    public Map<String, Double> getOverallRatings(){
-        HashMap<String, Double> overallRatings = new HashMap<>();
+    public Map<Integer, Double> getOverallRatings(){
+        HashMap<Integer, Double> overallRatings = new HashMap<>();
         for(Review review : reviewList){
-            overallRatings.put(review.getMovie().getTitle(), review.getOverallRating());
+            overallRatings.put(review.getMovieID(), review.getOverallRating());
         }
         return overallRatings;
     }

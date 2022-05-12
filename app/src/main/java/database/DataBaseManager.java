@@ -6,14 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.eurythmics.Review.Review;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Provides the database required for storing movie, rating and category information,
@@ -22,12 +17,12 @@ import java.util.List;
 public class DataBaseManager extends SQLiteOpenHelper{
 
     private static final String DATABASE_NAME = "moviesDatabase";
-    private static final int DATABSE_VERSION = 4;
+    private static final int DATABSE_VERSION = 6;
 
     private static final String TABLE_MOVIES = "movies";
     private static final String TABLE_REVIEWS = "reviews";
 
-    private static final String COLUMN_MOVIES_TITLE = "title";
+    private static final String COLUMN_MOVIES_ID = "id";
     private static final String COLUMN_MOVIES_DESCRIPTION = "description";
 
     private static final String COLUMN_REVIEW_STORY = "storyRating";
@@ -60,7 +55,7 @@ public class DataBaseManager extends SQLiteOpenHelper{
 
     private void createMovieTable(SQLiteDatabase sqLiteDatabase) {
         String sMovieTable = "CREATE TABLE "+ TABLE_MOVIES +" ( " +
-                COLUMN_MOVIES_TITLE + " TEXT PRIMARY KEY, " +
+                COLUMN_MOVIES_ID + " TEXT PRIMARY KEY, " +
                 COLUMN_MOVIES_DESCRIPTION + " TEXT" +
                 " )";
 
@@ -69,24 +64,24 @@ public class DataBaseManager extends SQLiteOpenHelper{
 
     private void createReviewsTable(SQLiteDatabase sqLiteDatabase) {
         String sReviewTable = "CREATE TABLE "+ TABLE_REVIEWS +" ( " +
-                COLUMN_MOVIES_TITLE + " TEXT PRIMARY KEY, " +
+                COLUMN_MOVIES_ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_REVIEW_STORY + " REAL, " +
                 COLUMN_REVIEW_CHARACTERS + " REAL, " +
                 COLUMN_REVIEW_SCORE + " REAL, " +
                 COLUMN_REVIEW_SCENERY + " REAL, " +
                 COLUMN_REVIEW_OVERALL + " REAL, " +
-                COLUMN_REVIEW_THOUGHTS + " TEXT, " +
-                "FOREIGN KEY ("+COLUMN_MOVIES_TITLE+") REFERENCES "+TABLE_MOVIES+"("+COLUMN_MOVIES_TITLE+")" +
-                " )";
+                COLUMN_REVIEW_THOUGHTS + " TEXT)"
+                ;
 
         sqLiteDatabase.execSQL(sReviewTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldV, int newV) {
+        System.out.println("Updated the database");
         if(oldV != newV){
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MOVIES);
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_REVIEWS);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MOVIES);
             onCreate(sqLiteDatabase);
         }
     }
@@ -95,19 +90,19 @@ public class DataBaseManager extends SQLiteOpenHelper{
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_MOVIES_TITLE, title);
+        contentValues.put(COLUMN_MOVIES_ID, title);
         contentValues.put(COLUMN_MOVIES_DESCRIPTION, description);
 
         return sqLiteDatabase.insert(TABLE_MOVIES, null, contentValues) != -1;
     }
 
-    public boolean addReview(String title, double storyRating, double charactersRating,
+    public boolean addReview(int movieID, double storyRating, double charactersRating,
                              double scoreRating, double sceneryRating,
                              double overallRating, String thoughts){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_MOVIES_TITLE, title);
+        contentValues.put(COLUMN_MOVIES_ID, movieID);
         contentValues.put(COLUMN_REVIEW_STORY, storyRating);
         contentValues.put(COLUMN_REVIEW_CHARACTERS, charactersRating);
         contentValues.put(COLUMN_REVIEW_SCORE, scoreRating);
@@ -118,13 +113,13 @@ public class DataBaseManager extends SQLiteOpenHelper{
         return sqLiteDatabase.insert(TABLE_REVIEWS, null, contentValues) != -1;
     }
 
-    public boolean editReview(String title, double storyRating, double charactersRating,
+    public boolean editReview(int movieID, double storyRating, double charactersRating,
                              double scoreRating, double sceneryRating,
                              double overallRating, String thoughts){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_MOVIES_TITLE, title);
+        contentValues.put(COLUMN_MOVIES_ID, movieID);
         contentValues.put(COLUMN_REVIEW_STORY, storyRating);
         contentValues.put(COLUMN_REVIEW_CHARACTERS, charactersRating);
         contentValues.put(COLUMN_REVIEW_SCORE, scoreRating);
@@ -132,12 +127,12 @@ public class DataBaseManager extends SQLiteOpenHelper{
         contentValues.put(COLUMN_REVIEW_OVERALL, overallRating);
         contentValues.put(COLUMN_REVIEW_THOUGHTS, thoughts);
 
-        return sqLiteDatabase.update(TABLE_REVIEWS, contentValues, COLUMN_MOVIES_TITLE + "=" + title, null) != -1;
+        return sqLiteDatabase.update(TABLE_REVIEWS, contentValues, COLUMN_MOVIES_ID + "=" + movieID, null) != -1;
     }
 
     public boolean deleteReview(Review review) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        return sqLiteDatabase.delete(TABLE_REVIEWS, COLUMN_MOVIES_TITLE + "=" + review.getMovie().getTitle(), null) > 0;
+        return sqLiteDatabase.delete(TABLE_REVIEWS, COLUMN_MOVIES_ID + "=" + review.getMovieID(), null) > 0;
     }
     public Cursor getAllMovies(){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
