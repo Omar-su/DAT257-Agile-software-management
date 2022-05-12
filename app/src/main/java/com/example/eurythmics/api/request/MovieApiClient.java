@@ -7,7 +7,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.eurythmics.AppExecutors;
 import com.example.eurythmics.api.Credentials;
+import com.example.eurythmics.api.MovieApi;
 import com.example.eurythmics.api.models.MovieModel;
+import com.example.eurythmics.api.response.MovieResponse;
 import com.example.eurythmics.api.response.MovieSearchResponse;
 
 import java.io.IOException;
@@ -28,10 +30,14 @@ public class MovieApiClient {
 
     private MutableLiveData<List<MovieModel>> moviesCategory;
 
+
+
     //Making a global runnable request
     private RetrieveMoviesRunnable retrieveMoviesRunnable;
     //Making a global runnable request
     private RetrieveMoviesRunnableCategory retrieveMoviesRunnableCategory;
+
+
 
     public static MovieApiClient getInstance() {
         if (instance == null){
@@ -43,6 +49,7 @@ public class MovieApiClient {
     private MovieApiClient(){
         mMovies = new MutableLiveData<>();
         moviesCategory = new MutableLiveData<>();
+
     }
 
     public LiveData<List<MovieModel>> getMovies(){
@@ -52,6 +59,7 @@ public class MovieApiClient {
     public LiveData<List<MovieModel>> getMoviesCategory(){
         return moviesCategory;
     }
+
 
 
     // Method that will be called in other classes
@@ -96,6 +104,21 @@ public class MovieApiClient {
     }
 
 
+
+    // Method that will be called in other classes
+    public MovieModel searchMoviesApiById(int id){
+        MovieApi movieApi = ServiceApi.getMovieApi();
+        try {
+            Response<MovieModel> movieModelCall = movieApi.searchMovieDetailById(id, Credentials.API_KEY).execute();
+            if (movieModelCall.body() != null) {
+                return movieModelCall.body();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
 
 
 
@@ -236,6 +259,7 @@ public class MovieApiClient {
 
 
     }
+
 
 
 }

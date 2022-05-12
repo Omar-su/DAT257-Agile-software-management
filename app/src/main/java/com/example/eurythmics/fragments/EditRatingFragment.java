@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +19,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.eurythmics.Movie.Movie;
 import com.example.eurythmics.Movie.MovieService;
+import com.bumptech.glide.Glide;
 import com.example.eurythmics.R;
 import com.example.eurythmics.Review.Review;
+import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.adapters.InputFilterMinMax;
 import com.example.eurythmics.api.models.MovieModel;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -35,8 +40,10 @@ public class EditRatingFragment extends Fragment {
     private EditText storyRating, charactersRating, scoreRating, sceneryRating, overallRating;
     private ImageButton incrementStory, incrementCharacters, incrementScore, incrementScenery, incrementOverall;
     private ImageButton decrementStory, decrementCharacters, decrementScore, decrementScenery, decrementOverall;
-    private TextView notes;
+    private TextInputEditText notes;
     private Button btnSave;
+    private TextView movieTitle;
+    private ImageView moviePoster;
 
 
     MovieModel chosenMovie;
@@ -45,7 +52,7 @@ public class EditRatingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_rating,container,false);
+        View view =inflater.inflate(R.layout.fragment_edit_rating,container,false);
 
         Bundle bundle = this.getArguments();
         ms = MovieService.getMovieService();
@@ -93,7 +100,16 @@ public class EditRatingFragment extends Fragment {
         decrementOverall = view.findViewById(R.id.overallRatingNumberPicker).findViewById(R.id.decrement);
         overallRating.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "10")});
 
-        notes = view.findViewById(R.id.textInputEditText);
+        // Movie title
+        movieTitle = view.findViewById(R.id.movieTitleRating);
+        movieTitle.setText(chosenMovie.getTitle());
+
+        // Movie poster
+        moviePoster = view.findViewById(R.id.moviePosterRating);
+        Glide.with(this).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(moviePoster);
+
+        notes = view.findViewById(R.id.editTextInput);
+
         btnSave = view.findViewById(R.id.saveButton);
 
         //implement all buttons

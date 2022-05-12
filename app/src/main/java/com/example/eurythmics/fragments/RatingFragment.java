@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,8 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
     private boolean isCategorySearch = true;
 
+    private MovieModel chosenMovie;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,7 +67,8 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
         recyclerView = view.findViewById(R.id.recycle_view);
 
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         initSearchBar();
 
@@ -101,42 +105,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         });
     }
 
-    private void getRetrofitResponse(String searchString) {
 
-        MovieApi movieApi = ServiceApi.getMovieApi();
-
-        Call<MovieSearchResponse> movieCategory = movieApi.searchMovieByName( Credentials.API_KEY, searchString,1);
-
-        movieCategory.enqueue(new Callback<MovieSearchResponse>() {
-            @Override
-            public void onResponse(Call<MovieSearchResponse> call, Response<MovieSearchResponse> response) {
-                if (response.code() == 200){
-
-                    List<MovieModel> movies = new ArrayList<>(response.body().getMovies());
-
-                    for (MovieModel movieModel: movies){
-                        Log.d("Tag", "successful  =============" + movieModel.getTitle());
-                    }
-
-                }else {
-                    try {
-                        makeToast(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MovieSearchResponse> call, Throwable t) {
-                makeToast("failed attempt to search, try again");
-            }
-        });
-
-
-
-
-    }
 
     private void observerAnyChange() {
         movieListViewModel.getMovies().observe(getViewLifecycleOwner(), new Observer<List<MovieModel>>() {
@@ -162,7 +131,6 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
                 // observing for any data change
                 if (movieModels!=null){
                     for (MovieModel movieModel: movieModels){
-                        Log.d("TAG", "onchanged" + movieModel.getTitle());
 
                         ratingViewAdapter.setmMovies(movieModels);
                     }
@@ -181,6 +149,9 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         movieListViewModel.searchMovieApiByCategory(filterQ, pageNumber);
     }
 
+    private MovieModel searchMovieApiByID(int id){
+        return movieListViewModel.searchMovieApiById(id);
+    }
 
     // Initializing recycle view and adding list items
     private void configureRecycleView(){
@@ -201,8 +172,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
                         movieListViewModel.searchNextPageCategory();
                     }else {
                         movieListViewModel.searchNextPage();
-                    }
-                }
+                    }                }
             }
         });
     }
@@ -222,9 +192,25 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
     @Override
     public void onMovieClick(int position) {
+        MovieModel currentMov = ratingViewAdapter.getSelectedMovie(position);
+        int id = currentMov.getMovie_id();
+
+
+        chosenMovie = searchMovieApiByID(id);
+
+        if (chosenMovie == null) {
+            makeToast("The movie was not found by the api, Please try again later");
+            return;
+        }
+        currentMov.setDuration(chosenMovie.getDuration());
+
+        makeToast(String.valueOf(currentMov.getDuration()));
+
+
+
         Fragment fragment = new MovieDetailFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable("CHOSEN_TRANSACTION", new MovieModel(ratingViewAdapter.getSelectedMovie(position)));
+        bundle.putParcelable("CHOSEN_TRANSACTION", new MovieModel(currentMov));
         fragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
 
