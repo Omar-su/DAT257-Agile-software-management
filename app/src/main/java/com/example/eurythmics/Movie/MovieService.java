@@ -49,6 +49,19 @@ public class MovieService {
         }
     }
 
+    public void loadReviewsFromDB(){
+        Cursor cursor = dataBaseManager.getAllReviews();
+        movieList.clear();
+        if(cursor.moveToFirst()){
+            do{
+                movieList.add(new Movie(
+                        cursor.getString(0),
+                        cursor.getString(1)
+                ));
+            }while (cursor.moveToNext());
+        }
+    }
+
     public Movie getMovie(String title){
         for(Movie movie : movieList){
             if(movie.getTitle() == title){

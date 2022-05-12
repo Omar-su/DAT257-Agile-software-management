@@ -56,6 +56,7 @@ public class EditRatingFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         ms = MovieService.getMovieService();
+        ms.loadReviewsFromDB();
 
         if (bundle != null){
             chosenMovie = bundle.getParcelable("movie_rating");
