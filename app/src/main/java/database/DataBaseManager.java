@@ -17,10 +17,11 @@ import com.example.eurythmics.Review.Review;
 public class DataBaseManager extends SQLiteOpenHelper{
 
     private static final String DATABASE_NAME = "moviesDatabase";
-    private static final int DATABSE_VERSION = 6;
+    private static final int DATABSE_VERSION = 7;
 
     private static final String TABLE_MOVIES = "movies";
     private static final String TABLE_REVIEWS = "reviews";
+    private static final String TABLE_FAVORITES = "favorites";
 
     private static final String COLUMN_MOVIES_ID = "id";
     private static final String COLUMN_MOVIES_DESCRIPTION = "description";
@@ -51,6 +52,7 @@ public class DataBaseManager extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         createMovieTable(sqLiteDatabase);
         createReviewsTable(sqLiteDatabase);
+        createFavoritesTable(sqLiteDatabase);
     }
 
     private void createMovieTable(SQLiteDatabase sqLiteDatabase) {
@@ -76,10 +78,19 @@ public class DataBaseManager extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(sReviewTable);
     }
 
+    private void createFavoritesTable(SQLiteDatabase sqLiteDatabase) {
+        String sReviewTable = "CREATE TABLE "+ TABLE_FAVORITES +" ( " +
+                COLUMN_MOVIES_ID + " INTEGER PRIMARY KEY)"
+                ;
+
+        sqLiteDatabase.execSQL(sReviewTable);
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldV, int newV) {
         System.out.println("Updated the database");
         if(oldV != newV){
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_REVIEWS);
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MOVIES);
             onCreate(sqLiteDatabase);
@@ -142,6 +153,20 @@ public class DataBaseManager extends SQLiteOpenHelper{
     public Cursor getAllReviews(){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_REVIEWS, null);
+    }
+
+    public boolean setFavorite(int movieID){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_MOVIES_ID, movieID);
+
+        return sqLiteDatabase.insert(TABLE_FAVORITES, null, contentValues) != -1;
+    }
+
+    public Cursor getAllFavorites(){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_FAVORITES, null);
     }
 
 }

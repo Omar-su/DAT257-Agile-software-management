@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         //initialise database manager and thus database
         dataBaseManager = new DataBaseManager(this);
-        dataBaseManager.onUpgrade(dataBaseManager.getWritableDatabase(), 1, 2);
+        //dataBaseManager.onUpgrade(dataBaseManager.getWritableDatabase(), 1, 2);
 
         //initialise movie service
         MovieService ms = new MovieService(dataBaseManager);

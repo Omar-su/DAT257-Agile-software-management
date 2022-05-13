@@ -5,10 +5,12 @@ import android.database.Cursor;
 import com.example.eurythmics.Review.Review;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import database.DataBaseManager;
 
@@ -18,14 +20,16 @@ public class MovieService {
     private static MovieService instance;
 
     private List<Review> reviewList = new ArrayList<>();
+    private List<Integer> favoritesList = new ArrayList<>();
+
 
     public MovieService(DataBaseManager dataBaseManager){
         if(instance == null){
             this.dataBaseManager = dataBaseManager;
             instance = this;
             loadReviewsFromDB();
+            loadFavoritesFromDB();
         }
-
     }
 
     public static MovieService getMovieService(){
@@ -49,6 +53,15 @@ public class MovieService {
                         cursor.getDouble(5),
                         cursor.getString(6)
                 ));
+            }while (cursor.moveToNext());
+        }
+    }
+
+    public void loadFavoritesFromDB(){
+        Cursor cursor = dataBaseManager.getAllFavorites();
+        if(cursor.moveToFirst()){
+            do{
+                favoritesList.add(cursor.getInt(0));
             }while (cursor.moveToNext());
         }
     }
@@ -128,4 +141,32 @@ public class MovieService {
         }
         return overallRatings;
     }
+
+    public void addFavorite(int movieID){
+        favoritesList.add(movieID);
+        dataBaseManager.setFavorite(movieID);
+    }
+
+    public double getAverageOverallRating(){
+        double total = 0;
+        for(Review review : reviewList){
+            total += review.getOverallRating();
+        }
+        return total / (double) reviewList.size();
+    }
+
+    public List<Integer> getTop5Rated(){
+        Collections.sort(reviewList, (r1, r2) -> Double.compare(r1.getOverallRating(), r2.getOverallRating()));
+        List<Integer> top5 = new ArrayList<>();
+        for(int i = 0; i < 5; i++){
+            if(i >= reviewList.size()){
+                break;
+            }else{
+                top5.add(reviewList.get(i).getMovieID());
+            }
+        }
+        return top5;
+    }
+
+
 }
