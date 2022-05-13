@@ -145,6 +145,24 @@ public class DataBaseManager extends SQLiteOpenHelper{
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         return sqLiteDatabase.delete(TABLE_REVIEWS, COLUMN_MOVIES_ID + "=" + review.getMovieID(), null) > 0;
     }
+
+    public Review getReview(int movieID) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_REVIEWS + " WHERE " + COLUMN_MOVIES_ID + "=" + movieID, null);
+        c.moveToFirst();
+
+        // Passing values
+        int col1 = c.getInt(0);
+        Double col2 = c.getDouble(1);
+        Double col3 = c.getDouble(2);
+        Double col4 = c.getDouble(3);
+        Double col5 = c.getDouble(4);
+        Double col6 = c.getDouble(5);
+        String col7 = c.getString(6);
+
+        return new Review(col1, col2, col3, col4, col5, col6, col7);
+    }
+
     public Cursor getAllMovies(){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + TABLE_MOVIES, null);

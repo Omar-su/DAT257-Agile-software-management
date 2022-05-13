@@ -36,10 +36,10 @@ import database.DataBaseManager;
 
 public class EditRatingFragment extends Fragment {
 
-    DataBaseManager dbHelper;
     private EditText storyRating, charactersRating, scoreRating, sceneryRating, overallRating;
     private ImageButton incrementStory, incrementCharacters, incrementScore, incrementScenery, incrementOverall;
     private ImageButton decrementStory, decrementCharacters, decrementScore, decrementScenery, decrementOverall;
+    private ImageButton btnDelete;
     private TextInputEditText notes;
     private Button btnSave;
     private TextView movieTitle;
@@ -52,7 +52,7 @@ public class EditRatingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_edit_rating,container,false);
+        View view = inflater.inflate(R.layout.fragment_edit_rating,container,false);
 
         Bundle bundle = this.getArguments();
         ms = MovieService.getMovieService();
@@ -65,8 +65,6 @@ public class EditRatingFragment extends Fragment {
         } else {
             throw new MissingResourceException("No chosen transaction was sent with the fragment, hence fragment cannot be created", MovieModel.class.toString(), "CHOSEN_TRANSACTION" );
         }
-
-        dbHelper = new DataBaseManager(null);
 
         init(view);
         checkForExistingReview(chosenMovie);
@@ -101,6 +99,8 @@ public class EditRatingFragment extends Fragment {
         decrementOverall = view.findViewById(R.id.overallRatingNumberPicker).findViewById(R.id.decrement);
         overallRating.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "10")});
 
+        notes = view.findViewById(R.id.editTextInput);
+
         // Movie title
         movieTitle = view.findViewById(R.id.movieTitleRating);
         movieTitle.setText(chosenMovie.getTitle());
@@ -109,9 +109,8 @@ public class EditRatingFragment extends Fragment {
         moviePoster = view.findViewById(R.id.moviePosterRating);
         Glide.with(this).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(moviePoster);
 
-        notes = view.findViewById(R.id.editTextInput);
-
         btnSave = view.findViewById(R.id.saveButton);
+        btnDelete = view.findViewById(R.id.deleteReviewButton);
 
         //implement all buttons
         incrementStory.setOnClickListener(new View.OnClickListener() {
@@ -345,7 +344,7 @@ public class EditRatingFragment extends Fragment {
                     // meaning it was successfully saved.
 
                     if (ms.isReviewed(chosenMovie.getMovie_id())) {
-                        Toast toast = Toast.makeText(getContext(), "Successfully saved rating!", Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(getContext(), "Review successfully saved!", Toast.LENGTH_LONG);
                         toast.show();
                     }
 
@@ -362,6 +361,30 @@ public class EditRatingFragment extends Fragment {
                 }
                 else {
                     Toast toast = Toast.makeText(getContext(), "An overall rating is required in order to submit!", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                if (ms.isReviewed(chosenMovie.getMovie_id())) {
+                    ms.removeReview(ms.getReview(chosenMovie.getMovie_id()));
+                }
+                //check if actually removed
+                if (!ms.isReviewed(chosenMovie.getMovie_id())) {
+                    Toast toast = Toast.makeText(getContext(), "Review successfully deleted", Toast.LENGTH_LONG);
+                    toast.show();
+
+                    storyRating.setText("");
+                    charactersRating.setText("");
+                    scoreRating.setText("");
+                    sceneryRating.setText("");
+                    overallRating.setText("");
+                    notes.setText("");
+                }
+                else {
+                    Toast toast = Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }

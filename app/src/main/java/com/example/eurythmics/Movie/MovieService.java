@@ -113,6 +113,8 @@ public class MovieService {
                     review.getOverallRating(),
                     review.getThoughts()
             );
+            reviewList.remove(review);
+            reviewList.add(dataBaseManager.getReview(review.getMovieID()));
         }
     }
 
