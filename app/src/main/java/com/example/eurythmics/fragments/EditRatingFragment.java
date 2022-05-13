@@ -17,8 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.eurythmics.Movie.Movie;
+import com.example.eurythmics.Movie.MovieService;
 import com.bumptech.glide.Glide;
 import com.example.eurythmics.R;
+import com.example.eurythmics.Review.Review;
 import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.adapters.InputFilterMinMax;
 import com.example.eurythmics.api.models.MovieModel;
@@ -33,10 +36,10 @@ import database.DataBaseManager;
 
 public class EditRatingFragment extends Fragment {
 
-    DataBaseManager dbHelper;
     private EditText storyRating, charactersRating, scoreRating, sceneryRating, overallRating;
     private ImageButton incrementStory, incrementCharacters, incrementScore, incrementScenery, incrementOverall;
     private ImageButton decrementStory, decrementCharacters, decrementScore, decrementScenery, decrementOverall;
+    private ImageButton btnDelete;
     private TextInputEditText notes;
     private Button btnSave;
     private TextView movieTitle;
@@ -44,13 +47,16 @@ public class EditRatingFragment extends Fragment {
 
 
     MovieModel chosenMovie;
+    MovieService ms;
 
     @Nullable
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_edit_rating,container,false);
+        View view = inflater.inflate(R.layout.fragment_edit_rating,container,false);
 
         Bundle bundle = this.getArguments();
+        ms = MovieService.getMovieService();
+        ms.loadReviewsFromDB();
 
         if (bundle != null){
             chosenMovie = bundle.getParcelable("movie_rating");
@@ -60,14 +66,14 @@ public class EditRatingFragment extends Fragment {
             throw new MissingResourceException("No chosen transaction was sent with the fragment, hence fragment cannot be created", MovieModel.class.toString(), "CHOSEN_TRANSACTION" );
         }
 
-        dbHelper = new DataBaseManager(null);
-
         init(view);
+        checkForExistingReview(chosenMovie);
 
         return view;
     }
 
     private void init(View view) {
+
         storyRating = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.number);
         incrementStory = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.increment);
         decrementStory = view.findViewById(R.id.storyNumberPicker).findViewById(R.id.decrement);
@@ -93,6 +99,8 @@ public class EditRatingFragment extends Fragment {
         decrementOverall = view.findViewById(R.id.overallRatingNumberPicker).findViewById(R.id.decrement);
         overallRating.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "10")});
 
+        notes = view.findViewById(R.id.editTextInput);
+
         // Movie title
         movieTitle = view.findViewById(R.id.movieTitleRating);
         movieTitle.setText(chosenMovie.getTitle());
@@ -101,9 +109,8 @@ public class EditRatingFragment extends Fragment {
         moviePoster = view.findViewById(R.id.moviePosterRating);
         Glide.with(this).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(moviePoster);
 
-        notes = view.findViewById(R.id.editTextInput);
-
         btnSave = view.findViewById(R.id.saveButton);
+        btnDelete = view.findViewById(R.id.deleteReviewButton);
 
         //implement all buttons
         incrementStory.setOnClickListener(new View.OnClickListener() {
@@ -299,23 +306,102 @@ public class EditRatingFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String newOverallRating = overallRating.getText().toString();
-                String newNotes = notes.getText().toString();
-                Log.d("TAG", "------" + newNotes);
-                Toast toast = Toast.makeText(getContext(), newNotes, Toast.LENGTH_LONG);
-                toast.show();
-                if (overallRating.length() != 0 && notes.length() != 0){
-                    //AddRating(/** the movie title */, newOverallRating, newNotes);
+                double newStoryRating = 0;
+                double newCharactersRating = 0;
+                double newScoreRating = 0;
+                double newSceneryRating = 0;
+                double newOverallRating = 0;
+                if (overallRating.length() != 0) {
+                    try {
+                        newStoryRating = Double.parseDouble(storyRating.getText().toString());
+                    } catch (NumberFormatException nfe) {}
+
+                    try {
+                        newCharactersRating = Double.parseDouble(charactersRating.getText().toString());
+                    } catch (NumberFormatException nfe) {}
+
+                    try {
+                        newScoreRating = Double.parseDouble(scoreRating.getText().toString());
+                    } catch (NumberFormatException nfe) {}
+
+                    try {
+                        newSceneryRating = Double.parseDouble(sceneryRating.getText().toString());
+                    } catch (NumberFormatException nfe) {}
+
+                    try {
+                        newOverallRating = Double.parseDouble(overallRating.getText().toString());
+                    } catch (NumberFormatException nfe) {}
+
+                    String newNotes = notes.getText().toString();
+
+                    Log.d("TAG", "------" + newNotes);
+
+                    ms.addReview( chosenMovie.getMovie_id(), newStoryRating, newCharactersRating,
+                            newScoreRating, newSceneryRating, newOverallRating, newNotes);
+
+                    // isReviewed needs Movie Class object, we have MovieModel.
+                    // this confirms that the movie is actually added to the list of reviewed ones,
+                    // meaning it was successfully saved.
+
+                    if (ms.isReviewed(chosenMovie.getMovie_id())) {
+                        Toast toast = Toast.makeText(getContext(), "Review successfully saved!", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+
+                    //sends you back to movie detail fragment after saving review
+                    Fragment fragment = new RatingFragment();
+
+                    // ideally want it to go back to MovieDetailFragment, but doesnt seem to work.
+
+                    //Fragment fragment = new MovieDetailFragment();
+                    //Bundle bundle = new Bundle();
+                    //bundle.putParcelable("CHOSEN_TRANSACTION", chosenMovie);
+                    //fragment.setArguments(bundle);
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+                }
+                else {
+                    Toast toast = Toast.makeText(getContext(), "An overall rating is required in order to submit!", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                if (ms.isReviewed(chosenMovie.getMovie_id())) {
+                    ms.removeReview(ms.getReview(chosenMovie.getMovie_id()));
+                }
+                //check if actually removed
+                if (!ms.isReviewed(chosenMovie.getMovie_id())) {
+                    Toast toast = Toast.makeText(getContext(), "Review successfully deleted", Toast.LENGTH_LONG);
+                    toast.show();
+
+                    storyRating.setText("");
+                    charactersRating.setText("");
+                    scoreRating.setText("");
+                    sceneryRating.setText("");
+                    overallRating.setText("");
+                    notes.setText("");
+                }
+                else {
+                    Toast toast = Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         });
     }
 
+    public void checkForExistingReview(MovieModel movieModel) {
+        if(ms.isReviewed(movieModel.getMovie_id())) {
+            Review existingReview = ms.getReview(movieModel.getMovie_id());
 
-    //TODO: make this method get the title of the movie being rated
-    public void AddRating(String movieTitle, String overallRating, String notes) {
-        //boolean insertData = dbHelper.addReview(overallRating, notes);
-
+            storyRating.setText("" + existingReview.getStoryRating());
+            charactersRating.setText("" + existingReview.getCharactersRating());
+            scoreRating.setText("" + existingReview.getScoreRating());
+            sceneryRating.setText("" + existingReview.getSceneryRating());
+            overallRating.setText("" + existingReview.getOverallRating());
+            notes.setText("" + existingReview.getThoughts());
+        }
     }
 
     //rounds to nearest value with a defined number of decimals

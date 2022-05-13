@@ -197,18 +197,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:background="#6F0000"
-        app:layout_constraintBottom_toBottomOf="@+id/movieTitleRating"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/movieTitleRating"
-        app:srcCompat="@drawable/ic_baseline_delete_24" />
-
-    <ImageButton
-        android:id="@+id/movie_collection_button"
+        android:id="@+id/deleteReviewButton"
         android:layout_width="35dp"
         android:layout_height="45dp"
         android:layout_marginEnd="15dp"

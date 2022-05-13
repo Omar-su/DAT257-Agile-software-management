@@ -2,6 +2,8 @@ package com.example.eurythmics.Movie;
 
 import com.example.eurythmics.Review.Review;
 
+
+//should remove entierly
 public class Movie {
     private String title;
     private String description;
