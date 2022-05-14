@@ -2,65 +2,130 @@ package com.example.eurythmics.fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
 
 import com.example.eurythmics.R;
+import com.example.eurythmics.adapters.HomeRecycleViewAdapter;
+import com.example.eurythmics.adapters.OnMovieCardListener;
+import com.example.eurythmics.adapters.RatingRecycleViewAdapter;
+import com.example.eurythmics.api.models.MovieModel;
+import com.example.eurythmics.viewmodels.MovieListViewModel;
+import com.example.eurythmics.viewmodels.RatedMoviesViewModel;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link RatedMoviesCollectionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RatedMoviesCollectionFragment extends Fragment {
+public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCardListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    // recycle view
+    private RecyclerView recyclerView;
 
-    public RatedMoviesCollectionFragment() {
-        // Required empty public constructor
-    }
+    private HomeRecycleViewAdapter viewAdapter;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RatedMoviesCollectionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RatedMoviesCollectionFragment newInstance(String param1, String param2) {
-        RatedMoviesCollectionFragment fragment = new RatedMoviesCollectionFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private SearchView searchBar;
+    private Button filter, sort;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private RatedMoviesViewModel viewModel;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rated_movies_collection, container, false);
+        View view = inflater.inflate(R.layout.fragment_rated_movies_collection, container, false);
+
+        viewModel = new ViewModelProvider(this).get(RatedMoviesViewModel.class);
+
+        recyclerView = view.findViewById(R.id.rated_movies_recycleview);
+
+        searchBar = view.findViewById(R.id.ratedMovies_searchBar);
+
+        filter = view.findViewById(R.id.movies_filter_button);
+        sort = view.findViewById(R.id.series_sort_button);
+
+
+        initSearchBar();
+
+
+        configureRecycleView();
+
+        observeChange();
+
+        initRecycleView();
+
+
+        return view;
+    }
+
+    private void observeChange() {
+        viewModel.getRatedMovies().observe(getViewLifecycleOwner(), new Observer<List<MovieModel>>() {
+            @Override
+            public void onChanged(List<MovieModel> movieModels) {
+                viewAdapter.setSavedMovies(movieModels);
+            }
+        });
+    }
+
+
+    private void initRecycleView() {
+
+        List<Integer> ids = Arrays.asList(75780,675353,335787);
+
+        viewModel.searchRatedMovies(ids);
+
+
+    }
+
+    private void initSearchBar() {
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+    }
+
+    private void configureRecycleView() {
+        viewAdapter = new HomeRecycleViewAdapter(this);
+        recyclerView.setAdapter(viewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+    }
+
+    @Override
+    public void onMovieClick(int position) {
+        MovieModel currentMov = viewAdapter.getSelectedMovie(position);
+        // TODO set category
+        //currentMov.setCategory(RatingRecycleViewAdapter.getHashMap().get(currentMov.getGenre_ids().get(0)));
+
+        Fragment fragment = new RatedMovieDetailView();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("ratedMovie", new MovieModel(currentMov));
+        fragment.setArguments(bundle);
+        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
     }
 }
