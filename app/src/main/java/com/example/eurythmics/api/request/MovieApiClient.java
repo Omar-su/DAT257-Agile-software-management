@@ -30,6 +30,8 @@ public class MovieApiClient {
 
     private MutableLiveData<List<MovieModel>> moviesCategory;
 
+    private MutableLiveData<List<MovieModel>> ratedMovies;
+
 
 
     //Making a global runnable request
@@ -49,7 +51,7 @@ public class MovieApiClient {
     private MovieApiClient(){
         mMovies = new MutableLiveData<>();
         moviesCategory = new MutableLiveData<>();
-
+        ratedMovies = new MutableLiveData<>();
     }
 
     public LiveData<List<MovieModel>> getMovies(){
@@ -59,6 +61,8 @@ public class MovieApiClient {
     public LiveData<List<MovieModel>> getMoviesCategory(){
         return moviesCategory;
     }
+
+    public LiveData<List<MovieModel>> getRatedMovies(){return ratedMovies;}
 
 
 
@@ -103,6 +107,14 @@ public class MovieApiClient {
 
     }
 
+    public void searchRatedMovies(List<Integer> ids){
+        List<MovieModel> movieModels = new ArrayList<>();
+        for (int id : ids){
+            MovieModel movieModel = searchMoviesApiById(id);
+            movieModels.add(movieModel);
+        }
+        ratedMovies.postValue(movieModels);
+    }
 
 
     // Method that will be called in other classes
@@ -119,10 +131,6 @@ public class MovieApiClient {
         return null;
 
     }
-
-
-
-
 
 
 

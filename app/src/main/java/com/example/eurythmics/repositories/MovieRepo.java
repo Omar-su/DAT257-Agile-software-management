@@ -42,6 +42,13 @@ public class MovieRepo {
         return movieApiClient.getMoviesCategory();
     }
 
+    public LiveData<List<MovieModel>> getRatedMovies(){
+        return movieApiClient.getRatedMovies();
+    }
+
+    public void searchRatedMovies(List<Integer> ids){
+        movieApiClient.searchRatedMovies(ids);
+    }
 
     public MovieModel searchMovieApiById(int id){
 
