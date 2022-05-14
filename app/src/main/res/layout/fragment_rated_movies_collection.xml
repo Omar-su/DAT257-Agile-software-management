@@ -29,9 +29,9 @@
         android:text="Sort By"
         android:textColor="@color/black"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/seriesCollectionSearch"
+        app:layout_constraintBottom_toBottomOf="@+id/ratedMovies_searchBar"
         app:layout_constraintStart_toEndOf="@+id/movies_filter_button"
-        app:layout_constraintTop_toTopOf="@+id/seriesCollectionSearch"
+        app:layout_constraintTop_toTopOf="@+id/ratedMovies_searchBar"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -43,13 +43,13 @@
         android:text="Filter"
         android:textColor="@color/black"
         android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/seriesCollectionSearch"
-        app:layout_constraintStart_toEndOf="@+id/seriesCollectionSearch"
-        app:layout_constraintTop_toTopOf="@+id/seriesCollectionSearch"
+        app:layout_constraintBottom_toBottomOf="@+id/ratedMovies_searchBar"
+        app:layout_constraintStart_toEndOf="@+id/ratedMovies_searchBar"
+        app:layout_constraintTop_toTopOf="@+id/ratedMovies_searchBar"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/seriesCollectionSearch"
+        android:id="@+id/ratedMovies_searchBar"
         android:layout_width="205dp"
         android:layout_height="42dp"
         android:layout_marginStart="25dp"
@@ -72,5 +72,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rated_movies_recycleview"
+        android:layout_width="409dp"
+        android:layout_height="552dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
