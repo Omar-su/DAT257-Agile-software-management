@@ -92,7 +92,7 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    public String getCategory(int i) {
+    private String getCategory(int i) {
         int genreId = 0;
         String category = "";
 
@@ -110,7 +110,6 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
 
         return category;
     }
-
     @Override
     public int getItemCount() {
         if (mMovies!=null){
