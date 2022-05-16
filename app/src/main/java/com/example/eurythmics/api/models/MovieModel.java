@@ -23,9 +23,10 @@ public class MovieModel implements Parcelable {
     @SerializedName("runtime") private int duration;
     public MovieModel movieModel;
     private String category;
+    private List<Genre> genres;
 
 
-    protected MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, List<Integer> genre_ids, int duration) {
+    protected MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, List<Integer> genre_ids, int duration, List<Genre> genres) {
         this.title = title;
         this.poster_path = posterPath;
         this.release_date = releaseDate;
@@ -34,6 +35,7 @@ public class MovieModel implements Parcelable {
         this.overview = movie_overView;
         this.genre_ids = genre_ids;
         this.duration = duration;
+        this.genres = genres;
     }
 
 
@@ -47,6 +49,8 @@ public class MovieModel implements Parcelable {
         this.genre_ids = new ArrayList<Integer>();
         in.readList(genre_ids, genre_ids.getClass().getClassLoader());
         duration = in.readInt();
+        this.genres = new ArrayList<Genre>();
+        in.readList(genres, genres.getClass().getClassLoader());
     }
 
     public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
@@ -99,6 +103,13 @@ public class MovieModel implements Parcelable {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public String getCategoryFromDetailMov(){
+        if (this.genres != null){
+            return genres.get(0).getName();
+        }
+        return "Undefined";
     }
 
     @Override
