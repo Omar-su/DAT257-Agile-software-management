@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
+import com.example.eurythmics.Movie.MovieService;
 import com.example.eurythmics.R;
 import com.example.eurythmics.adapters.HomeRecycleViewAdapter;
 import com.example.eurythmics.adapters.OnMovieCardListener;
@@ -27,6 +28,7 @@ import com.example.eurythmics.viewmodels.RatedMoviesViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,6 +47,7 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
     private Button filter, sort;
 
     private RatedMoviesViewModel viewModel;
+    MovieService ms;
 
 
     @Override
@@ -61,6 +64,8 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
 
         filter = view.findViewById(R.id.movies_filter_button);
         sort = view.findViewById(R.id.series_sort_button);
+
+        ms = MovieService.getMovieService();
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -90,7 +95,7 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
 
     private void initRecycleView() {
 
-        List<Integer> ids = Arrays.asList(75780,675353,335787);
+        List<Integer> ids = ms.getAllMovieIds();
 
         viewModel.searchRatedMovies(ids);
 
@@ -122,8 +127,7 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
     @Override
     public void onMovieClick(int position) {
         MovieModel currentMov = viewAdapter.getSelectedMovie(position);
-        // TODO set category
-        //currentMov.setCategory(RatingRecycleViewAdapter.getHashMap().get(currentMov.getGenre_ids().get(0)));
+        currentMov.setCategory(currentMov.getCategoryFromDetailMov());
 
         Fragment fragment = new RatedMovieDetailView();
         Bundle bundle = new Bundle();

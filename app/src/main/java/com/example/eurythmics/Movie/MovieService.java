@@ -79,6 +79,17 @@ public class MovieService {
         return null;
     }
 
+    public List<Integer> getAllMovieIds(){
+        List<Integer> ids = new ArrayList<>();
+        Cursor cursor = dataBaseManager.getAllReviews();
+        if(cursor.moveToFirst()){
+            do{
+                ids.add(cursor.getInt(0));
+            }while (cursor.moveToNext());
+        }
+        return ids;
+    }
+
     public boolean isReviewed(int movieID){
         for(Review review : reviewList){
             if(review.getMovieID() == movieID){
