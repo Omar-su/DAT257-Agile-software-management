@@ -69,6 +69,8 @@ dependencies {
 
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
 
+    //Image slider
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
 
 }

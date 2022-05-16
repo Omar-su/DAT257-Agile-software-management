@@ -9,22 +9,10 @@
     tools:context=".fragments.HomeFragment">
 
     <ImageButton
-        android:id="@+id/movie_collection_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="60dp"
-        android:background="#6F0000"
-        android:scaleType="fitCenter"
-        android:src="@drawable/moviebutton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
         android:id="@+id/series_collection_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:background="#6F0000"
         android:scaleType="fitCenter"
         android:src="@drawable/seriesbutton"
@@ -36,12 +24,53 @@
         android:id="@+id/favorites_collection_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
         android:background="#6F0000"
         android:scaleType="fitCenter"
         android:src="@drawable/favoritesbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/movie_collection_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:background="#6F0000"
+        android:scaleType="fitCenter"
+        android:src="@drawable/moviebutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/series_collection_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/iceberg"
+        android:text="Upcoming Movies"
+        android:textColor="#FFFFFF"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/series_collection_button"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewImageSlider"
+        android:layout_width="413dp"
+        android:layout_height="410dp"
+        android:paddingStart="80dp"
+        android:paddingEnd="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/series_collection_text"
+        app:layout_constraintVertical_bias="0.317" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
