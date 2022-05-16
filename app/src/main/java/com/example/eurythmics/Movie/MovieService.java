@@ -29,6 +29,8 @@ public class MovieService {
             instance = this;
             loadReviewsFromDB();
             loadFavoritesFromDB();
+        }else{
+            throw new RuntimeException("Should not create singleton");
         }
     }
 
@@ -41,6 +43,7 @@ public class MovieService {
     }
 
     public void loadReviewsFromDB(){
+        System.out.println("Loaded the database");
         Cursor cursor = dataBaseManager.getAllReviews();
         if(cursor.moveToFirst()){
             do{

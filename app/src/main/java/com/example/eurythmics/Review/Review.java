@@ -49,6 +49,8 @@ public class Review {
         }
     }
 
+
+
     public double getStoryRating(){return storyRating;}
     public double getCharactersRating(){return charactersRating;}
     public double getScoreRating(){return scoreRating;}
@@ -56,4 +58,12 @@ public class Review {
     public double getOverallRating(){return overallRating;}
     public String getThoughts(){return thoughts;}
     public int getMovieID(){return movieID;}
+
+    @Override
+    public String toString() {
+        return ("ID:"+this.getMovieID()+
+                " Overall Rating: "+ this.getOverallRating());
+    }
+
+
 }

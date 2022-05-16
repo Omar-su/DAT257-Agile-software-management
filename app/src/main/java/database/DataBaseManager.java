@@ -17,7 +17,7 @@ import com.example.eurythmics.Review.Review;
 public class DataBaseManager extends SQLiteOpenHelper{
 
     private static final String DATABASE_NAME = "moviesDatabase";
-    private static final int DATABSE_VERSION = 7;
+    private static final int DATABSE_VERSION = 11;
 
     private static final String TABLE_MOVIES = "movies";
     private static final String TABLE_REVIEWS = "reviews";
