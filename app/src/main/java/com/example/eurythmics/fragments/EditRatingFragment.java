@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.eurythmics.Movie.Movie;
 import com.example.eurythmics.Movie.MovieService;
 import com.bumptech.glide.Glide;
 import com.example.eurythmics.R;

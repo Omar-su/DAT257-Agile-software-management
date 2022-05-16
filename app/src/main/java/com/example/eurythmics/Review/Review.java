@@ -1,6 +1,5 @@
 package com.example.eurythmics.Review;
 
-import com.example.eurythmics.Movie.Movie;
 
 public class Review {
     private int movieID;

@@ -1,5 +1,6 @@
 package com.example.eurythmics.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.eurythmics.Movie.MovieService;
 import com.example.eurythmics.R;
 import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.models.MovieModel;
@@ -36,7 +38,10 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         ((HomeViewHolder)holder).cardTitle.setText(savedMovies.get(i).getTitle());
         ((HomeViewHolder)holder).cardDescription.setText(savedMovies.get(i).getOverview());
-//        ((HomeViewHolder)holder).movieRating.setRating(savedMovies.get(i).getRating());
+        MovieService ms = MovieService.getMovieService();
+        float rating = (float) ms.getOverallRating(savedMovies.get(i).getMovie_id());
+        Log.d("rfs", "_____________"+ rating/2);
+        ((HomeViewHolder)holder).movieRating.setRating(rating/2);
         setPoster(holder, i);
 
     }
