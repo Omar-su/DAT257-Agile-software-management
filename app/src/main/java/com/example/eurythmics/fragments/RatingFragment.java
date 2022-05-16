@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.eurythmics.Movie.MovieService;
 import com.example.eurythmics.R;
 import com.example.eurythmics.adapters.OnMovieCardListener;
 import com.example.eurythmics.adapters.RatingRecycleViewAdapter;
@@ -55,6 +56,8 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
     private MovieModel chosenMovie;
 
+    private MovieService ms;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +69,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         searchBar = view.findViewById(R.id.action_search);
 
         recyclerView = view.findViewById(R.id.recycle_view);
+        ms = MovieService.getMovieService();
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -202,11 +206,18 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
         makeToast(String.valueOf(currentMov.getDuration()));
 
-
-
-        Fragment fragment = new MovieDetailFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable("CHOSEN_TRANSACTION", new MovieModel(currentMov));
+        Fragment fragment;
+        String s = "";
+        if (ms.isReviewed(currentMov.getMovie_id())){
+            fragment = new RatedMovieDetailView();
+            s = "ratedMovie";
+        }else {
+            fragment = new MovieDetailFragment();
+            s = "CHOSEN_TRANSACTION";
+        }
+
+        bundle.putParcelable(s, new MovieModel(currentMov));
         fragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
 
