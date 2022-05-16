@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="720dp"
+    android:layout_height="wrap_content"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="399dp"
     android:fillViewport="true"
@@ -98,31 +98,120 @@
             android:id="@+id/textTopFive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:fontFamily="@font/iceberg"
-            android:text="My Top 5"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/be_vietnam"
+            android:text="Top 5 rated:"
             android:textColor="#FFFFFF"
-            android:textSize="25dp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.032"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textFirstMovie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="192dp"
-            tools:layout_editor_absoluteY="461dp" />
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            android:text="Movie Title 1"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toEndOf="@+id/imageFirstMovie"
+            app:layout_constraintTop_toBottomOf="@+id/textTopFive" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/imageFirstMovie"
             android:layout_width="61dp"
             android:layout_height="87dp"
-            tools:layout_editor_absoluteX="63dp"
-            tools:layout_editor_absoluteY="440dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTopFive"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textSecondMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="104dp"
+            android:text="Movie Title 2"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toEndOf="@+id/imageSecondMovie"
+            app:layout_constraintTop_toBottomOf="@+id/textTopFive" />
+
+        <ImageView
+            android:id="@+id/imageSecondMovie"
+            android:layout_width="61dp"
+            android:layout_height="87dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="92dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTopFive"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textThirdMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="188dp"
+            android:text="Movie Title 3"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toEndOf="@+id/imageThirdMovie"
+            app:layout_constraintTop_toBottomOf="@+id/textTopFive" />
+
+        <ImageView
+            android:id="@+id/imageThirdMovie"
+            android:layout_width="61dp"
+            android:layout_height="87dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="180dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTopFive"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textFourthMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="280dp"
+            android:text="Movie Title 4"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toEndOf="@+id/imageFourthMovie"
+            app:layout_constraintTop_toBottomOf="@+id/textTopFive" />
+
+        <ImageView
+            android:id="@+id/imageFourthMovie"
+            android:layout_width="61dp"
+            android:layout_height="87dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="268dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTopFive"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textFifthMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="368dp"
+            android:text="Movie Title 5"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toEndOf="@+id/imageFifthMovie"
+            app:layout_constraintTop_toBottomOf="@+id/textTopFive" />
+
+        <ImageView
+            android:id="@+id/imageFifthMovie"
+            android:layout_width="61dp"
+            android:layout_height="87dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="356dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTopFive"
             tools:src="@tools:sample/avatars" />
 
 
