@@ -42,7 +42,7 @@ public class MovieService {
         }
     }
 
-    public void loadReviewsFromDB(){
+    private void loadReviewsFromDB(){
         System.out.println("Loaded the database");
         Cursor cursor = dataBaseManager.getAllReviews();
         if(cursor.moveToFirst()){
@@ -60,7 +60,7 @@ public class MovieService {
         }
     }
 
-    public void loadFavoritesFromDB(){
+    private void loadFavoritesFromDB(){
         Cursor cursor = dataBaseManager.getAllFavorites();
         if(cursor.moveToFirst()){
             do{
@@ -105,8 +105,7 @@ public class MovieService {
                     review.getOverallRating(),
                     review.getThoughts()
             );
-        }
-        else {
+        }else {
             dataBaseManager.editReview(
                     review.getMovieID(),
                     review.getStoryRating(),
@@ -116,8 +115,15 @@ public class MovieService {
                     review.getOverallRating(),
                     review.getThoughts()
             );
-            reviewList.remove(review);
-            reviewList.add(dataBaseManager.getReview(review.getMovieID()));
+            Review oldReview = getReview(review.getMovieID());
+            reviewList.remove(oldReview);
+            reviewList.add(review);
+        }
+
+        //TODO: remove, this is only for sanity checks
+        System.out.println("Printing review list:");
+        for(Review r : reviewList){
+            System.out.println(r);
         }
     }
 
@@ -130,6 +136,14 @@ public class MovieService {
 
     public void removeReview(Review review){
         if (isReviewed(review.getMovieID())) {
+            reviewList.remove(review);
+            dataBaseManager.deleteReview(review);
+        }
+    }
+
+    public void removeReview(int movieID){
+        Review review = getReview(movieID);
+        if(review != null){
             reviewList.remove(review);
             dataBaseManager.deleteReview(review);
         }

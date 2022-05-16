@@ -368,7 +368,7 @@ public class EditRatingFragment extends Fragment {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (ms.isReviewed(chosenMovie.getMovie_id())) {
-                    ms.removeReview(ms.getReview(chosenMovie.getMovie_id()));
+                    ms.removeReview(chosenMovie.getMovie_id());
                 }
                 //check if actually removed
                 if (!ms.isReviewed(chosenMovie.getMovie_id())) {
