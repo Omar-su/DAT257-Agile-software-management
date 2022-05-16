@@ -6,18 +6,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6F0000"
-    tools:context=".fragments.FavoritesCollectionFragment">
+    tools:context=".fragments.RatedMoviesCollectionFragment">
+
+    <android.widget.ImageView
+        android:id="@+id/favorite_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:background="#6F303B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorite_text"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/favorite_sort_button"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:padding="5dp"
+        android:text="Sort By"
+        android:textColor="@color/black"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/favorite_searchBar"
+        app:layout_constraintStart_toEndOf="@+id/favorite_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/favorite_searchBar"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/favorite_filter_button"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:padding="5dp"
+        android:text="Filter"
+        android:textColor="@color/black"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/favorite_searchBar"
+        app:layout_constraintStart_toEndOf="@+id/favorite_searchBar"
+        app:layout_constraintTop_toTopOf="@+id/favorite_searchBar"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/favorite_searchBar"
+        android:layout_width="205dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/search"
+        app:layout_constraintBottom_toBottomOf="@+id/favorite_imageView"
+        app:layout_constraintStart_toStartOf="@+id/favorite_imageView"
+        app:layout_constraintTop_toTopOf="@+id/favorite_imageView"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/favorite_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FavoritesCollectionFragment"
-        android:textSize="20sp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/iceberg"
+        android:text="Favorite Collection"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favorite_recycleView"
+        android:layout_width="411dp"
+        android:layout_height="553dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorite_imageView"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

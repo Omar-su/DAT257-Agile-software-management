@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.eurythmics.Movie.MovieService;
 import com.example.eurythmics.R;
 import com.example.eurythmics.api.Credentials;
 import com.example.eurythmics.api.models.MovieModel;
@@ -29,7 +30,8 @@ public class MovieDetailFragment extends Fragment {
 
     private MovieModel chosenMovie;
 
-    private boolean isFavorite = false;
+
+    MovieService ms;
 
 
 
@@ -47,6 +49,7 @@ public class MovieDetailFragment extends Fragment {
             throw new MissingResourceException("No chosen transaction was sent with the fragment, hence fragment cannot be created", MovieModel.class.toString(), "CHOSEN_TRANSACTION" );
         }
 
+        ms = MovieService.getMovieService();
 
         title = view.findViewById(R.id.title_detail_view);
         category = view.findViewById(R.id.category_detail_view);
@@ -69,6 +72,11 @@ public class MovieDetailFragment extends Fragment {
     }
 
     private void initLikeButton() {
+        if (ms.isFavorite(chosenMovie.getMovie_id())){
+            likeButton.setImageResource(R.drawable.ic_favorite);
+        }else {
+            likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,12 +84,13 @@ public class MovieDetailFragment extends Fragment {
                 //TODO Add movie to favorite
 
                 // Add to favorites
-                if (!isFavorite){
-                    likeButton.setImageResource(R.drawable.ic_favorite);
-                    isFavorite = true;
-                }else {
+                // Add to favorites
+                if (ms.isFavorite(chosenMovie.getMovie_id())){
                     likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-                    isFavorite = false;
+                    ms.deleteFavoriteMovie(chosenMovie.getMovie_id());
+                }else {
+                    likeButton.setImageResource(R.drawable.ic_favorite);
+                    ms.addFavorite(chosenMovie.getMovie_id());
                 }
 
             }

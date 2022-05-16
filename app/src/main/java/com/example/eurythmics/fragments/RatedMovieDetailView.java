@@ -59,6 +59,7 @@ public class RatedMovieDetailView extends Fragment {
         scoreRating= view.findViewById(R.id.score_value_movie_with_existing);
         sceneryRating = view.findViewById(R.id.scenery_value_movie_with_existing);
         overallRating = view.findViewById(R.id.overall_rating_value_movie_with_existing);
+        likeButton = view.findViewById(R.id.likeButton2);
 
         ms = MovieService.getMovieService();
 
@@ -92,5 +93,27 @@ public class RatedMovieDetailView extends Fragment {
     }
 
     private void initLikeButton() {
+        if (ms.isFavorite(chosenMovie.getMovie_id())){
+            likeButton.setImageResource(R.drawable.ic_favorite);
+        }else {
+            likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO Check if movie is favorite
+                //TODO Add movie to favorite
+
+                // Add to favorites
+                if (ms.isFavorite(chosenMovie.getMovie_id())){
+                    likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    ms.deleteFavoriteMovie(chosenMovie.getMovie_id());
+                }else {
+                    likeButton.setImageResource(R.drawable.ic_favorite);
+                    ms.addFavorite(chosenMovie.getMovie_id());
+                }
+
+            }
+        });
     }
 }

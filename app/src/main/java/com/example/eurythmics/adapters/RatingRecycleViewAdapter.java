@@ -1,5 +1,6 @@
 package com.example.eurythmics.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,8 +75,15 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
 
 
         ((RatingViewHolder)holder).releaseDateTextView.setText(String.valueOf(mMovies.get(i).getReleaseDate()));
+        String category = "Undefined";
+        if (getCategory(i) != null && !getCategory(i).equals("")){
+            category = getCategory(i);
+            Log.d("ta", "---------------" + category);
+        }else {
+            category = mMovies.get(i).getCategoryFromDetailMov();
+            Log.d("ta2", "---------------" + category);
+        }
 
-        String category = getCategory(i);
         ((RatingViewHolder)holder).categoryTextView.setText(category);
 
 
@@ -96,7 +104,7 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
         int genreId = 0;
         String category = "";
 
-        while (category == null || category.isEmpty()){
+        while ((category == null || category.isEmpty())&& mMovies.get(i).getGenre_ids() != null){
             if (genreId >= mMovies.get(i).getGenre_ids().size())break;
             Integer categoryId = (mMovies.get(i).getGenre_ids().get(genreId));
 

@@ -5,9 +5,7 @@ import android.database.Cursor;
 import com.example.eurythmics.Review.Review;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +26,7 @@ public class MovieService {
             this.dataBaseManager = dataBaseManager;
             instance = this;
             loadReviewsFromDB();
-            loadFavoritesFromDB();
+            favoritesList = getFavoritesFromDB();
         }else{
             throw new RuntimeException("Should not create singleton");
         }
@@ -60,13 +58,25 @@ public class MovieService {
         }
     }
 
-    private void loadFavoritesFromDB(){
+    public List<Integer> getFavoritesFromDB(){
         Cursor cursor = dataBaseManager.getAllFavorites();
+        List<Integer> favoriteIDs = new ArrayList<>();
         if(cursor.moveToFirst()){
             do{
-                favoritesList.add(cursor.getInt(0));
+                favoriteIDs.add(cursor.getInt(0));
             }while (cursor.moveToNext());
         }
+        return favoriteIDs;
+    }
+
+    public boolean isFavorite(int movieId){
+        List<Integer> ids = getFavoritesFromDB();
+        for (int id: ids){
+            if (id == movieId){
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -175,6 +185,11 @@ public class MovieService {
     public void addFavorite(int movieID){
         favoritesList.add(movieID);
         dataBaseManager.setFavorite(movieID);
+    }
+
+    public void deleteFavoriteMovie(int movieId){
+        dataBaseManager.deleteFavoriteMovie(movieId);
+        favoritesList = getFavoritesFromDB();
     }
 
     public double getAverageOverallRating(){

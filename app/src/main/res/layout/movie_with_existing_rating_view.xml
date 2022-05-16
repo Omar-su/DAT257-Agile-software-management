@@ -243,7 +243,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/rating_movie_with_existing" />
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/likeButton2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -261,7 +261,7 @@
                     android:layout_marginTop="26dp"
                     android:background="#6F0000"
                     app:layout_constraintStart_toEndOf="@+id/rating_movie_with_existing"
-                    app:layout_constraintTop_toBottomOf="@+id/imageButton"
+                    app:layout_constraintTop_toBottomOf="@+id/likeButton2"
                     app:srcCompat="@drawable/ic_baseline_edit_24" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
