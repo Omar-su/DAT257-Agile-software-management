@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#6F0000"
-        tools:context=".fragments.ProfileFragment">
+        tools:context=".view.fragments.fragments.ProfileFragment">
 
         <ImageView
             android:id="@+id/imageView4"

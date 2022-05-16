@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6F0000"
-    tools:context=".fragments.HomeFragment">
+    tools:context=".view.fragments.fragments.HomeFragment">
 
     <ImageButton
         android:id="@+id/series_collection_button"

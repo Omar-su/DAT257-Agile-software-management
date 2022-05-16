@@ -4,17 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.example.eurythmics.databinding.ActivityMainBinding;
-import com.example.eurythmics.fragments.HomeFragment;
-import com.example.eurythmics.fragments.ProfileFragment;
-import com.example.eurythmics.fragments.RatingFragment;
+import com.example.eurythmics.view.fragments.fragments.HomeFragment;
+import com.example.eurythmics.view.fragments.fragments.ProfileFragment;
+import com.example.eurythmics.view.fragments.fragments.RatingFragment;
+import com.example.eurythmics.model.api.models.MovieService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.example.eurythmics.Movie.*;
 
-import database.DataBaseManager;
+import com.example.eurythmics.model.api.database.DataBaseManager;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //initialise database manager and thus database
+        //initialise com.example.eurythmics.model.api.database manager and thus com.example.eurythmics.model.api.database
         dataBaseManager = new DataBaseManager(this);
         //dataBaseManager.onUpgrade(dataBaseManager.getWritableDatabase(), 1, 2);
 

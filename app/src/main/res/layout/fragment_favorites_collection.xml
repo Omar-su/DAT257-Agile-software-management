@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6F0000"
-    tools:context=".fragments.RatedMoviesCollectionFragment">
+    tools:context=".view.fragments.fragments.RatedMoviesCollectionFragment">
 
     <android.widget.ImageView
         android:id="@+id/favorite_imageView"
@@ -75,8 +75,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favorite_recycleView"
-        android:layout_width="411dp"
-        android:layout_height="553dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

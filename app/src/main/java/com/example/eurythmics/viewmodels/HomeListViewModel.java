@@ -1,12 +1,10 @@
 package com.example.eurythmics.viewmodels;
 
-import android.graphics.Movie;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.eurythmics.api.models.MovieModel;
-import com.example.eurythmics.repositories.MovieRepo;
+import com.example.eurythmics.model.api.models.MovieModel;
+import com.example.eurythmics.model.api.repositories.MovieRepo;
 
 import java.util.List;
 

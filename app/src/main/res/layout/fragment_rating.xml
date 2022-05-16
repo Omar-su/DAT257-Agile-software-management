@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#6F0000"
 
-    tools:context=".fragments.RatingFragment">
+    tools:context=".view.fragments.fragments.RatingFragment">
 
     <android.widget.ImageView
         android:id="@+id/imageView"
