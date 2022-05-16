@@ -114,11 +114,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
                 // observing for any data change
                 if (movieModels!=null){
                     ratingViewAdapter.setmMovies(movieModels);
-//                    for (MovieModel movieModel: movieModels){
-//                        Log.d("TAG", "onchanged" + movieModel.getTitle());
-//
-//                        ratingViewAdapter.setmMovies(movieModels);
-//                    }
+
                 }
 
             }
@@ -132,10 +128,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
                 // observing for any data change
                 if (movieModels!=null){
                     ratingViewAdapter.setmMovies(movieModels);
-//                    for (MovieModel movieModel: movieModels){
-//
-//                        ratingViewAdapter.setmMovies(movieModels);
-//                    }
+
                 }
 
             }
