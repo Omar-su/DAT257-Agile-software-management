@@ -1,12 +1,19 @@
 package com.example.eurythmics.model.api.models;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.RequiresApi;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A class representing a movie
@@ -106,13 +113,35 @@ public class MovieModel implements Parcelable {
         this.duration = duration;
     }
 
-    public void setOverAllRating(double rating) {
-        this.overAllRating = rating;
+    private String getYear(String date) {
+        return date.substring(0, 4);
+
+    }
+    private String getMonth(String date) {
+        return date.substring(5,7);
+    }
+    private String getDay(String date) {
+        return date.substring(8);
     }
 
-    public double getOverAllRating() {
-        return overAllRating;
+    public Date getDate(String releaseD) {
+        // creating a Calendar object
+        Calendar c1 = Calendar.getInstance();
+
+        // set Month
+        // MONTH starts with 0 i.e. ( 0 - Jan)
+        c1.set(Calendar.MONTH, Integer.parseInt(getMonth(releaseD)));
+
+        // set Date
+        c1.set(Calendar.DATE, Integer.parseInt(getDay(releaseD)));
+
+        // set Year
+        c1.set(Calendar.YEAR, Integer.parseInt(getYear(releaseD)));
+
+        return c1.getTime();
     }
+
+
 
     public String getCategoryFromDetailMov(){
         if (this.genres != null){

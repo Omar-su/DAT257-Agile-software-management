@@ -23,6 +23,7 @@ import android.widget.RadioGroup;
 
 import com.example.eurythmics.model.api.models.MovieService;
 import com.example.eurythmics.R;
+import com.example.eurythmics.model.api.models.SortOptions;
 import com.example.eurythmics.view.fragments.adapters.HomeRecycleViewAdapter;
 import com.example.eurythmics.view.fragments.adapters.OnMovieCardListener;
 import com.example.eurythmics.model.api.models.MovieModel;
@@ -112,25 +113,25 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
                 switch (i) {
                     case R.id.newest_date_radio:
                         setDeActivatedColor(sortButton);
-//                        ssf.sortBy(SortOption.NEWEST_DATE);
+                        viewModel.sortBy(SortOptions.NEWEST_DATE);
                         break;
 
                     case R.id.oldest_date_radio:
-//                        ssf.sortBy(SortOption.OLDEST_DATE);
+                        viewModel.sortBy(SortOptions.OLDEST_DATE);
                         setActivatedColor(sortButton);
                         break;
 
                     case R.id.highestRating_radio:
-//                        ssf.sortBy(SortOption.LARGEST_AMOUNT);
+                        viewModel.sortBy(SortOptions.HIGHEST_RATING);
                         setActivatedColor(sortButton);
                         break;
 
                     case R.id.durationTime_radio:
-//                        ssf.sortBy(SortOption.SMALLEST_AMOUNT);
+                        viewModel.sortBy(SortOptions.DURATION_TIME);
                         setActivatedColor(sortButton);
                         break;
                 }
-//                updateList();
+                viewAdapter.setSavedMovies(viewModel.getSortedMovies());
                 sortDialog.cancel();
             }
         });
@@ -190,6 +191,7 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
         viewModel.getRatedMovies().observe(getViewLifecycleOwner(), new Observer<List<MovieModel>>() {
             @Override
             public void onChanged(List<MovieModel> movieModels) {
+                viewModel.setListMovies(movieModels);
                 viewAdapter.setSavedMovies(movieModels);
             }
         });

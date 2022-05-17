@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,10 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 
 
+import com.example.eurythmics.model.api.models.FilterOption;
 import com.example.eurythmics.model.api.models.MovieService;
 import com.example.eurythmics.R;
+import com.example.eurythmics.model.api.models.SortOptions;
 import com.example.eurythmics.view.fragments.adapters.OnMovieCardListener;
 import com.example.eurythmics.view.fragments.adapters.RatingRecycleViewAdapter;
 import com.example.eurythmics.model.api.models.MovieModel;
@@ -96,6 +99,7 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
                 for (MovieModel movieModel : movieModels){
                     movieModel.setCategory(movieModel.getCategoryFromDetailMov());
                 }
+                viewModel.setListMovies(movieModels);
                 viewAdapter.setmMovies(movieModels);
             }
         });
@@ -152,25 +156,27 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
                 switch (i) {
                     case R.id.newest_date_radio:
                         setDeActivatedColor(sortButton);
-//                        ssf.sortBy(SortOption.NEWEST_DATE);
+                        viewModel.sortBy(SortOptions.NEWEST_DATE);
+                        Log.d("Ataf", "________________-");
+
                         break;
 
                     case R.id.oldest_date_radio:
-//                        ssf.sortBy(SortOption.OLDEST_DATE);
+                        viewModel.sortBy(SortOptions.OLDEST_DATE);
                         setActivatedColor(sortButton);
                         break;
 
                     case R.id.highestRating_radio:
-//                        ssf.sortBy(SortOption.LARGEST_AMOUNT);
+                        viewModel.sortBy(SortOptions.HIGHEST_RATING);
                         setActivatedColor(sortButton);
                         break;
 
                     case R.id.durationTime_radio:
-//                        ssf.sortBy(SortOption.SMALLEST_AMOUNT);
+                        viewModel.sortBy(SortOptions.DURATION_TIME);
                         setActivatedColor(sortButton);
                         break;
                 }
-//                updateList();
+                viewAdapter.setmMovies(viewModel.getSortedMovies());
                 sortDialog.cancel();
             }
         });
@@ -196,22 +202,21 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
                     case R.id.action_radio:
                         filterIsActivated = false;
                         setDeActivatedColor(filterButton);
-//                        ssf.setFilter(FilterOption.ALL_CATEGORIES);
+                        viewModel.setFilter(FilterOption.ACTION);
 
                         break;
                     case R.id.adventure_radio:
                         filterIsActivated = true;
                         setActivatedColor(filterButton);
-//                        ssf.setFilter(FilterOption.EXPENSE);
+                        viewModel.setFilter(FilterOption.ADVENTURE);
                         break;
 
                     case R.id.comedy_radio:
                         filterIsActivated = true;
                         setActivatedColor(filterButton);
-//                        ssf.setFilter(FilterOption.INCOME);
+                        viewModel.setFilter(FilterOption.COMEDY);
                         break;
                 }
-                //updateList();
                 filterDialog.cancel();
             }
         });
