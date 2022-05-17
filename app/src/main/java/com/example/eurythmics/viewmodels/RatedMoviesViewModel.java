@@ -97,10 +97,10 @@ public class RatedMoviesViewModel extends ViewModel {
     }
 
     private void sortByNewestDate() {
-        Collections.sort(filterList, new Comparator<MovieModel>() {
+        filterList.sort(new Comparator<MovieModel>() {
             @Override
             public int compare(MovieModel m1, MovieModel m2) {
-                if (m1.getDate(m1.getReleaseDate()) == null || m2.getDate(m1.getReleaseDate()) == null){
+                if (m1.getDate(m1.getReleaseDate()) == null || m2.getDate(m1.getReleaseDate()) == null) {
                     return 0;
                 }
                 Date date1 = m1.getDate(m1.getReleaseDate());
@@ -146,5 +146,20 @@ public class RatedMoviesViewModel extends ViewModel {
 
     public List<MovieModel> getFilterList() {
         return filterList;
+    }
+
+    public void searchTextChange(String s) {
+        Collections.sort(filterList, new Comparator<MovieModel>() {
+            @Override
+            public int compare(MovieModel m1, MovieModel m2) {
+                String prefix = s.toLowerCase();
+                String a = m1.getTitle().toLowerCase();
+                String b = m2.getTitle().toLowerCase();
+                if (a.contains(prefix) && b.contains(prefix)) return a.compareTo(b);
+                if (a.contains(prefix) && !b.contains(prefix)) return -1;
+                if (!a.contains(prefix) && b.contains(prefix)) return 1;
+                return 0;
+            }
+        });
     }
 }

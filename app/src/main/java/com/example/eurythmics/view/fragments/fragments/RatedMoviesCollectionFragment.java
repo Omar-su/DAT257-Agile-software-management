@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -221,11 +222,15 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                viewModel.searchTextChange(s);
+                viewAdapter.setSavedMovies(viewModel.getFilterList());
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
+                viewModel.searchTextChange(s);
+                viewAdapter.setSavedMovies(viewModel.getFilterList());
                 return false;
             }
         });

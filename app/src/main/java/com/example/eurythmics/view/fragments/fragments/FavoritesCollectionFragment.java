@@ -118,12 +118,16 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
     private void initSearchBar() {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(String s) {
+                viewModel.searchTextChange(s);
+                viewAdapter.setmMovies(viewModel.getFilterList());
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public boolean onQueryTextChange(String s) {
+                viewModel.searchTextChange(s);
+                viewAdapter.setmMovies(viewModel.getFilterList());
                 return false;
             }
         });
