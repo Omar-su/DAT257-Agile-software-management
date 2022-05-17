@@ -52,12 +52,12 @@
 
             <TextView
                 android:id="@+id/releaseDate_text"
-                android:layout_width="wrap_content"
+                android:layout_width="81dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="101dp"
-                android:layout_marginBottom="12dp"
-                android:layout_toEndOf="@+id/category_textView"
+                android:layout_marginEnd="52dp"
+                android:layout_marginBottom="13dp"
                 android:text="TextView"
                 android:textColor="#FFFFFF" />
 

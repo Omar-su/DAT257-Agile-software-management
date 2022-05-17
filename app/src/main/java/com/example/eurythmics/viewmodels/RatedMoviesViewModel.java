@@ -65,6 +65,17 @@ public class RatedMoviesViewModel extends ViewModel {
     }
 
     private void sortByOldestDate() {
+        Collections.sort(modelList, new Comparator<MovieModel>() {
+            @Override
+            public int compare(MovieModel m1, MovieModel m2) {
+                if (m1.getDate(m1.getReleaseDate()) == null || m2.getDate(m1.getReleaseDate()) == null){
+                    return 0;
+                }
+                Date date1 = m1.getDate(m1.getReleaseDate());
+                Date date2 = m2.getDate(m2.getReleaseDate());
+                return date1.compareTo(date2);
+            }
+        });
     }
 
     private void sortByNewestDate() {
