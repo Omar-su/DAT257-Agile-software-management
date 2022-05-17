@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sort_dialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#6F0000">
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Sort by"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/sort_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+        <RadioButton
+            android:id="@+id/newest_date_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Newest date"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/oldest_date_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Oldest date"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            />
+
+        <RadioButton
+            android:id="@+id/highestRating_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Highest Rating"
+            android:textSize="18sp"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/durationTime_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Duration time"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            />
+    </RadioGroup>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
