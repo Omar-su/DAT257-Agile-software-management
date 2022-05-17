@@ -110,7 +110,12 @@ public class MovieService {
     }
 
     public double getOverallRating(int movieID){
-        return getReview(movieID).getOverallRating();
+
+        if (getReview(movieID) != null){
+            return getReview(movieID).getOverallRating();
+        }else {
+            return 0;
+        }
     }
 
     public void addReview(Review review){

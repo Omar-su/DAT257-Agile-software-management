@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.eurythmics.R;
+import com.example.eurythmics.model.api.Review.Review;
 import com.example.eurythmics.model.api.models.FilterOption;
 import com.example.eurythmics.model.api.models.MovieModel;
+import com.example.eurythmics.model.api.models.MovieService;
 import com.example.eurythmics.model.api.models.SortOptions;
 import com.example.eurythmics.model.api.repositories.MovieRepo;
 
@@ -62,12 +64,20 @@ public class RatedMoviesViewModel extends ViewModel {
         Collections.sort(modelList, new Comparator<MovieModel>() {
             @Override
             public int compare(MovieModel m1, MovieModel m2) {
+
                 return Integer.compare(m1.getDuration(), m2.getDuration());
             }
         });
     }
 
     private void sortByRating() {
+        Collections.sort(modelList, new Comparator<MovieModel>() {
+            @Override
+            public int compare(MovieModel m1, MovieModel m2) {
+                MovieService ms = MovieService.getMovieService();
+                return Double.compare(ms.getOverallRating(m2.getMovie_id()), ms.getOverallRating(m1.getMovie_id()));
+            }
+        });
     }
 
     private void sortByOldestDate() {
