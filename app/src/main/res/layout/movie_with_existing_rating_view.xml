@@ -204,7 +204,7 @@
                     android:textColor="#FFFFFF"
                     android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/story_movie_with_existing2"
-                    app:layout_constraintTop_toBottomOf="@+id/imageButton3" />
+                    app:layout_constraintTop_toBottomOf="@+id/edit_rating" />
 
                 <TextView
                     android:id="@+id/scenery_movie_with_existing"
@@ -257,7 +257,7 @@
                     app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
                 <ImageButton
-                    android:id="@+id/imageButton3"
+                    android:id="@+id/edit_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="249dp"

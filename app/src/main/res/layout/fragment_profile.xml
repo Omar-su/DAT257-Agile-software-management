@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/edit_rating"
         android:layout_width="41dp"
         android:layout_height="40dp"
         android:layout_marginStart="80dp"

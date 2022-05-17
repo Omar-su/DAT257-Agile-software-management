@@ -27,7 +27,7 @@ public class RatedMovieDetailView extends Fragment {
     private TextView title, category, releaseDate, durationTime,
             storyRating, charactersRating, scoreRating, sceneryRating, overallRating;
 
-    private Button addRatingButton;
+    private ImageView editRating;
 
     private MovieModel chosenMovie;
 
@@ -63,8 +63,10 @@ public class RatedMovieDetailView extends Fragment {
         likeButton = view.findViewById(R.id.likeButton2);
         durationTime = view.findViewById(R.id.rated_detail_durationTime);
 
+        editRating = view.findViewById(R.id.edit_rating);
         ms = MovieService.getMovieService();
 
+        initEditRating();
 
         initLikeButton();
 
@@ -75,6 +77,19 @@ public class RatedMovieDetailView extends Fragment {
 
         return view;
 
+    }
+
+    private void initEditRating() {
+        editRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new EditRatingFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("movie_rating", chosenMovie);
+                fragment.setArguments(bundle);
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+            }
+        });
     }
 
     private void initPoster() {

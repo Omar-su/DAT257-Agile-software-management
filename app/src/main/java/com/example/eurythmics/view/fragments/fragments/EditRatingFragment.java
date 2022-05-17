@@ -54,7 +54,7 @@ public class EditRatingFragment extends Fragment {
 
         if (bundle != null){
             chosenMovie = bundle.getParcelable("movie_rating");
-            Log.d("TAG", chosenMovie.getTitle());
+            Log.d("TAG","ccdcdcdcdcd" + chosenMovie.getTitle());
 
         } else {
             throw new MissingResourceException("No chosen transaction was sent with the fragment, hence fragment cannot be created", MovieModel.class.toString(), "CHOSEN_TRANSACTION" );
