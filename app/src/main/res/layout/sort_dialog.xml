@@ -30,12 +30,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8">
+        <RadioButton
+            android:id="@+id/default_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Default"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/newest_date_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="Newest date"
             android:textColor="@color/white"
             android:textSize="18sp" />
@@ -61,7 +68,7 @@
             android:id="@+id/durationTime_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Duration time"
+            android:text="Highest Duration"
             android:textSize="18sp"
             android:textColor="@color/white"
             />

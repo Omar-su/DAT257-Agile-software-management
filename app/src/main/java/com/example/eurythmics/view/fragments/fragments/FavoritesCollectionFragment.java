@@ -154,11 +154,13 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
+                    case R.id.default_radio:
+                        setDeActivatedColor(sortButton);
+                        viewModel.sortBy(SortOptions.DEFAULT);
+                        break;
                     case R.id.newest_date_radio:
                         setDeActivatedColor(sortButton);
                         viewModel.sortBy(SortOptions.NEWEST_DATE);
-                        Log.d("Ataf", "________________-");
-
                         break;
 
                     case R.id.oldest_date_radio:
@@ -176,7 +178,7 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
                         setActivatedColor(sortButton);
                         break;
                 }
-                viewAdapter.setmMovies(viewModel.getSortedMovies());
+                viewAdapter.setmMovies(viewModel.getFilterList());
                 sortDialog.cancel();
             }
         });
@@ -199,24 +201,30 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
+                    case R.id.default_radio:
+                        filterIsActivated = false;
+                        setDeActivatedColor(filterButton);
+                        viewModel.filter(FilterOption.DEFAULT);
+                        break;
                     case R.id.action_radio:
                         filterIsActivated = false;
                         setDeActivatedColor(filterButton);
-                        viewModel.setFilter(FilterOption.ACTION);
+                        viewModel.filter(FilterOption.ACTION);
 
                         break;
                     case R.id.adventure_radio:
                         filterIsActivated = true;
                         setActivatedColor(filterButton);
-                        viewModel.setFilter(FilterOption.ADVENTURE);
+                        viewModel.filter(FilterOption.ADVENTURE);
                         break;
 
                     case R.id.comedy_radio:
                         filterIsActivated = true;
                         setActivatedColor(filterButton);
-                        viewModel.setFilter(FilterOption.COMEDY);
+                        viewModel.filter(FilterOption.COMEDY);
                         break;
                 }
+                viewAdapter.setmMovies(viewModel.getFilterList());
                 filterDialog.cancel();
             }
         });

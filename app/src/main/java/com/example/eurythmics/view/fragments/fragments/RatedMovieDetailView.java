@@ -69,12 +69,26 @@ public class RatedMovieDetailView extends Fragment {
         initLikeButton();
 
         initRatingView();
-
+        initPoster();
 
         getDataFromIntent();
 
         return view;
 
+    }
+
+    private void initPoster() {
+        poster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MovieModel currentMov = chosenMovie;
+                Fragment fragment = new MoviePosterFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("rated_poster", new MovieModel(currentMov));
+                fragment.setArguments(bundle);
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+            }
+        });
     }
 
     private void getDataFromIntent() {

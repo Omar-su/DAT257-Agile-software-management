@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 
 
+import com.example.eurythmics.model.api.models.FilterOption;
 import com.example.eurythmics.model.api.models.MovieService;
 import com.example.eurythmics.R;
 import com.example.eurythmics.model.api.models.SortOptions;
@@ -111,6 +112,10 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
+                    case R.id.default_radio:
+                        setDeActivatedColor(sortButton);
+                        viewModel.sortBy(SortOptions.DEFAULT);
+                        break;
                     case R.id.newest_date_radio:
                         setDeActivatedColor(sortButton);
                         viewModel.sortBy(SortOptions.NEWEST_DATE);
@@ -131,7 +136,7 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
                         setActivatedColor(sortButton);
                         break;
                 }
-                viewAdapter.setSavedMovies(viewModel.getSortedMovies());
+                viewAdapter.setSavedMovies(viewModel.getFilterList());
                 sortDialog.cancel();
             }
         });
@@ -154,25 +159,30 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
+                    case R.id.default_radio:
+                        filterIsActivated = false;
+                        setDeActivatedColor(filterButton);
+                        viewModel.filter(FilterOption.DEFAULT);
+                        break;
                     case R.id.action_radio:
                         filterIsActivated = false;
                         setDeActivatedColor(filterButton);
-//                        ssf.setFilter(FilterOption.ALL_CATEGORIES);
+                        viewModel.filter(FilterOption.ACTION);
 
                         break;
                     case R.id.adventure_radio:
                         filterIsActivated = true;
                         setActivatedColor(filterButton);
-//                        ssf.setFilter(FilterOption.EXPENSE);
+                        viewModel.filter(FilterOption.ADVENTURE);
                         break;
 
                     case R.id.comedy_radio:
                         filterIsActivated = true;
                         setActivatedColor(filterButton);
-//                        ssf.setFilter(FilterOption.INCOME);
+                        viewModel.filter(FilterOption.COMEDY);
                         break;
                 }
-                //updateList();
+                viewAdapter.setSavedMovies(viewModel.getFilterList());
                 filterDialog.cancel();
             }
         });
@@ -191,8 +201,8 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
         viewModel.getRatedMovies().observe(getViewLifecycleOwner(), new Observer<List<MovieModel>>() {
             @Override
             public void onChanged(List<MovieModel> movieModels) {
-                viewModel.setListMovies(movieModels);
                 viewAdapter.setSavedMovies(movieModels);
+                viewModel.setListMovies(movieModels);
             }
         });
     }

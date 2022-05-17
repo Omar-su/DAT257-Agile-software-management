@@ -19,10 +19,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class RatedMoviesViewModel extends ViewModel {
     private MovieRepo movieRepo;
     List<MovieModel> modelList;
+    List<MovieModel> filterList;
 
     public RatedMoviesViewModel() {
         movieRepo = MovieRepo.getInstance();
@@ -61,17 +63,17 @@ public class RatedMoviesViewModel extends ViewModel {
     }
 
     private void sortByTime() {
-        Collections.sort(modelList, new Comparator<MovieModel>() {
+        Collections.sort(filterList, new Comparator<MovieModel>() {
             @Override
             public int compare(MovieModel m1, MovieModel m2) {
 
-                return Integer.compare(m1.getDuration(), m2.getDuration());
+                return Integer.compare(m2.getDuration(), m1.getDuration());
             }
         });
     }
 
     private void sortByRating() {
-        Collections.sort(modelList, new Comparator<MovieModel>() {
+        Collections.sort(filterList, new Comparator<MovieModel>() {
             @Override
             public int compare(MovieModel m1, MovieModel m2) {
                 MovieService ms = MovieService.getMovieService();
@@ -81,7 +83,7 @@ public class RatedMoviesViewModel extends ViewModel {
     }
 
     private void sortByOldestDate() {
-        Collections.sort(modelList, new Comparator<MovieModel>() {
+        Collections.sort(filterList, new Comparator<MovieModel>() {
             @Override
             public int compare(MovieModel m1, MovieModel m2) {
                 if (m1.getDate(m1.getReleaseDate()) == null || m2.getDate(m1.getReleaseDate()) == null){
@@ -95,7 +97,7 @@ public class RatedMoviesViewModel extends ViewModel {
     }
 
     private void sortByNewestDate() {
-        Collections.sort(modelList, new Comparator<MovieModel>() {
+        Collections.sort(filterList, new Comparator<MovieModel>() {
             @Override
             public int compare(MovieModel m1, MovieModel m2) {
                 if (m1.getDate(m1.getReleaseDate()) == null || m2.getDate(m1.getReleaseDate()) == null){
@@ -108,14 +110,41 @@ public class RatedMoviesViewModel extends ViewModel {
         });
     }
 
-    public void setFilter(FilterOption action) {
+    public void filter(FilterOption filterOption) {
+        switch (filterOption) {
+            case DEFAULT: filterList = modelList; break;
+            case ACTION:
+                filterCat("action");
+                break;
+
+            case ADVENTURE:
+                filterCat("adventure");
+                break;
+
+            case COMEDY:
+                filterCat("comedy");
+                break;
+
+        }
     }
+
+    private void filterCat(String cat) {
+        filterList = new ArrayList<>();
+        for (MovieModel m: modelList){
+            if (m.getCategory().toLowerCase(Locale.ROOT).equals(cat)){
+                filterList.add(m);
+            }
+        }
+    }
+
 
     public void setListMovies(List<MovieModel> movieModels) {
         this.modelList = movieModels;
+        this.filterList = movieModels;
     }
 
-    public List<MovieModel> getSortedMovies() {
-        return modelList;
+
+    public List<MovieModel> getFilterList() {
+        return filterList;
     }
 }

@@ -14,7 +14,9 @@ import com.example.eurythmics.R;
 import com.example.eurythmics.model.api.Credentials;
 import com.example.eurythmics.model.api.models.MovieModel;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -63,6 +65,9 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     public void setSavedMovies(List<MovieModel> savedMovies){
         this.savedMovies = savedMovies;
+        for (MovieModel m: savedMovies){
+            m.setCategory(m.getCategoryFromDetailMov());
+        }
         notifyDataSetChanged();
     }
 

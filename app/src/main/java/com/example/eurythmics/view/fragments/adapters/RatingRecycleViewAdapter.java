@@ -83,6 +83,7 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
             category = mMovies.get(i).getCategoryFromDetailMov();
             Log.d("ta2", "---------------" + category);
         }
+        mMovies.get(i).setCategory(category);
 
         ((RatingViewHolder)holder).categoryTextView.setText(category);
 

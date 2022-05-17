@@ -2,6 +2,8 @@ package com.example.eurythmics.view.fragments.fragments;
 
 import androidx.fragment.app.Fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -24,7 +26,7 @@ public class MovieDetailFragment extends Fragment {
 
     private ImageView poster, likeButton;
 
-    private TextView title, category, releaseDate, durationTime;
+    private TextView title, category, releaseDate, durationTime, description;
 
     private Button addRatingButton;
 
@@ -59,6 +61,7 @@ public class MovieDetailFragment extends Fragment {
         durationTime = view.findViewById(R.id.durationTime);
 
         likeButton = view.findViewById(R.id.likeButton);
+        description = view.findViewById(R.id.description_field_detail);
 
         initLikeButton();
 
@@ -67,8 +70,24 @@ public class MovieDetailFragment extends Fragment {
 
         getDataFromIntent();
 
+        intiPoster();
+
         return view;
 
+    }
+
+    private void intiPoster() {
+        poster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MovieModel currentMov = chosenMovie;
+                Fragment fragment = new MoviePosterFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("poster", new MovieModel(currentMov));
+                fragment.setArguments(bundle);
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+            }
+        });
     }
 
     private void initLikeButton() {
@@ -119,6 +138,7 @@ public class MovieDetailFragment extends Fragment {
 
         Pair<Integer, Integer> hoursMinutes = getTime(chosenMovie.getDuration());
         durationTime.setText(hoursMinutes.first + "h " + hoursMinutes.second + "m");
+        description.setText(chosenMovie.getOverview());
 
         Glide.with(this).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(poster);
     }
