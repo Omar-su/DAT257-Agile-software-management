@@ -57,7 +57,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
 
         searchBar = view.findViewById(R.id.action_search);
 
-        recyclerView = view.findViewById(R.id.recycle_view);
+        recyclerView = view.findViewById(R.id.profile_recycle_view);
         ms = MovieService.getMovieService();
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
