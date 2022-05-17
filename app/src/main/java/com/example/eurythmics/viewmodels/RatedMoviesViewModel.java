@@ -59,6 +59,12 @@ public class RatedMoviesViewModel extends ViewModel {
     }
 
     private void sortByTime() {
+        Collections.sort(modelList, new Comparator<MovieModel>() {
+            @Override
+            public int compare(MovieModel m1, MovieModel m2) {
+                return Integer.compare(m1.getDuration(), m2.getDuration());
+            }
+        });
     }
 
     private void sortByRating() {

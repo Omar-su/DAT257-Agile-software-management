@@ -1,6 +1,8 @@
 package com.example.eurythmics.view.fragments.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +61,7 @@ public class RatedMovieDetailView extends Fragment {
         sceneryRating = view.findViewById(R.id.scenery_value_movie_with_existing);
         overallRating = view.findViewById(R.id.overall_rating_value_movie_with_existing);
         likeButton = view.findViewById(R.id.likeButton2);
+        durationTime = view.findViewById(R.id.rated_detail_durationTime);
 
         ms = MovieService.getMovieService();
 
@@ -79,6 +82,8 @@ public class RatedMovieDetailView extends Fragment {
         releaseDate.setText(chosenMovie.getReleaseDate());
         Glide.with(this).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(poster);
         category.setText(chosenMovie.getCategory());
+        Pair<Integer, Integer> hoursMinutes = getTime(chosenMovie.getDuration());
+        durationTime.setText(hoursMinutes.first + "h " + hoursMinutes.second + "m");
     }
 
     private void initRatingView() {
@@ -114,5 +119,19 @@ public class RatedMovieDetailView extends Fragment {
 
             }
         });
+    }
+
+
+    private Pair<Integer, Integer> getTime(int duration) {
+        int minuteInHour = 60;
+
+        int hours = duration/minuteInHour;
+        int minutes = duration % minuteInHour;
+        Log.d("tag", "hours = " + hours + "minutes = " + minutes);
+
+        Pair<Integer, Integer> hMinute = new Pair<>(hours, minutes);
+
+        return hMinute;
+
     }
 }

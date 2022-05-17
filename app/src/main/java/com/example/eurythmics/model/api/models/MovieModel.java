@@ -31,7 +31,6 @@ public class MovieModel implements Parcelable {
     public MovieModel movieModel;
     private String category;
     private List<Genre> genres;
-    private double overAllRating;
 
 
     protected MovieModel(String title, String posterPath, String releaseDate, int movie_id, float voteAverage, String movie_overView, List<Integer> genre_ids, int duration, List<Genre> genres) {
