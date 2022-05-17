@@ -1,8 +1,12 @@
 package com.example.eurythmics.view.fragments.fragments;
 
+import android.app.Dialog;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 
 
 import com.example.eurythmics.model.api.models.MovieService;
@@ -38,7 +43,10 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
     private RatingRecycleViewAdapter viewAdapter;
 
     private SearchView searchBar;
-    private Button filter, sort;
+    private Button filterButton, sortButton;
+    private Dialog filterDialog, sortDialog;
+
+    private boolean filterIsActivated = false;
 
     private RatedMoviesViewModel viewModel;
     MovieService ms;
@@ -55,8 +63,8 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
 
         searchBar = view.findViewById(R.id.favorite_searchBar);
 
-        filter = view.findViewById(R.id.favorite_filter_button);
-        sort = view.findViewById(R.id.favorite_sort_button);
+        filterButton = view.findViewById(R.id.favorite_filter_button);
+        sortButton = view.findViewById(R.id.favorite_sort_button);
 
         ms = MovieService.getMovieService();
 
@@ -72,6 +80,11 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
 
         initRecycleView();
 
+        initFilterDialog();
+        initFilterButton();
+
+        initSortDialog();
+        initSortButton();
 
         return view;
     }
@@ -119,6 +132,101 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
 
 
     }
+
+    private void initSortButton() {
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortDialog.show();
+            }
+        });
+    }
+
+    private void initSortDialog() {
+        sortDialog = new Dialog(getActivity());
+        sortDialog.setContentView(R.layout.sort_dialog);
+        RadioGroup sortRadioGroup = sortDialog.findViewById(R.id.sort_radio_group);
+        sortRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i) {
+                    case R.id.newest_date_radio:
+                        setDeActivatedColor(sortButton);
+//                        ssf.sortBy(SortOption.NEWEST_DATE);
+                        break;
+
+                    case R.id.oldest_date_radio:
+//                        ssf.sortBy(SortOption.OLDEST_DATE);
+                        setActivatedColor(sortButton);
+                        break;
+
+                    case R.id.highestRating_radio:
+//                        ssf.sortBy(SortOption.LARGEST_AMOUNT);
+                        setActivatedColor(sortButton);
+                        break;
+
+                    case R.id.durationTime_radio:
+//                        ssf.sortBy(SortOption.SMALLEST_AMOUNT);
+                        setActivatedColor(sortButton);
+                        break;
+                }
+//                updateList();
+                sortDialog.cancel();
+            }
+        });
+    }
+
+    private void initFilterButton() {
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filterDialog.show();
+            }
+        });
+    }
+
+    private void initFilterDialog() {
+        filterDialog = new Dialog(getActivity());
+        filterDialog.setContentView(R.layout.filter_dialog);
+        RadioGroup filterRadio = filterDialog.findViewById(R.id.filter_radio_group);
+        filterRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i) {
+                    case R.id.action_radio:
+                        filterIsActivated = false;
+                        setDeActivatedColor(filterButton);
+//                        ssf.setFilter(FilterOption.ALL_CATEGORIES);
+
+                        break;
+                    case R.id.adventure_radio:
+                        filterIsActivated = true;
+                        setActivatedColor(filterButton);
+//                        ssf.setFilter(FilterOption.EXPENSE);
+                        break;
+
+                    case R.id.comedy_radio:
+                        filterIsActivated = true;
+                        setActivatedColor(filterButton);
+//                        ssf.setFilter(FilterOption.INCOME);
+                        break;
+                }
+                //updateList();
+                filterDialog.cancel();
+            }
+        });
+
+    }
+
+    private void setActivatedColor(Button button) {
+        button.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.teal_200)));
+    }
+
+    private void setDeActivatedColor(Button button) {
+        button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffd6d7d7")));
+    }
+
+
 
     @Override
     public void onMovieClick(int position) {
