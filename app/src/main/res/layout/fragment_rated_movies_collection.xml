@@ -21,7 +21,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/series_sort_button"
+        android:id="@+id/movie_sort_button"
         android:layout_width="60dp"
         android:layout_height="50dp"
         android:layout_marginStart="15dp"

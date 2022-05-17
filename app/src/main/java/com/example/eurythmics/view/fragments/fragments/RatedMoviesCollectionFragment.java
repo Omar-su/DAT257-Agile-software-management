@@ -66,7 +66,7 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
         searchBar = view.findViewById(R.id.ratedMovies_searchBar);
 
         filterButton = view.findViewById(R.id.movies_filter_button);
-        sortButton = view.findViewById(R.id.series_sort_button);
+        sortButton = view.findViewById(R.id.movie_sort_button);
 
         ms = MovieService.getMovieService();
 
