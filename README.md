@@ -86,6 +86,22 @@ If you don't have an android phone you will need to download an android virtual 
 
 <!-- Structure -->
 <h2 id="structure"> Structure</h2>
+The structure of the project consists of the app and the documents. In the app you find the source code in src map in which you can navigate to the main map. In the main map you find the res map which has all xml files and all rescource used for design. In the eurythmics map you can find all the code that runs the program. There are 3 maps, model/api, view/fragments, viewmodels and a main class which runs the whole program. 
+
+&nbsp;
+
+The model/api has all the code for the api implementationas well as the database and some model classes that represents objects and apply logic. 
+
+
+In the view map you will find all view components meaning all classes that connect the model with the gui and all adapters which display the list items on recycle views. 
+
+In the viewModel map you will find the classes that connects the backend/model to the frgments/adapters. View models act as an observer which tells the view when something got updated. 
+
+
+In the documents map at the start you find the final report, Business model canvas, Social contract, project_scope_desctiption and ProjectScope-firstMockup.
+
+
+You will also find two maps the indvidual reflection map and the team reflection. In the team reflections map you find all team reflections and in the idividuell reflections map you will find a map for each member with all their own individuell reflection. 
 
 <!-- Länkar -->
 <h2 id="links"> Links </h2>
