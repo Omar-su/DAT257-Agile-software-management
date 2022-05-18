@@ -207,15 +207,14 @@ public class MovieService {
 
     public List<Integer> getTop5Rated(){
         Collections.sort(reviewList, (r1, r2) -> Double.compare(r1.getOverallRating(), r2.getOverallRating()));
-        List<Integer> top5 = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-            if(i >= reviewList.size()){
-                break;
-            }else{
-                top5.add(reviewList.get(i).getMovieID());
-            }
+
+        List<Review> top5 = reviewList.subList(Math.max(reviewList.size() - 5, 0), reviewList.size());
+        List<Integer> top5IDs = new ArrayList<>();
+        for(Review review : top5){
+            top5IDs.add(review.getMovieID());
         }
-        return top5;
+        Collections.reverse(top5IDs);
+        return top5IDs;
     }
 
 
