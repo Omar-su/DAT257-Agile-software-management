@@ -29,6 +29,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.MissingResourceException;
 
+/**
+ * This class represents the fragment for creating, editing and deleting a rating for the chosen movie.
+ * Here, the user can:
+ * specify values for a new rating and save it
+ * change an existing rating's values, with all the values automatically loaded into the fragment
+ * cancel this operation
+ * delete this rating
+ */
 public class EditRatingFragment extends Fragment {
 
     private EditText storyRating, charactersRating, scoreRating, sceneryRating, overallRating;
@@ -44,6 +52,11 @@ public class EditRatingFragment extends Fragment {
     MovieModel chosenMovie;
     MovieService ms;
 
+    /**
+     * Method that runs when the fragment is being created.
+     * Connects the fragment xml file to the fragment class and initializes the fragment's components.
+     * @return returns the view
+     */
     @Nullable
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
