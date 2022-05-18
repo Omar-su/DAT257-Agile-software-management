@@ -3,17 +3,16 @@
 ## DAT257-Agile-software-management
 
 <p align="left">   
-  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="" alt="Splash page image" width="200" height="400"/>
-  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+     &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
 
-  <img src="" alt="Start page image" width="200" height="400"/>
+  <img src="https://www.linkpicture.com/q/Screenshot-2022-05-19-004242.png" alt="Home Page image" width="220" height="400"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://www.linkpicture.com/q/Screenshot-2022-05-19-004703.png" alt="Rating Page image" width="220" height="400"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+ 
+  <img src="https://www.linkpicture.com/q/Screenshot-2022-05-19-011044.png" alt="Profiel Page image" width="220" height="400"/>
+
 </p>
 
 
