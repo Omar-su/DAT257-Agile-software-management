@@ -87,14 +87,13 @@
             android:id="@+id/durationTime"
             android:layout_width="98dp"
             android:layout_height="28dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/tagbox"
             android:fontFamily="@font/be_vietnam_extrabold"
             android:text="TextView"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toStartOf="@+id/likeButton"
-            app:layout_constraintHorizontal_bias="0.478"
             app:layout_constraintStart_toEndOf="@+id/release_date_detail_view"
             app:layout_constraintTop_toBottomOf="@+id/title_detail_view" />
 
@@ -102,10 +101,10 @@
             android:id="@+id/likeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="28dp"
             android:background="#6F0000"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/durationTime"
             app:layout_constraintTop_toBottomOf="@+id/title_detail_view"
             app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
@@ -124,8 +123,8 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="91dp"
-            android:layout_height="64dp"
+            android:layout_width="88dp"
+            android:layout_height="56dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/transparent"
