@@ -114,6 +114,31 @@
         app:layout_constraintTop_toBottomOf="@+id/textTopFive"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/textAverageRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/be_vietnam_bold"
+        android:text="Average Rating:"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/inputTextAverageRating"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:text="XX"
+        android:textColor="#FFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textAverageRating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toEndOf="@+id/textAverageRating" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
