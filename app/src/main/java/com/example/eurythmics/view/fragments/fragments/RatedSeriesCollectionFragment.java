@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 
 import com.example.eurythmics.R;
@@ -25,6 +26,8 @@ public class RatedSeriesCollectionFragment extends Fragment {
     private Button filterButton, sortButton;
     private Dialog filterDialog, sortDialog;
 
+    private ImageButton backButton;
+
     private boolean filterIsActivated = false;
 
     @Override
@@ -35,6 +38,9 @@ public class RatedSeriesCollectionFragment extends Fragment {
 
         filterButton = view.findViewById(R.id.series_filter_button);
         sortButton = view.findViewById(R.id.series_sort_button);
+        backButton = view.findViewById(R.id.seriesBackButton);
+
+        initFavoriteBackButton();
 
         initFilterDialog();
         initFilterButton();
@@ -49,6 +55,17 @@ public class RatedSeriesCollectionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 sortDialog.show();
+            }
+        });
+    }
+
+
+    private void initFavoriteBackButton() {
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new HomeFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
             }
         });
     }

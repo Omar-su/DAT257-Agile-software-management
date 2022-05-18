@@ -207,6 +207,7 @@ public class RatingFragment extends Fragment implements OnMovieCardListener {
         }
 
         bundle.putParcelable(s, new MovieModel(currentMov));
+        bundle.putString("fromWhichFragment", "ratingView");
         fragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
 

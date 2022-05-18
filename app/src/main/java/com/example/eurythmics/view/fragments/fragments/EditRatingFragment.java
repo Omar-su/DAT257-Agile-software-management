@@ -353,18 +353,20 @@ public class EditRatingFragment extends Fragment {
                     if (ms.isReviewed(chosenMovie.getMovie_id())) {
                         Toast toast = Toast.makeText(getContext(), "Review successfully saved!", Toast.LENGTH_LONG);
                         toast.show();
+                        Fragment fragment = new RatedMovieDetailView();
+                        Bundle bundle = new Bundle();
+                        chosenMovie.movieModel = chosenMovie;
+                        bundle.putParcelable("ratedMovie", chosenMovie);
+                        fragment.setArguments(bundle);
+                        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
                     }
 
                     //sends you back to movie detail fragment after saving review
-                    Fragment fragment = new RatingFragment();
+                    //Fragment fragment = new RatingFragment();
 
                     // ideally want it to go back to MovieDetailFragment, but doesnt seem to work.
 
-                    //Fragment fragment = new MovieDetailFragment();
-                    //Bundle bundle = new Bundle();
-                    //bundle.putParcelable("CHOSEN_TRANSACTION", chosenMovie);
-                    //fragment.setArguments(bundle);
-                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+
                 }
                 else {
                     Toast toast = Toast.makeText(getContext(), "An overall rating is required in order to submit!", Toast.LENGTH_LONG);

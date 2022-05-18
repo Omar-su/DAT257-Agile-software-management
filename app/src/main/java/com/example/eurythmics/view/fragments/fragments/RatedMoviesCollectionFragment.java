@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 
 
@@ -51,6 +52,7 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
 
     private boolean filterIsActivated = false;
 
+    private ImageButton favoriteBackButton;
 
     private RatedMoviesViewModel viewModel;
     MovieService ms;
@@ -72,12 +74,14 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
         sortButton = view.findViewById(R.id.movie_sort_button);
 
         ms = MovieService.getMovieService();
+        favoriteBackButton = view.findViewById(R.id.movieBackButton);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         initSearchBar();
 
+        initFavoriteBackButton();
 
         configureRecycleView();
 
@@ -208,6 +212,15 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
         });
     }
 
+    private void initFavoriteBackButton() {
+        favoriteBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new HomeFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+            }
+        });
+    }
 
     private void initRecycleView() {
 

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,9 +33,11 @@ public class MovieDetailFragment extends Fragment {
 
     private MovieModel chosenMovie;
 
+    private ImageButton backButtonDetailMov;
 
     MovieService ms;
 
+    private String fromWhichFragment;
 
 
     @Override
@@ -47,6 +50,8 @@ public class MovieDetailFragment extends Fragment {
         if (bundle != null){
             MovieModel movieModel = bundle.getParcelable("CHOSEN_TRANSACTION");
             chosenMovie = movieModel.movieModel;
+            fromWhichFragment = bundle.getString("fromWhichFragment");
+
         } else {
             throw new MissingResourceException("No chosen transaction was sent with the fragment, hence fragment cannot be created", MovieModel.class.toString(), "CHOSEN_TRANSACTION" );
         }
@@ -62,11 +67,13 @@ public class MovieDetailFragment extends Fragment {
 
         likeButton = view.findViewById(R.id.likeButton);
         description = view.findViewById(R.id.description_field_detail);
+        backButtonDetailMov = view.findViewById(R.id.backButtonDetailMov);
 
         initLikeButton();
 
         initAddRatingView();
 
+        initBackButton();
 
         getDataFromIntent();
 
@@ -74,6 +81,22 @@ public class MovieDetailFragment extends Fragment {
 
         return view;
 
+    }
+
+    private void initBackButton() {
+        backButtonDetailMov.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (fromWhichFragment.equals("favorite")){
+                    Fragment fragment = new FavoritesCollectionFragment();
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+                }else if (fromWhichFragment.equals("ratingView")){
+                    Fragment fragment = new RatingFragment();
+                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+                }
+
+            }
+        });
     }
 
     private void intiPoster() {
@@ -99,10 +122,7 @@ public class MovieDetailFragment extends Fragment {
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Check if movie is favorite
-                //TODO Add movie to favorite
 
-                // Add to favorites
                 // Add to favorites
                 if (ms.isFavorite(chosenMovie.getMovie_id())){
                     likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);

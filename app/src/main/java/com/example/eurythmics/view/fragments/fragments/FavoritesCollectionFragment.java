@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 
 
@@ -51,6 +52,8 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
 
     private boolean filterIsActivated = false;
 
+    private ImageButton favoriteBackButton;
+
     private RatedMoviesViewModel viewModel;
     MovieService ms;
 
@@ -70,13 +73,14 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
         sortButton = view.findViewById(R.id.favorite_sort_button);
 
         ms = MovieService.getMovieService();
+        favoriteBackButton = view.findViewById(R.id.favoriteBackButton);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         initSearchBar();
 
-
+        initFavoriteBackButton();
         configureRecycleView();
 
         observeChange();
@@ -90,6 +94,16 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
         initSortButton();
 
         return view;
+    }
+
+    private void initFavoriteBackButton() {
+        favoriteBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new HomeFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+            }
+        });
     }
 
     private void observeChange() {
@@ -262,6 +276,7 @@ public class FavoritesCollectionFragment extends Fragment implements OnMovieCard
         }
 
         bundle.putParcelable(s, new MovieModel(currentMov));
+        bundle.putString("fromWhichFragment","favorite");
         fragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
     }
