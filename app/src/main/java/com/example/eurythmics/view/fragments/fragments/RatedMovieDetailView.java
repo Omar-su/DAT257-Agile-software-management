@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -31,7 +33,11 @@ public class RatedMovieDetailView extends Fragment {
 
     private MovieModel chosenMovie;
 
+    private ImageButton backButton;
+
     private MovieService ms;
+
+    private String fromWhichFragment;
 
 
 
@@ -46,6 +52,7 @@ public class RatedMovieDetailView extends Fragment {
         if (bundle != null){
             MovieModel movieModel = bundle.getParcelable("ratedMovie");
             chosenMovie = movieModel.movieModel;
+            fromWhichFragment = bundle.getString("fromWhichFragment");
         } else {
             throw new MissingResourceException("No chosen transaction was sent with the fragment, hence fragment cannot be created", MovieModel.class.toString(), "CHOSEN_TRANSACTION" );
         }
@@ -63,9 +70,11 @@ public class RatedMovieDetailView extends Fragment {
         notes = view.findViewById(R.id.notes_value_movie_with_existing);
         likeButton = view.findViewById(R.id.likeButton2);
         durationTime = view.findViewById(R.id.rated_detail_durationTime);
-
+        backButton = view.findViewById(R.id.backButton_existing_movie);
         editRating = view.findViewById(R.id.edit_rating);
         ms = MovieService.getMovieService();
+
+        initBackButton();
 
         initEditRating();
 
@@ -78,6 +87,37 @@ public class RatedMovieDetailView extends Fragment {
 
         return view;
 
+    }
+
+    private void initBackButton() {
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment;
+                switch (fromWhichFragment) {
+                    case "favorite":
+                        fragment = new FavoritesCollectionFragment();
+                        switchScenes(fragment);
+                        break;
+                    case "ratingView":
+                        fragment = new RatingFragment();
+                        switchScenes(fragment);
+                        break;
+                    case "ratedMovies":
+                        fragment = new RatedMoviesCollectionFragment();
+                        switchScenes(fragment);
+                        break;
+                    case "profile":
+                        fragment = new ProfileFragment();
+                        switchScenes(fragment);
+                        break;
+                }
+            }
+        });
+    }
+
+    private void switchScenes(Fragment fragment){
+        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
     }
 
     private void initEditRating() {
@@ -101,6 +141,7 @@ public class RatedMovieDetailView extends Fragment {
                 Fragment fragment = new MoviePosterFragment();
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("rated_poster", new MovieModel(currentMov));
+                bundle.putString("fromWhichFragment", fromWhichFragment);
                 fragment.setArguments(bundle);
                 requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
             }

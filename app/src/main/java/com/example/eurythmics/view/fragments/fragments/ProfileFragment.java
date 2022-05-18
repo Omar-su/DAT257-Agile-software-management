@@ -93,6 +93,7 @@ public class ProfileFragment extends Fragment implements OnMovieCardListener {
         Fragment fragment = new RatedMovieDetailView();
         Bundle bundle = new Bundle();
         bundle.putParcelable("ratedMovie", new MovieModel(currentMov));
+        bundle.putString("fromWhichFragment", "profile");
         fragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
     }

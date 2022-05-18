@@ -265,6 +265,7 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
         Fragment fragment = new RatedMovieDetailView();
         Bundle bundle = new Bundle();
         bundle.putParcelable("ratedMovie", new MovieModel(currentMov));
+        bundle.putString("fromWhichFragment", "ratedMovies");
         fragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
     }

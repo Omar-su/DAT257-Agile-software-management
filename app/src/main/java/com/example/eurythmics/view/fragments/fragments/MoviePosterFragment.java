@@ -22,6 +22,7 @@ public class MoviePosterFragment extends Fragment {
     private ImageView poster;
     private MovieModel chosenMovie;
     private boolean isRated = false;
+    private String fromWhichFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class MoviePosterFragment extends Fragment {
                 movieModel = bundle.getParcelable("poster");
             }
             chosenMovie = movieModel.movieModel;
+            fromWhichFragment = bundle.getString("fromWhichFragment");
         } else {
             throw new MissingResourceException("No chosen transaction was sent with the fragment, hence fragment cannot be created", MovieModel.class.toString(), "CHOSEN_TRANSACTION" );
         }
@@ -60,6 +62,7 @@ public class MoviePosterFragment extends Fragment {
                     fragment = new MovieDetailFragment();
                     bundle.putParcelable("CHOSEN_TRANSACTION", new MovieModel(currentMov));
                 }
+                bundle.putString("fromWhichFragment", fromWhichFragment);
                 fragment.setArguments(bundle);
                 requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
             }

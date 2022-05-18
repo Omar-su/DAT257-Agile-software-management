@@ -107,6 +107,7 @@ public class MovieDetailFragment extends Fragment {
                 Fragment fragment = new MoviePosterFragment();
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("poster", new MovieModel(currentMov));
+                bundle.putString("fromWhichFragment", fromWhichFragment);
                 fragment.setArguments(bundle);
                 requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
             }
