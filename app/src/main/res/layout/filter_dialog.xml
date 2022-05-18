@@ -24,12 +24,13 @@
         android:id="@+id/filter_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="65dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8">
+
         <RadioButton
             android:id="@+id/default_radio"
             android:layout_width="match_parent"
@@ -38,29 +39,126 @@
             android:text="Default"
             android:textColor="@color/white"
             android:textSize="18sp" />
+
         <RadioButton
             android:id="@+id/action_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Action"
-            android:textSize="18sp"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/adventure_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Adventure"
-            android:textSize="18sp"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/animation_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Animation"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/comedy_radio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Comedy"
-            android:textSize="18sp"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/crime_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crime"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/drama_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Drama"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/family_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Family"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/fantasy_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fantasy"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/horror_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Horror"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/romance_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Romance"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/science_fiction_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Science Fiction"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/thriller_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thriller"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/tv_movie_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TV Movie"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/war_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="War"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/western_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Western"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
     </RadioGroup>
 
