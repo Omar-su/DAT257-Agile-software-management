@@ -56,6 +56,7 @@ Documents: Contains all of the documents for thw project. This includes:<br>
   <li>Business model canvas</li>
   <li>Project scope- first mockup</li>
   <li>Project scope description</li>
+  <li>Social contract</li>
   <li>Folder containing our team relfections</li>
   <li>Folder containing individual reflections for each team member</li>
 </ul> 
