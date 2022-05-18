@@ -49,6 +49,14 @@ public class MoviePosterFragment extends Fragment {
 
         Glide.with(poster.getContext()).load(Credentials.IMG_BASE_URL + chosenMovie.getPosterPath()).into(poster);
 
+        setPoster();
+
+
+        return view;
+
+    }
+
+    private void setPoster() {
         poster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,10 +75,6 @@ public class MoviePosterFragment extends Fragment {
                 requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
             }
         });
-
-
-        return view;
-
     }
 
 
