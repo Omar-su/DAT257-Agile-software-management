@@ -19,8 +19,14 @@ import java.util.Map;
 
 public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-
+    /**
+     * A list of movieModels that is used to display the movies
+     */
     private List<MovieModel> mMovies;
+
+    /**
+     * An instance for onmoviecardlistener
+     */
     private OnMovieCardListener onMovieCardListener;
 
     /**
@@ -63,18 +69,23 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Connecting to the movie cards
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_serie_card_row_item,parent,false);
+        // Returning a view holder which connects the components
         return new RatingViewHolder(view, onMovieCardListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
 
+        // Setting the values of the components
         ((RatingViewHolder)holder).title.setText(mMovies.get(i).getTitle());
         ((RatingViewHolder)holder).description.setText(mMovies.get(i).getOverview());
 
 
         ((RatingViewHolder)holder).releaseDateTextView.setText(String.valueOf(mMovies.get(i).getReleaseDate()));
+
+        // Setting the category
         String category = "Undefined";
         if (getCategory(i) != null && !getCategory(i).equals("")){
             category = getCategory(i);
@@ -84,13 +95,9 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
             Log.d("ta2", "---------------" + category);
         }
         mMovies.get(i).setCategory(category);
-
         ((RatingViewHolder)holder).categoryTextView.setText(category);
 
-
         setPoster(holder, i);
-
-
     }
 
     private void setPoster(RecyclerView.ViewHolder holder, int i) {
@@ -119,6 +126,7 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
 
         return category;
     }
+
     @Override
     public int getItemCount() {
         if (mMovies!=null){
@@ -127,11 +135,20 @@ public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.
         return 0;
     }
 
+    /**
+     * Updates the list of movie models that will displayed on the recycle view
+     * @param mMovies The new updated list
+     */
     public void setmMovies(List<MovieModel> mMovies){
         this.mMovies = mMovies;
         notifyDataSetChanged();
     }
 
+    /**
+     * Returns the selected movie model on the recycle view
+     * @param position The position of the card
+     * @return Returns the selected movie
+     */
     public MovieModel getSelectedMovie(int position){
         if (mMovies != null){
             if (mMovies.size() > 0){
