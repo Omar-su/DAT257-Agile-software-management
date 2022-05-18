@@ -14,21 +14,28 @@ public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     private OnMovieCardListener onMovieCardListener;
 
-     TextView cardTitle, cardDescription;
-     RatingBar movieRating;
-     ImageView cardPoster;
+    // Components to connect to the movie card
+    TextView cardTitle, cardDescription;
+    RatingBar movieRating;
+    ImageView cardPoster;
 
+    /**
+     * A view holder which is connected the movie card and connects the components to the GUI
+     * @param itemView
+     * @param onMovieCardListener
+     */
     public HomeViewHolder(@NonNull View itemView, OnMovieCardListener onMovieCardListener) {
         super(itemView);
         this.onMovieCardListener = onMovieCardListener;
 
+        // Connecting to view components
         cardTitle = itemView.findViewById(R.id.saved_movie_card_title);
         cardDescription = itemView.findViewById(R.id.description_card);
         movieRating = itemView.findViewById(R.id.rating_bar_card);
         cardPoster = itemView.findViewById(R.id.poster_saved_card_img);
 
+        // Making movie card clickable
         itemView.setOnClickListener(this);
-
     }
 
     @Override
