@@ -49,14 +49,13 @@ Fabian Flaa: @Foxboi <br>
 <h2 id="gitinfo"> Gitinfo</h2>
 The github project contains of three folders and some gradle files. <br><br>
 
-App: Contains the source folder of the application. More about the code will be described in the "stucture" section.<br><br>
+App: Contains the source folder of the application. More about the code will be described in the "stucture" section. The app folder also includes a folder for the JUnit tests.<br><br>
 
 Documents: Contains all of the documents for thw project. This includes:<br>
  <ul>
   <li>Business model canvas</li>
   <li>Project scope- first mockup</li>
   <li>Project scope description</li>
-  <li>A diagram</li>
   <li>Folder containing our team relfections</li>
   <li>Folder containing individual reflections for each team member</li>
 </ul> 
