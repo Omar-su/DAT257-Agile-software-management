@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RatingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
+    // Movie card components
     TextView title, description, categoryTextView, releaseDateTextView;
     ImageView poster;
 
@@ -17,7 +18,11 @@ public class RatingViewHolder extends RecyclerView.ViewHolder implements View.On
     // Click listener
     OnMovieCardListener onMovieCardListener;
 
-
+    /**
+     * connects the items to the view
+     * @param itemView the view
+     * @param onMovieCardListener card listener
+     */
     public RatingViewHolder(@NonNull View itemView, OnMovieCardListener onMovieCardListener) {
         super(itemView);
 
@@ -28,8 +33,6 @@ public class RatingViewHolder extends RecyclerView.ViewHolder implements View.On
         poster = itemView.findViewById(com.example.eurythmics.R.id.poster_img);
         categoryTextView = itemView.findViewById(com.example.eurythmics.R.id.category_textView);
         releaseDateTextView = itemView.findViewById(com.example.eurythmics.R.id.releaseDate_text);
-
-
 
         itemView.setOnClickListener(this);
     }
