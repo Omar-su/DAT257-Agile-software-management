@@ -48,7 +48,7 @@
 
                 <TextView
                     android:id="@+id/overall_rating_value_movie_with_existing"
-                    android:layout_width="34dp"
+                    android:layout_width="45dp"
                     android:layout_height="34dp"
                     android:layout_marginTop="50dp"
                     android:fontFamily="@font/be_vietnam_extrabold"
@@ -164,7 +164,7 @@
 
                 <TextView
                     android:id="@+id/chracters_value_movie_with_existing"
-                    android:layout_width="34dp"
+                    android:layout_width="45dp"
                     android:layout_height="34dp"
                     android:fontFamily="@font/be_vietnam"
                     android:text="xx"
@@ -175,7 +175,7 @@
 
                 <TextView
                     android:id="@+id/score_value_movie_with_existing"
-                    android:layout_width="34dp"
+                    android:layout_width="45dp"
                     android:layout_height="34dp"
                     android:fontFamily="@font/be_vietnam"
                     android:text="xx"
@@ -186,7 +186,7 @@
 
                 <TextView
                     android:id="@+id/scenery_value_movie_with_existing"
-                    android:layout_width="34dp"
+                    android:layout_width="45dp"
                     android:layout_height="34dp"
                     android:layout_marginStart="1dp"
                     android:fontFamily="@font/be_vietnam"
@@ -198,7 +198,7 @@
 
                 <TextView
                     android:id="@+id/story_value_movie_with_existing"
-                    android:layout_width="34dp"
+                    android:layout_width="45dp"
                     android:layout_height="34dp"
                     android:layout_marginTop="38dp"
                     android:fontFamily="@font/be_vietnam"
