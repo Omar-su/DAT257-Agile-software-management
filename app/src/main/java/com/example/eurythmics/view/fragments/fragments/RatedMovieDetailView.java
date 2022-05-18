@@ -25,7 +25,7 @@ public class RatedMovieDetailView extends Fragment {
     private ImageView poster, likeButton;
 
     private TextView title, category, releaseDate, durationTime,
-            storyRating, charactersRating, scoreRating, sceneryRating, overallRating;
+            storyRating, charactersRating, scoreRating, sceneryRating, overallRating, notes;
 
     private ImageView editRating;
 
@@ -60,6 +60,7 @@ public class RatedMovieDetailView extends Fragment {
         scoreRating= view.findViewById(R.id.score_value_movie_with_existing);
         sceneryRating = view.findViewById(R.id.scenery_value_movie_with_existing);
         overallRating = view.findViewById(R.id.overall_rating_value_movie_with_existing);
+        notes = view.findViewById(R.id.notes_value_movie_with_existing);
         likeButton = view.findViewById(R.id.likeButton2);
         durationTime = view.findViewById(R.id.rated_detail_durationTime);
 
@@ -122,6 +123,7 @@ public class RatedMovieDetailView extends Fragment {
         scoreRating.setText("" + review.getScoreRating());
         sceneryRating.setText("" + review.getSceneryRating());
         overallRating.setText("" + review.getOverallRating());
+        notes.setText(review.getThoughts());
 
     }
 
