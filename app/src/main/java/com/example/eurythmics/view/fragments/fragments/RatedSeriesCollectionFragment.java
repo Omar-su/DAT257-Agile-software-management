@@ -18,8 +18,17 @@ import android.widget.RadioGroup;
 import com.example.eurythmics.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
+ This class represents the fragment for searching, filtering and sorting
+ any rated series.
+ * Here, the user can:
+ * <p><ul>
+ * <li>use the searchbar to search for the series using any letter of it's title
+ * <li>filter the series by their main genre (default when no genre is selected)
+ * <li>sort the series by newest date, oldest date, highest rating or highest duration (default when no sorting option is selected)
+ * </ul><p>
+ * Can be opened from {@link  com.example.eurythmics.view.fragments.fragments.HomeFragment}
+ * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
+ * @author Omar Suliman
  */
 public class RatedSeriesCollectionFragment extends Fragment implements OnBackButtonClickListener {
 
