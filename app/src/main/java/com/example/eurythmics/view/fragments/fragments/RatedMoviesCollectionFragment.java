@@ -35,8 +35,17 @@ import com.example.eurythmics.viewmodels.RatedMoviesViewModel;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
+ This class represents the fragment for searching, filtering and sorting
+ any rated movies.
+ * Here, the user can:
+ * <p><ul>
+ * <li>use the searchbar to search for the movies using any letter of it's title
+ * <li>filter the movie by it's main genre (default when no genre is selected)
+ * <li>sort the movie by newest date, oldest date, highest rating or highest duration (default when no sorting option is selected)
+ * </ul><p>
+ * Can be opened from {@link  com.example.eurythmics.view.fragments.fragments.HomeFragment}
+ * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
+ * @author Omar Suliman
  */
 public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCardListener, OnBackButtonClickListener{
 
