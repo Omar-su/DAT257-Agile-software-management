@@ -17,6 +17,7 @@ import java.util.Locale;
 
 /**
  * A class representing a movie
+ * @@author Omar Sulaiman
  */
 public class MovieModel implements Parcelable {
 
@@ -28,6 +29,10 @@ public class MovieModel implements Parcelable {
     private String overview;
     private List<Integer> genre_ids;
     @SerializedName("runtime") private int duration;
+
+    /**
+     * A movie model object that holds the same object in which it will be used when parsing an object
+     */
     public MovieModel movieModel;
     private String category;
     private List<Genre> genres;
@@ -45,7 +50,10 @@ public class MovieModel implements Parcelable {
         this.genres = genres;
     }
 
-
+    /**
+     * The constructur which is called when creating objects of json parcels
+     * @param in The jason parcel which has all parameters
+     */
     public MovieModel(Parcel in) {
         title = in.readString();
         poster_path = in.readString();
@@ -72,6 +80,10 @@ public class MovieModel implements Parcelable {
         }
     };
 
+    /**
+     * Creates a movie object that has an instance of it's self
+     * @param selectedMovie
+     */
     public MovieModel(MovieModel selectedMovie) {
         this.movieModel = selectedMovie;
     }
@@ -123,6 +135,11 @@ public class MovieModel implements Parcelable {
         return date.substring(8);
     }
 
+    /**
+     * A method which translates the release date to a date
+     * @param releaseD A string that has a date
+     * @return Returns a Date object
+     */
     public Date getDate(String releaseD) {
         // creating a Calendar object
         Calendar c1 = Calendar.getInstance();
@@ -141,7 +158,10 @@ public class MovieModel implements Parcelable {
     }
 
 
-
+    /**
+     * Gets the first category of the movie
+     * @return Returns a category
+     */
     public String getCategoryFromDetailMov(){
         if (this.genres != null){
             return genres.get(0).getName();

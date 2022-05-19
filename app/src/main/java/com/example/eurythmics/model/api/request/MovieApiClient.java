@@ -20,6 +20,10 @@ import java.util.concurrent.TimeUnit;
 import retrofit2.Call;
 import retrofit2.Response;
 
+/**
+ * A class which handles all api calls
+ * @author Omar Sulaiman
+ */
 public class MovieApiClient {
 
     private static MovieApiClient instance;
@@ -53,19 +57,34 @@ public class MovieApiClient {
         ratedMovies = new MutableLiveData<>();
     }
 
+    /**
+     * A method which returns a live data list which can be observed
+     * @return An immutable list
+     */
     public LiveData<List<MovieModel>> getMovies(){
         return mMovies;
     }
 
+    /**
+     * A method which returns a live data list which can be observed
+     * @return An immutable list
+     */
     public LiveData<List<MovieModel>> getMoviesCategory(){
         return moviesCategory;
     }
 
+    /**
+     * A method which returns a live data list which can be observed
+     * @return An immutable list
+     */
     public LiveData<List<MovieModel>> getRatedMovies(){return ratedMovies;}
 
 
-
-    // Method that will be called in other classes
+    /**
+     * Searches for movies
+     * @param query The movie that is being searched for
+     * @param pageNumber which page
+     */
     public void searchMoviesApi(String query, int pageNumber){
         if (retrieveMoviesRunnable != null){
             retrieveMoviesRunnable = null;
@@ -86,7 +105,11 @@ public class MovieApiClient {
     }
 
 
-    // Method that will be called in other classes
+    /**
+     * A method which searches for movies with a specific category
+     * @param filterQ What category
+     * @param pageNumber Which page
+     */
     public void searchMoviesApiByCategory(String filterQ, int pageNumber){
         if (retrieveMoviesRunnableCategory != null){
             retrieveMoviesRunnableCategory = null;
@@ -96,6 +119,7 @@ public class MovieApiClient {
 
         final Future myHandler2 = AppExecutors.getInstance().networkIO().submit(retrieveMoviesRunnableCategory);
 
+        // Runs parallel
         AppExecutors.getInstance().networkIO().schedule(new Runnable() {
             @Override
             public void run() {
@@ -106,6 +130,10 @@ public class MovieApiClient {
 
     }
 
+    /**
+     * Searches for movies to get their details
+     * @param ids The ids of the movies
+     */
     public void searchRatedMovies(List<Integer> ids){
         List<MovieModel> movieModels = new ArrayList<>();
         for (int id : ids){
@@ -116,7 +144,10 @@ public class MovieApiClient {
     }
 
 
-    // Method that will be called in other classes
+    /**
+     * Searches for a specific movie to get it's detail
+     * @param id The id of the movie
+     */
     public MovieModel searchMoviesApiById(int id){
         MovieApi movieApi = ServiceApi.getMovieApi();
         try {
@@ -132,8 +163,9 @@ public class MovieApiClient {
     }
 
 
-
-    // retrieving data from rest api by runnable class
+    /**
+     * A class which holds the responsibility of executing the api calls in parallel
+     */
     private class RetrieveMoviesRunnable implements Runnable{
 
         private String query;
@@ -200,7 +232,10 @@ public class MovieApiClient {
 
     }
 
-    // retrieving data from rest api by runnable class
+
+    /**
+     * A class which holds the responsibility of executing the api calls in parallel
+     */
     private class RetrieveMoviesRunnableCategory implements Runnable{
 
         private String query;

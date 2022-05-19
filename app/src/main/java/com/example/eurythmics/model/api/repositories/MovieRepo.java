@@ -7,6 +7,10 @@ import com.example.eurythmics.model.api.request.MovieApiClient;
 
 import java.util.List;
 
+/**
+ * A repository class which connects the api client class with the viewmodels
+ * @author omar Sulaiman
+ */
 public class MovieRepo {
 
     private static MovieRepo instance;
@@ -19,6 +23,10 @@ public class MovieRepo {
     private String filterQ;
     private int categoryPageNumber;
 
+    /**
+     * A singleton pattern which only returns one object
+     * @return
+     */
     public static MovieRepo getInstance(){
         if (instance  == null){
             instance = new MovieRepo();
@@ -74,6 +82,9 @@ public class MovieRepo {
         movieApiClient.searchMoviesApiByCategory(filterQ,pageNumber);
     }
 
+    /**
+     * Searches for the next page of the api result
+     */
     public void searchNextPageCategory() {
         searchMovieApiByCategory(filterQ, categoryPageNumber + 1);
     }

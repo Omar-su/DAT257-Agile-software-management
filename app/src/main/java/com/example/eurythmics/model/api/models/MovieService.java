@@ -12,6 +12,9 @@ import java.util.Map;
 
 import com.example.eurythmics.model.api.database.DataBaseManager;
 
+/**
+ *
+ */
 public class MovieService {
 
     private DataBaseManager dataBaseManager;
