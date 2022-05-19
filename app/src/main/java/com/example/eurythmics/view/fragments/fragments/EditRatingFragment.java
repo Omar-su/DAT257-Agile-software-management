@@ -32,10 +32,15 @@ import java.util.MissingResourceException;
 /**
  * This class represents the fragment for creating, editing and deleting a rating for the chosen movie.
  * Here, the user can:
- * specify values for a new rating and save it
- * change an existing rating's values, with all the values automatically loaded into the fragment
- * cancel this operation
- * delete this rating
+ * <p><ul>
+ * <li>specify values for a new rating and save it
+ * <li>change an existing rating's values, with all the values automatically loaded into the fragment
+ * <li>cancel this operation
+ * <li>delete this rating
+ * </ul><p>
+ * Opened from {@link  com.example.eurythmics.view.fragments.fragments.MovieDetailFragment} <p>
+ * Opened from {@link  com.example.eurythmics.view.fragments.fragments.RatedMovieDetailView}
+ * @author Eugene Dvoryankov, Fabian Flaa, Omar Suliman, Oscar Palmqvist
  */
 public class EditRatingFragment extends Fragment {
 
