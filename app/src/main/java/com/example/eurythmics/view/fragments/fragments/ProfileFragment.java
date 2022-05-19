@@ -87,6 +87,9 @@ public class ProfileFragment extends Fragment implements OnMovieCardListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
+    /**
+     * Updates adapter once movie models send new updated list
+     */
     private void observeChange() {
         viewModel.getRatedMovies().observe(getViewLifecycleOwner(), new Observer<List<MovieModel>>() {
             @Override

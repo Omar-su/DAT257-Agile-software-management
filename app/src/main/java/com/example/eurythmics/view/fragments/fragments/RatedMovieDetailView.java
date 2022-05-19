@@ -51,8 +51,8 @@ import java.util.MissingResourceException;
  * A filled in heart symbol indicates that the movie or series exists in the favorites collection {@link com.example.eurythmics.view.fragments.fragments.FavoritesCollectionFragment} <p>
  * When the user clicks on the Add rating button, the {@link com.example.eurythmics.view.fragments.fragments.EditRatingFragment} opens and from there, the user can create, change or delete a rating.
  * <p>Can be opened from {@link  com.example.eurythmics.view.fragments.fragments.RatingFragment}
- * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
  * @author Omar Suliman
+ * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
  */
 public class RatedMovieDetailView extends Fragment implements OnBackButtonClickListener{
     private ImageView poster, likeButton;

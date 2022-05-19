@@ -44,8 +44,8 @@ import java.util.List;
  * <li>sort the movie by newest date, oldest date, highest rating or highest duration (default when no sorting option is selected)
  * </ul><p>
  * Can be opened from {@link  com.example.eurythmics.view.fragments.fragments.HomeFragment}
- * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
  * @author Omar Suliman
+ * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
  */
 public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCardListener, OnBackButtonClickListener{
 

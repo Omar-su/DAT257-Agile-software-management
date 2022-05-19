@@ -78,7 +78,10 @@ public class EditRatingFragment extends Fragment {
             fromWhichFragment = bundle.getString("fromWhichFragment");
 
         } else {
-            throw new MissingResourceException("No chosen transaction was sent with the fragment, hence fragment cannot be created", MovieModel.class.toString(), "CHOSEN_TRANSACTION" );
+            Toast t = new Toast(getContext());
+            t.setText("No chosen transaction was sent with the fragment, hence fragment cannot be created");
+            t.setDuration(Toast.LENGTH_LONG);
+            t.show();
         }
 
         init(view);
@@ -433,6 +436,10 @@ public class EditRatingFragment extends Fragment {
         });
     }
 
+    /**
+     * Check if a movie is already reviewed and shows the result
+     * @param movieModel The movie
+     */
     public void checkForExistingReview(MovieModel movieModel) {
         if(ms.isReviewed(movieModel.getMovie_id())) {
             Review existingReview = ms.getReview(movieModel.getMovie_id());

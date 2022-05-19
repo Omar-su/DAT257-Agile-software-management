@@ -67,6 +67,7 @@ public class MoviePosterFragment extends Fragment {
             MovieModel currentMov = chosenMovie;
             Fragment fragment;
             Bundle bundle = new Bundle();
+            // depending on which frgment the poster was clicked from the user will return to it after clicking on the picture
             if (isRated){
                 fragment = new RatedMovieDetailView();
                 bundle.putParcelable("ratedMovie", new MovieModel(currentMov));
