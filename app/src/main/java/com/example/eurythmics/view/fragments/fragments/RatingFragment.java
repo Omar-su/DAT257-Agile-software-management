@@ -25,7 +25,12 @@ import com.example.eurythmics.viewmodels.MovieListViewModel;
 
 import java.util.List;
 
-
+/**
+ * This class represents the fragment for searching all the movies and series from the API. <p>
+ * This fragment consists of a simple searchbar and the movie/series list bellow
+ * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
+ * @author Omar Suliman
+ */
 public class RatingFragment extends Fragment implements OnMovieCardListener {
 
 
