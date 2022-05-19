@@ -34,6 +34,7 @@ import java.util.MissingResourceException;
  * <li> duration/running time
  * <li> brief description
  * </ul><p>
+ * If the user taps on the movie poster, the {@link com.example.eurythmics.view.fragments.fragments.MoviePosterFragment} will be opened and a full sized movie poster will appear.
  * The fragments also contains a heart shaped button and an add rating button. <p>
  * In this fragment a movie or series can be marked as favorite by clicking on the heart shaped button.
  * A filled in heart symbol indicates that the movie or series exists in the favorites collection {@link com.example.eurythmics.view.fragments.fragments.FavoritesCollectionFragment} <p>

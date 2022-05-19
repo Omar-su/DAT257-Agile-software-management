@@ -17,6 +17,12 @@ import com.example.eurythmics.view.fragments.adapters.RatingViewHolder;
 
 import java.util.MissingResourceException;
 
+/**
+ * This class represents the fragment for a full size movie poster.
+ * This fragment can be accessed from and can redirect to {@link  com.example.eurythmics.view.fragments.fragments.MovieDetailFragment} or {@link  com.example.eurythmics.view.fragments.fragments.RatedMovieDetailView}
+ when the user taps on the movie poster.
+ * @author Omar Suliman
+ */
 public class MoviePosterFragment extends Fragment {
 
     private ImageView poster;
