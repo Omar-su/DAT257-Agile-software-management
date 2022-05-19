@@ -105,17 +105,14 @@ public class MovieDetailFragment extends Fragment implements OnBackButtonClickLi
 
 
     private void intiPoster() {
-        poster.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MovieModel currentMov = chosenMovie;
-                Fragment fragment = new MoviePosterFragment();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("poster", new MovieModel(currentMov));
-                bundle.putString("fromWhichFragment", fromWhichFragment);
-                fragment.setArguments(bundle);
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
-            }
+        poster.setOnClickListener(view -> {
+            MovieModel currentMov = chosenMovie;
+            Fragment fragment = new MoviePosterFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("poster", new MovieModel(currentMov));
+            bundle.putString("fromWhichFragment", fromWhichFragment);
+            fragment.setArguments(bundle);
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
         });
     }
 
@@ -125,34 +122,28 @@ public class MovieDetailFragment extends Fragment implements OnBackButtonClickLi
         }else {
             likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
         }
-        likeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        likeButton.setOnClickListener(view -> {
 
-                // Add to favorites
-                if (ms.isFavorite(chosenMovie.getMovie_id())){
-                    likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-                    ms.deleteFavoriteMovie(chosenMovie.getMovie_id());
-                }else {
-                    likeButton.setImageResource(R.drawable.ic_favorite);
-                    ms.addFavorite(chosenMovie.getMovie_id());
-                }
-
+            // Add to favorites
+            if (ms.isFavorite(chosenMovie.getMovie_id())){
+                likeButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                ms.deleteFavoriteMovie(chosenMovie.getMovie_id());
+            }else {
+                likeButton.setImageResource(R.drawable.ic_favorite);
+                ms.addFavorite(chosenMovie.getMovie_id());
             }
+
         });
     }
 
     private void initAddRatingView() {
-        addRatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new EditRatingFragment();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("movie_rating", chosenMovie);
-                bundle.putString("fromWhichFragment", fromWhichFragment);
-                fragment.setArguments(bundle);
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();            }
-        });
+        addRatingButton.setOnClickListener(view -> {
+            Fragment fragment = new EditRatingFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("movie_rating", chosenMovie);
+            bundle.putString("fromWhichFragment", fromWhichFragment);
+            fragment.setArguments(bundle);
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();            });
     }
 
     private void getDataFromIntent() {
@@ -186,14 +177,18 @@ public class MovieDetailFragment extends Fragment implements OnBackButtonClickLi
     @Override
     public void initBackButton() {
         backButtonDetailMov.setOnClickListener(view -> {
-            if (fromWhichFragment.equals("favorite")){
-                Fragment fragment = new FavoritesCollectionFragment();
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
-            }else if (fromWhichFragment.equals("ratingView")){
-                Fragment fragment = new RatingFragment();
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+            Fragment fragment = new RatedMoviesCollectionFragment();
+            switch (fromWhichFragment){
+                case "favorite": fragment = new FavoritesCollectionFragment();break;
+                case "ratingView": fragment = new RatingFragment(); break;
+                case "ratedMovie": break;
             }
-
+            Bundle bundle = new Bundle();
+            chosenMovie.movieModel = chosenMovie;
+            bundle.putParcelable(fromWhichFragment, chosenMovie);
+            bundle.putString("fromWhichFragment", fromWhichFragment);
+            fragment.setArguments(bundle);
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
         });
     }
 }

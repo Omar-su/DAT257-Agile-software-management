@@ -63,23 +63,20 @@ public class MoviePosterFragment extends Fragment {
     }
 
     private void setPoster() {
-        poster.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MovieModel currentMov = chosenMovie;
-                Fragment fragment;
-                Bundle bundle = new Bundle();
-                if (isRated){
-                    fragment = new RatedMovieDetailView();
-                    bundle.putParcelable("ratedMovie", new MovieModel(currentMov));
-                }else {
-                    fragment = new MovieDetailFragment();
-                    bundle.putParcelable("CHOSEN_TRANSACTION", new MovieModel(currentMov));
-                }
-                bundle.putString("fromWhichFragment", fromWhichFragment);
-                fragment.setArguments(bundle);
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+        poster.setOnClickListener(view -> {
+            MovieModel currentMov = chosenMovie;
+            Fragment fragment;
+            Bundle bundle = new Bundle();
+            if (isRated){
+                fragment = new RatedMovieDetailView();
+                bundle.putParcelable("ratedMovie", new MovieModel(currentMov));
+            }else {
+                fragment = new MovieDetailFragment();
+                bundle.putParcelable("CHOSEN_TRANSACTION", new MovieModel(currentMov));
             }
+            bundle.putString("fromWhichFragment", fromWhichFragment);
+            fragment.setArguments(bundle);
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
         });
     }
 

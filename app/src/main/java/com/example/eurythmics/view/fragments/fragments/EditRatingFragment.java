@@ -51,7 +51,7 @@ public class EditRatingFragment extends Fragment {
     private ImageButton decrementStory, decrementCharacters, decrementScore, decrementScenery, decrementOverall;
     private ImageButton btnDelete;
     private TextInputEditText notes;
-    private Button btnSave;
+    private Button btnSave, cancelButton;
     private TextView movieTitle;
     private ImageView moviePoster;
 
@@ -82,6 +82,7 @@ public class EditRatingFragment extends Fragment {
         }
 
         init(view);
+        initCancelButton();
         checkForExistingReview(chosenMovie);
 
         return view;
@@ -126,6 +127,9 @@ public class EditRatingFragment extends Fragment {
 
         btnSave = view.findViewById(R.id.saveButton);
         btnDelete = view.findViewById(R.id.deleteReviewButton);
+        cancelButton = view.findViewById(R.id.cancelButton);
+
+
 
         //implement all buttons
         incrementStory.setOnClickListener(new View.OnClickListener() {
@@ -384,28 +388,48 @@ public class EditRatingFragment extends Fragment {
             }
         });
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                if (ms.isReviewed(chosenMovie.getMovie_id())) {
-                    ms.removeReview(chosenMovie.getMovie_id());
-                }
-                //check if actually removed
-                if (!ms.isReviewed(chosenMovie.getMovie_id())) {
-                    Toast toast = Toast.makeText(getContext(), "Review successfully deleted", Toast.LENGTH_LONG);
-                    toast.show();
-
-                    storyRating.setText("");
-                    charactersRating.setText("");
-                    scoreRating.setText("");
-                    sceneryRating.setText("");
-                    overallRating.setText("");
-                    notes.setText("");
-                }
-                else {
-                    Toast toast = Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+        btnDelete.setOnClickListener(view1 -> {
+            if (ms.isReviewed(chosenMovie.getMovie_id())) {
+                ms.removeReview(chosenMovie.getMovie_id());
             }
+            //check if actually removed
+            if (!ms.isReviewed(chosenMovie.getMovie_id())) {
+                Toast toast = Toast.makeText(getContext(), "Review successfully deleted", Toast.LENGTH_LONG);
+                toast.show();
+
+                storyRating.setText("");
+                charactersRating.setText("");
+                scoreRating.setText("");
+                sceneryRating.setText("");
+                overallRating.setText("");
+                notes.setText("");
+            }
+            else {
+                Toast toast = Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+    }
+
+    private void initCancelButton() {
+        cancelButton.setOnClickListener(view -> {
+            Toast toast = Toast.makeText(getContext(), "Review canceled", Toast.LENGTH_LONG);
+            toast.show();
+            Fragment fragment;
+            String s = "";
+            if (!ms.isReviewed(chosenMovie.getMovie_id())){
+                fragment = new MovieDetailFragment();
+                s = "CHOSEN_TRANSACTION";
+            }else {
+                fragment = new RatedMovieDetailView();
+                s = "ratedMovie";
+            }
+            Bundle bundle = new Bundle();
+            chosenMovie.movieModel = chosenMovie;
+            bundle.putParcelable(s, chosenMovie);
+            bundle.putString("fromWhichFragment", fromWhichFragment);
+            fragment.setArguments(bundle);
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
         });
     }
 

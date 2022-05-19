@@ -284,16 +284,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="88dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
