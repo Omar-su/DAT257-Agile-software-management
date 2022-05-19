@@ -15,7 +15,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.example.eurythmics.model.api.database.DataBaseManager;
 
-
+/**
+ * The main class which runs the application and has all navigation logic
+ * @author Jenny Carlsson, Omar Sulaiman
+ */
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
@@ -52,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private  void  initBottomNavigationOnClick(){
-
+    /**
+     * A method which enables navigation through static nav bar
+     */
+    private void initBottomNavigationOnClick(){
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment fragment = null;
             switch (item.getItemId()){

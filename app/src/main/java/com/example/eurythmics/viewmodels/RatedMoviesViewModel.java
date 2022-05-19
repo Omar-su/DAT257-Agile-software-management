@@ -20,11 +20,16 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
+/**
+ * A view model which is reponsible to provide all rated movies to the ratedmoviescollection,
+ * profile and favorite collection
+ * @author Omar Sulaiman
+ */
 public class RatedMoviesViewModel extends ViewModel {
+
     private MovieRepo movieRepo;
-    List<MovieModel> modelList;
-    List<MovieModel> filterList;
+    private List<MovieModel> modelList;
+    private List<MovieModel> filterList;
 
     public RatedMoviesViewModel() {
         movieRepo = MovieRepo.getInstance();
@@ -36,11 +41,19 @@ public class RatedMoviesViewModel extends ViewModel {
         return movieRepo.getRatedMovies();
     }
 
+    /**
+     * Searches for all rated movies in the api by calling the movierepo
+     * @param ids The ids of all rated movies
+     */
     public void searchRatedMovies(List<Integer> ids){
         movieRepo.searchRatedMovies(ids);
     }
 
 
+    /**
+     * A method which  handles how to sort movies
+     * @param sortOption A sort option
+     */
     public void sortBy(SortOptions sortOption) {
         switch (sortOption) {
             case NEWEST_DATE:
@@ -62,26 +75,26 @@ public class RatedMoviesViewModel extends ViewModel {
 
     }
 
+    /**
+     * Sorts the filterlist by the movies duration time
+     */
     private void sortByTime() {
-        Collections.sort(filterList, new Comparator<MovieModel>() {
-            @Override
-            public int compare(MovieModel m1, MovieModel m2) {
-
-                return Integer.compare(m2.getDuration(), m1.getDuration());
-            }
-        });
+        Collections.sort(filterList, (m1, m2) -> Integer.compare(m2.getDuration(), m1.getDuration()));
     }
 
+    /**
+     * Sorts the filterlist by the movies rating
+     */
     private void sortByRating() {
-        Collections.sort(filterList, new Comparator<MovieModel>() {
-            @Override
-            public int compare(MovieModel m1, MovieModel m2) {
-                MovieService ms = MovieService.getMovieService();
-                return Double.compare(ms.getOverallRating(m2.getMovie_id()), ms.getOverallRating(m1.getMovie_id()));
-            }
+        Collections.sort(filterList, (m1, m2) -> {
+            MovieService ms = MovieService.getMovieService();
+            return Double.compare(ms.getOverallRating(m2.getMovie_id()), ms.getOverallRating(m1.getMovie_id()));
         });
     }
 
+    /**
+     * Sorts the filterlist by the movies the oldest date
+     */
     private void sortByOldestDate() {
         Collections.sort(filterList, new Comparator<MovieModel>() {
             @Override
@@ -96,6 +109,9 @@ public class RatedMoviesViewModel extends ViewModel {
         });
     }
 
+    /**
+     * Sorts the filterlist by the movies newest date
+     */
     private void sortByNewestDate() {
         filterList.sort(new Comparator<MovieModel>() {
             @Override
@@ -110,6 +126,10 @@ public class RatedMoviesViewModel extends ViewModel {
         });
     }
 
+    /**
+     * Handles all filter operations for the movies
+     * @param filterOption Filtes option
+     */
     public void filter(FilterOption filterOption) {
         switch (filterOption) {
             case DEFAULT: filterList = modelList; break;
@@ -124,10 +144,12 @@ public class RatedMoviesViewModel extends ViewModel {
             case COMEDY:
                 filterCat("comedy");
                 break;
-
         }
     }
 
+    /**
+     * Filters the filterlist by the movies category
+     */
     private void filterCat(String cat) {
         filterList = new ArrayList<>();
         for (MovieModel m: modelList){
@@ -136,7 +158,6 @@ public class RatedMoviesViewModel extends ViewModel {
             }
         }
     }
-
 
     public void setListMovies(List<MovieModel> movieModels) {
         this.modelList = movieModels;
@@ -148,6 +169,9 @@ public class RatedMoviesViewModel extends ViewModel {
         return filterList;
     }
 
+    /**
+     * Reorders the list based on how matching the search string is to the movies names
+     */
     public void searchTextChange(String s) {
         Collections.sort(filterList, new Comparator<MovieModel>() {
             @Override
