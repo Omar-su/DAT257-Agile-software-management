@@ -178,9 +178,11 @@ public class MovieDetailFragment extends Fragment implements OnBackButtonClickLi
     public void initBackButton() {
         backButtonDetailMov.setOnClickListener(view -> {
             Fragment fragment = new RatedMoviesCollectionFragment();
+
             switch (fromWhichFragment){
                 case "favorite": fragment = new FavoritesCollectionFragment();break;
                 case "ratingView": fragment = new RatingFragment(); break;
+                case "profile": fragment = new ProfileFragment(); break;
                 case "ratedMovie": break;
             }
             Bundle bundle = new Bundle();
