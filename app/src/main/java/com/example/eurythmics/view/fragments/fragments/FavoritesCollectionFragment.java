@@ -45,8 +45,9 @@ import java.util.List;
  * </ul><p>
  * A movie or series can be marked as favorite in the {@link  com.example.eurythmics.view.fragments.fragments.MovieDetailFragment} or {@link  com.example.eurythmics.view.fragments.fragments.RatedMovieDetailView} by
  * clicking on the heart symbol in the detail view. A filled in heart symbol indicates that the movie or series exists in the favorites collection <p>
- * Opened from {@link  com.example.eurythmics.view.fragments.fragments.HomeFragment}
- * @author Eugene Dvoryankov, Omar Suliman
+ * Can be opened from {@link  com.example.eurythmics.view.fragments.fragments.HomeFragment}
+ * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
+ * @author Omar Suliman
  */
 public class FavoritesCollectionFragment extends Fragment implements OnMovieCardListener, OnBackButtonClickListener {
 
