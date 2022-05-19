@@ -11,7 +11,7 @@
         android:id="@+id/titleRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
+        android:layout_marginStart="160dp"
         android:fontFamily="@font/iceberg"
         android:maxLength="100"
         android:text="Rating"
@@ -20,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.189" />
 
     <include
         android:id="@+id/sceneryNumberPicker"
@@ -153,8 +153,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextInput"
-            android:layout_width="195dp"
-            android:layout_height="121dp"
+            android:layout_width="209dp"
+            android:layout_height="match_parent"
             android:hint="notes..."
             android:maxLength="100"
             tools:visibility="visible" />
@@ -164,12 +164,13 @@
         android:id="@+id/saveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="28dp"
         android:text="Save"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintStart_toEndOf="@+id/cancelButton"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:strokeColor="#2196F3" />
 
     <ImageView
         android:id="@+id/moviePosterRating"
@@ -207,6 +208,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/movieTitleRating"
         app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="28dp"
+        android:text="Cancel"
+        android:textColor="@color/black"
+        android:theme="@style/Theme.Eurythmics"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+    <TextView
+        android:id="@+id/notesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/be_vietnam"
+        android:text="Notes:"
+        android:textColor="#FFFFFF"
+        android:textSize="22dp"
+        app:layout_constraintStart_toStartOf="@+id/overallRatingLabel"
+        app:layout_constraintTop_toBottomOf="@+id/overallRatingLabel" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
