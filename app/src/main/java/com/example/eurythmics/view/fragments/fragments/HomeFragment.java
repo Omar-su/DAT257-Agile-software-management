@@ -24,8 +24,14 @@ import com.example.eurythmics.viewmodels.HomeListViewModel;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
+ This class represents the fragment for home screen. Here, the user can:
+ * <p><ul>
+ * <li>access the rated movies by clicking on the Movies button. This opens the {@link com.example.eurythmics.view.fragments.fragments.RatedMoviesCollectionFragment}
+ * <li>access the rated TV series by clicking on the TV series button. This opens the {@link com.example.eurythmics.view.fragments.fragments.RatedSeriesCollectionFragment}
+ * <li>access the favorite movies and TV series by clicking on the Favorites button. This opens the {@link com.example.eurythmics.view.fragments.fragments.FavoritesCollectionFragment}
+ * </ul><p>
+ * There is also an upcoming movies carousel. It is possible scroll the carousel to left and right, however nothing happens if you click on a movie poster.
+ * @author Eugene Dvoryankov, Jenny Carlsson, Omar Suliman
  */
 public class HomeFragment extends Fragment {
 
