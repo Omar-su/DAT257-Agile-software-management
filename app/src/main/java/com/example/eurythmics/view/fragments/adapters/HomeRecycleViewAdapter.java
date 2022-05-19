@@ -53,9 +53,14 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         ((HomeViewHolder)holder).cardDescription.setText(savedMovies.get(i).getOverview());
         MovieService ms = MovieService.getMovieService();
         // Setting the rating for the 5 stars ratingBar
-        float rating = (float) ms.getOverallRating(savedMovies.get(i).getMovie_id());
+        float r = (float) ms.getOverallRating(savedMovies.get(i).getMovie_id());
+        float rating = (float) Math.floor((r*10)/10);
         Log.d("rfs", "_____________"+ rating/2);
         ((HomeViewHolder)holder).movieRating.setRating(rating/2);
+        Log.d("rfs", "_____________"+ (float) Math.floor((((rating/2)*10))/10));
+        ((HomeViewHolder)holder).rateNumber.setText(String.valueOf(r));
+
+
         setPoster(holder, i);
     }
 

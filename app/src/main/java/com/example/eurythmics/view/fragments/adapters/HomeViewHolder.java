@@ -19,7 +19,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private OnMovieCardListener onMovieCardListener;
 
     // Components to connect to the movie card
-    TextView cardTitle, cardDescription;
+    TextView cardTitle, cardDescription, rateNumber;
     RatingBar movieRating;
     ImageView cardPoster;
 
@@ -37,6 +37,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         cardDescription = itemView.findViewById(R.id.description_card);
         movieRating = itemView.findViewById(R.id.rating_bar_card);
         cardPoster = itemView.findViewById(R.id.poster_saved_card_img);
+        rateNumber = itemView.findViewById(R.id.rateNum);
 
         // Making movie card clickable
         itemView.setOnClickListener(this);
