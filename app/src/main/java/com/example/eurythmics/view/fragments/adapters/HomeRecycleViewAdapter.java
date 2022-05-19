@@ -17,7 +17,11 @@ import com.example.eurythmics.model.api.models.MovieModel;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
+/**
+ * Class that represents the adapter for the list in the {@link com.example.eurythmics.view.fragments.fragments.ProfileFragment}
+ * and {@link  com.example.eurythmics.view.fragments.fragments.RatedMoviesCollectionFragment}
+ * @author Omar Suliman
+ */
 public class HomeRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**
