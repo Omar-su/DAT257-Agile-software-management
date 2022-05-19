@@ -26,6 +26,17 @@ import com.example.eurythmics.viewmodels.RatedMoviesViewModel;
 
 import java.util.List;
 
+
+/**
+ * This class represents the fragment for the user profile.
+ * The profile consists of a profile picture, a username,
+ * an average rating, a settings button and a description.
+ * None of these features are working, there are merely a mockup.
+ * The profile fragment also consists of a working list of 5 top rated movies.
+ * The list can be between 0-5 items long.
+ * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
+ * @author Omar Suliman
+ */
 public class ProfileFragment extends Fragment implements OnMovieCardListener {
     private ImageView profilePicture;
 
