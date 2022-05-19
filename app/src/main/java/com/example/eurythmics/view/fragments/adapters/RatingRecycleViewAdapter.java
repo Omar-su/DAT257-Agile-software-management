@@ -17,6 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * An adapter which connects each list item to the recycle view
+ * @author Omar Sulaiman
+ */
 public class RatingRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**

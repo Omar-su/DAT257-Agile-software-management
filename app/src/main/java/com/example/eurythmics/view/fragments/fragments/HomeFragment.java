@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void configureSliderAdapter() {
-        sliderAdapter = new SliderAdapter(viewPager2);
+        sliderAdapter = new SliderAdapter();
         viewPager2.setAdapter(sliderAdapter);
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);

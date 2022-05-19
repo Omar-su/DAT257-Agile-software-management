@@ -14,11 +14,15 @@ import com.example.eurythmics.model.api.models.MovieModel;
 
 import java.util.List;
 
+/**
+ * An adapter for the image slider in the home page which populates the view page with images
+ * @author Omar Sulaiman
+ */
 public class SliderAdapter extends RecyclerView.Adapter<SliderViewHolder>{
     List<MovieModel> modelList;
 
 
-    public SliderAdapter( ViewPager2 viewPager2) {}
+    public SliderAdapter() {}
 
     @NonNull
     @Override
@@ -28,13 +32,10 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int i) {
+        // Sets the images
         String moviePosterPath = modelList.get(i).getPosterPath();
         Glide.with(holder.itemView.getContext()).load(Credentials.IMG_BASE_URL + moviePosterPath).into((holder).imageView);
-
     }
-
-
-
 
     @Override
     public int getItemCount() {

@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eurythmics.R;
 import com.makeramen.roundedimageview.RoundedImageView;
-
+/**
+ * A view holder which represents the cards which will be shown on the page view
+ * @author  Omar Sulaiman
+ */
 public class SliderViewHolder extends RecyclerView.ViewHolder{
 
     RoundedImageView imageView;
@@ -16,6 +19,5 @@ public class SliderViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
         imageView = itemView.findViewById(R.id.imageSlider);
     }
-
 
 }

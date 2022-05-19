@@ -6,7 +6,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+/**
+ * A view holder which represents the cards which will be shown on the recycle view
+ * @author  Omar Sulaiman
+ */
 public class RatingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 

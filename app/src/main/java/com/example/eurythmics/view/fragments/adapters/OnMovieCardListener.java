@@ -1,5 +1,9 @@
 package com.example.eurythmics.view.fragments.adapters;
 
+/**
+ * An interface that has an on movie click method
+ * @author Omar Sulaiman
+ */
 public interface OnMovieCardListener {
 
     /**

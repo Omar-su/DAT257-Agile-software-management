@@ -10,6 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eurythmics.R;
 
+/**
+ * A view holder which represents the cards which will be shown on the recycle view
+ * @author  Omar Sulaiman
+ */
 public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private OnMovieCardListener onMovieCardListener;
