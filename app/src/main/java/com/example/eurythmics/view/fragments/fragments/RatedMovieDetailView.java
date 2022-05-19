@@ -23,6 +23,37 @@ import com.example.eurythmics.model.api.models.MovieModel;
 
 import java.util.MissingResourceException;
 
+/**
+ * This class represents the fragment for viewing a detailed description, as well as, the rating of a rated movie.
+ * The detailed description includes:
+ * <p><ul>
+ * <li> poster
+ * <li> title
+ * <li> genre
+ * <li> release date
+ * <li> duration/running time
+ * <li> brief description
+ * </ul><p>
+ *
+ * The rating consists of:
+ * <p><ul>
+ * <li> Overall rating
+ * <li> character rating
+ * <li> score rating
+ * <li> story rating
+ * <li> scenery rating
+ * <li> notes box
+ * </ul><p>
+ * To edit the rating, click on the edit rating button that looks like a pen. This will take the user to the {@link com.example.eurythmics.view.fragments.fragments.EditRatingFragment} <p>
+ * If the user taps on the movie poster, the {@link com.example.eurythmics.view.fragments.fragments.MoviePosterFragment} will be opened and a full sized movie poster will appear.
+ * The fragments also contains a heart shaped button and an add rating button. <p>
+ * In this fragment a movie or series can be marked as favorite by clicking on the heart shaped button.
+ * A filled in heart symbol indicates that the movie or series exists in the favorites collection {@link com.example.eurythmics.view.fragments.fragments.FavoritesCollectionFragment} <p>
+ * When the user clicks on the Add rating button, the {@link com.example.eurythmics.view.fragments.fragments.EditRatingFragment} opens and from there, the user can create, change or delete a rating.
+ * <p>Can be opened from {@link  com.example.eurythmics.view.fragments.fragments.RatingFragment}
+ * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
+ * @author Omar Suliman
+ */
 public class RatedMovieDetailView extends Fragment implements OnBackButtonClickListener{
     private ImageView poster, likeButton;
 
