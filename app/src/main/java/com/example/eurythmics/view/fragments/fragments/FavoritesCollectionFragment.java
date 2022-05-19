@@ -35,8 +35,18 @@ import com.example.eurythmics.viewmodels.RatedMoviesViewModel;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * create an instance of this fragment.
+ This class represents the fragment for searching, filtering and sorting
+ any movies and series, which are marked as favorites. A movie marked as a favorite does not need to have a rating.
+ * Here, the user can:
+ * <p><ul>
+ * <li>use the searchbar to search for movies and series using any letter of it's title
+ * <li>filter the movies and series by their main genre (default when no genre is selected)
+ * <li>sort the movies and series by newest date, oldest date, highest rating or highest duration (default when no sorting option is selected)
+ * </ul><p>
+ * A movie or series can be marked as favorite in the {@link  com.example.eurythmics.view.fragments.fragments.MovieDetailFragment} or {@link  com.example.eurythmics.view.fragments.fragments.RatedMovieDetailView} by
+ * clicking on the heart symbol in the detail view. A filled in heart symbol indicates that the movie or series exists in the favorites collection <p>
+ * Opened from {@link  com.example.eurythmics.view.fragments.fragments.HomeFragment}
+ * @author Eugene Dvoryankov, Omar Suliman
  */
 public class FavoritesCollectionFragment extends Fragment implements OnMovieCardListener, OnBackButtonClickListener {
 
