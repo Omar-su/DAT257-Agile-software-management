@@ -5,7 +5,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * This class is for single movie request
+ * This class is the object that will hold the single movie json object
+ * @author Omar Sulaiman
  */
 public class MovieResponse {
 

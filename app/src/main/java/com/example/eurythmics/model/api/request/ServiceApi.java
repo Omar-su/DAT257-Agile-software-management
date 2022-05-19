@@ -6,6 +6,9 @@ import com.example.eurythmics.model.api.MovieApi;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * A class which has the purpose of connecting retrofit with the api and the MovieApi interface
+ */
 public class ServiceApi {
 
 

@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * This class is for requesting movie lists like popular or latest movies
+ * This class is the object that will hold the list of movie json objects
+ * @author Omar Sulaiman
  */
 public class MovieSearchResponse {
 
