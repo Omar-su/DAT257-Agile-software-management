@@ -21,7 +21,7 @@ import com.example.eurythmics.R;
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public class RatedSeriesCollectionFragment extends Fragment {
+public class RatedSeriesCollectionFragment extends Fragment implements OnBackButtonClickListener {
 
     private Button filterButton, sortButton;
     private Dialog filterDialog, sortDialog;
@@ -40,7 +40,7 @@ public class RatedSeriesCollectionFragment extends Fragment {
         sortButton = view.findViewById(R.id.series_sort_button);
         backButton = view.findViewById(R.id.seriesBackButton);
 
-        initFavoriteBackButton();
+        initBackButton();
 
         initFilterDialog();
         initFilterButton();
@@ -59,16 +59,6 @@ public class RatedSeriesCollectionFragment extends Fragment {
         });
     }
 
-
-    private void initFavoriteBackButton() {
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new HomeFragment();
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
-            }
-        });
-    }
 
     private void initSortDialog() {
         sortDialog = new Dialog(getActivity());
@@ -105,12 +95,7 @@ public class RatedSeriesCollectionFragment extends Fragment {
     }
 
     private void initFilterButton() {
-        filterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                filterDialog.show();
-            }
-        });
+        filterButton.setOnClickListener(view -> filterDialog.show());
     }
 
     private void initFilterDialog() {
@@ -154,4 +139,14 @@ public class RatedSeriesCollectionFragment extends Fragment {
         button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffd6d7d7")));
     }
 
+    @Override
+    public void initBackButton() {
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new HomeFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+            }
+        });
+    }
 }

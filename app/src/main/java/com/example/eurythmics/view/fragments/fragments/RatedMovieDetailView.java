@@ -23,7 +23,7 @@ import com.example.eurythmics.model.api.models.MovieModel;
 
 import java.util.MissingResourceException;
 
-public class RatedMovieDetailView extends Fragment {
+public class RatedMovieDetailView extends Fragment implements OnBackButtonClickListener{
     private ImageView poster, likeButton;
 
     private TextView title, category, releaseDate, durationTime,
@@ -89,62 +89,27 @@ public class RatedMovieDetailView extends Fragment {
 
     }
 
-    private void initBackButton() {
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment;
-                switch (fromWhichFragment) {
-                    case "favorite":
-                        fragment = new FavoritesCollectionFragment();
-                        switchScenes(fragment);
-                        break;
-                    case "ratingView":
-                        fragment = new RatingFragment();
-                        switchScenes(fragment);
-                        break;
-                    case "ratedMovies":
-                        fragment = new RatedMoviesCollectionFragment();
-                        switchScenes(fragment);
-                        break;
-                    case "profile":
-                        fragment = new ProfileFragment();
-                        switchScenes(fragment);
-                        break;
-                }
-            }
-        });
-    }
-
-    private void switchScenes(Fragment fragment){
-        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
-    }
 
     private void initEditRating() {
-        editRating.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new EditRatingFragment();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("movie_rating", chosenMovie);
-                fragment.setArguments(bundle);
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
-            }
+        editRating.setOnClickListener(view -> {
+            Fragment fragment = new EditRatingFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("movie_rating", chosenMovie);
+            bundle.putString("fromWhichFragment", fromWhichFragment);
+            fragment.setArguments(bundle);
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
         });
     }
 
     private void initPoster() {
-        poster.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MovieModel currentMov = chosenMovie;
-                Fragment fragment = new MoviePosterFragment();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("rated_poster", new MovieModel(currentMov));
-                bundle.putString("fromWhichFragment", fromWhichFragment);
-                fragment.setArguments(bundle);
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
-            }
+        poster.setOnClickListener(view -> {
+            MovieModel currentMov = chosenMovie;
+            Fragment fragment = new MoviePosterFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("rated_poster", new MovieModel(currentMov));
+            bundle.putString("fromWhichFragment", fromWhichFragment);
+            fragment.setArguments(bundle);
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
         });
     }
 
@@ -205,5 +170,34 @@ public class RatedMovieDetailView extends Fragment {
 
         return hMinute;
 
+    }
+
+    @Override
+    public void initBackButton() {
+        backButton.setOnClickListener(view -> {
+            Fragment fragment;
+            switch (fromWhichFragment) {
+                case "favorite":
+                    fragment = new FavoritesCollectionFragment();
+                    switchScenes(fragment);
+                    break;
+                case "ratingView":
+                    fragment = new RatingFragment();
+                    switchScenes(fragment);
+                    break;
+                case "ratedMovies":
+                    fragment = new RatedMoviesCollectionFragment();
+                    switchScenes(fragment);
+                    break;
+                case "profile":
+                    fragment = new ProfileFragment();
+                    switchScenes(fragment);
+                    break;
+            }
+        });
+    }
+
+    private void switchScenes(Fragment fragment){
+        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
     }
 }

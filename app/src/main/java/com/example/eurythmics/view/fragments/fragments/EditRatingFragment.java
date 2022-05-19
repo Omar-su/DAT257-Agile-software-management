@@ -48,6 +48,7 @@ public class EditRatingFragment extends Fragment {
     private TextView movieTitle;
     private ImageView moviePoster;
 
+    private String fromWhichFragment;
 
     MovieModel chosenMovie;
     MovieService ms;
@@ -67,7 +68,7 @@ public class EditRatingFragment extends Fragment {
 
         if (bundle != null){
             chosenMovie = bundle.getParcelable("movie_rating");
-            Log.d("TAG","ccdcdcdcdcd" + chosenMovie.getTitle());
+            fromWhichFragment = bundle.getString("fromWhichFragment");
 
         } else {
             throw new MissingResourceException("No chosen transaction was sent with the fragment, hence fragment cannot be created", MovieModel.class.toString(), "CHOSEN_TRANSACTION" );
@@ -357,6 +358,7 @@ public class EditRatingFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         chosenMovie.movieModel = chosenMovie;
                         bundle.putParcelable("ratedMovie", chosenMovie);
+                        bundle.putString("fromWhichFragment", fromWhichFragment);
                         fragment.setArguments(bundle);
                         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
                     }

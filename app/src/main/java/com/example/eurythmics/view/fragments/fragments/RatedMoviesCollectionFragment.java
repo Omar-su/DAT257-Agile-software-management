@@ -38,7 +38,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCardListener {
+public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCardListener, OnBackButtonClickListener{
 
 
     // recycle view
@@ -81,7 +81,7 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
 
         initSearchBar();
 
-        initFavoriteBackButton();
+        initBackButton();
 
         configureRecycleView();
 
@@ -212,15 +212,6 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
         });
     }
 
-    private void initFavoriteBackButton() {
-        favoriteBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new HomeFragment();
-                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
-            }
-        });
-    }
 
     private void initRecycleView() {
 
@@ -268,5 +259,13 @@ public class RatedMoviesCollectionFragment extends Fragment implements OnMovieCa
         bundle.putString("fromWhichFragment", "ratedMovies");
         fragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+    }
+
+    @Override
+    public void initBackButton() {
+        favoriteBackButton.setOnClickListener(view -> {
+            Fragment fragment = new HomeFragment();
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+        });
     }
 }

@@ -23,7 +23,7 @@ import com.example.eurythmics.model.api.models.MovieModel;
 
 import java.util.MissingResourceException;
 
-public class MovieDetailFragment extends Fragment {
+public class MovieDetailFragment extends Fragment implements OnBackButtonClickListener {
 
     private ImageView poster, likeButton;
 
@@ -83,21 +83,6 @@ public class MovieDetailFragment extends Fragment {
 
     }
 
-    private void initBackButton() {
-        backButtonDetailMov.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (fromWhichFragment.equals("favorite")){
-                    Fragment fragment = new FavoritesCollectionFragment();
-                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
-                }else if (fromWhichFragment.equals("ratingView")){
-                    Fragment fragment = new RatingFragment();
-                    requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
-                }
-
-            }
-        });
-    }
 
     private void intiPoster() {
         poster.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +129,7 @@ public class MovieDetailFragment extends Fragment {
                 Fragment fragment = new EditRatingFragment();
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("movie_rating", chosenMovie);
+                bundle.putString("fromWhichFragment", fromWhichFragment);
                 fragment.setArguments(bundle);
                 requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();            }
         });
@@ -177,4 +163,17 @@ public class MovieDetailFragment extends Fragment {
 
     }
 
+    @Override
+    public void initBackButton() {
+        backButtonDetailMov.setOnClickListener(view -> {
+            if (fromWhichFragment.equals("favorite")){
+                Fragment fragment = new FavoritesCollectionFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+            }else if (fromWhichFragment.equals("ratingView")){
+                Fragment fragment = new RatingFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout_main, fragment).commit();
+            }
+
+        });
+    }
 }
