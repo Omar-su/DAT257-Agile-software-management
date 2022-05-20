@@ -41,7 +41,6 @@ import java.util.MissingResourceException;
  * When the user clicks on the Add rating button, the {@link com.example.eurythmics.view.fragments.fragments.EditRatingFragment} opens and from there, the user can create, change or delete a rating.
  * <p>Can be opened from {@link  com.example.eurythmics.view.fragments.fragments.RatingFragment}
  * @author Omar Suliman
- * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
  */
 public class MovieDetailFragment extends Fragment implements OnBackButtonClickListener {
 

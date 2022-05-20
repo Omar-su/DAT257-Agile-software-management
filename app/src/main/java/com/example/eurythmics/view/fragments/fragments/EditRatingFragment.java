@@ -40,7 +40,6 @@ import java.util.MissingResourceException;
  * </ul><p>
  * Opened from {@link  com.example.eurythmics.view.fragments.fragments.MovieDetailFragment} <p>
  * Opened from {@link  com.example.eurythmics.view.fragments.fragments.RatedMovieDetailView}
- * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
  * @author Fabian Flaa, Omar Suliman, Oscar Palmqvist
  *
  */

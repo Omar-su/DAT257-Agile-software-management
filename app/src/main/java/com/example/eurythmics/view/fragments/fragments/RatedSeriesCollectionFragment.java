@@ -28,7 +28,6 @@ import com.example.eurythmics.R;
  * </ul><p>
  * Can be opened from {@link  com.example.eurythmics.view.fragments.fragments.HomeFragment}
  * @author Omar Suliman
- * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
  */
 public class RatedSeriesCollectionFragment extends Fragment implements OnBackButtonClickListener {
 

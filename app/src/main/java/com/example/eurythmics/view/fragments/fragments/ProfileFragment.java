@@ -35,7 +35,6 @@ import java.util.List;
  * The profile fragment also consists of a working list of 5 top rated movies.
  * The list can be between 0-5 items long.
  * @author Omar Suliman
- * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
  */
 public class ProfileFragment extends Fragment implements OnMovieCardListener {
     private ImageView profilePicture;

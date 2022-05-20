@@ -32,7 +32,6 @@ import java.util.List;
  * </ul><p>
  * There is also an upcoming movies carousel. It is possible scroll the carousel to left and right, however nothing happens if you click on a movie poster.
  * @author Omar Suliman
- * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
  */
 public class HomeFragment extends Fragment {
 
@@ -58,7 +57,6 @@ public class HomeFragment extends Fragment {
         viewPager2 = view.findViewById(R.id.viewImageSlider);
         configureSliderAdapter();
         observerAnyChangeCat();
-
 
         searchUpcomingMovies("upcoming",1);
 

@@ -47,7 +47,6 @@ import java.util.List;
  * clicking on the heart symbol in the detail view. A filled in heart symbol indicates that the movie or series exists in the favorites collection <p>
  * Can be opened from {@link  com.example.eurythmics.view.fragments.fragments.HomeFragment}
  * @author Omar Suliman
- * @author Desirée Staaf, Eugene Dvoryankov, Ida Nordlund, Jenny Carlsson
  */
 public class FavoritesCollectionFragment extends Fragment implements OnMovieCardListener, OnBackButtonClickListener {
 
