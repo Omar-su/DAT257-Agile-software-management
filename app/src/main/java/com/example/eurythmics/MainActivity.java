@@ -17,7 +17,7 @@ import com.example.eurythmics.model.api.database.DataBaseManager;
 
 /**
  * The main class which runs the application and has all navigation logic
- * @author Jenny Carlsson, Omar Sulaiman
+ * @author Jenny Carlsson, Omar Sulaiman, Desiree Staff, Oscar Palmqvist
  */
 public class MainActivity extends AppCompatActivity {
 
