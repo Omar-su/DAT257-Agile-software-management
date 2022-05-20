@@ -30,7 +30,9 @@
                 android:layout_height="45dp"
                 android:layout_marginStart="6dp"
                 android:layout_toEndOf="@+id/poster_saved_card_img"
-                android:stepSize="0.5" />
+                android:stepSize="0.5"
+                android:isIndicator="true"
+                android:progressTint="#F5C518"/>
 
             <TextView
                 android:id="@+id/saved_movie_card_title"
