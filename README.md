@@ -105,8 +105,7 @@ You will also find two maps the indvidual reflection map and the team reflection
 <!-- Länkar -->
 <h2 id="links"> Links </h2>
 <ol>
-  <li><a href=""> RAD (requirement- and documentary analysis) </a></li>
-  <li><a href=""> SDD (system design documentation) </a></li>
+
   <li><a href=""> Backlog (Trello) </a></li>
 
 </ol>
