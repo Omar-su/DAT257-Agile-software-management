@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.eurythmics.R;
@@ -43,6 +44,7 @@ public class ProfileFragment extends Fragment implements OnMovieCardListener {
     private HomeRecycleViewAdapter viewAdapter;
     private RatedMoviesViewModel viewModel;
     private MovieService ms;
+    private TextView inputTextAverageRating;
 
 
     @Override
@@ -51,7 +53,7 @@ public class ProfileFragment extends Fragment implements OnMovieCardListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         profilePicture = view.findViewById(R.id.profile_picture);
-
+        inputTextAverageRating = view.findViewById(R.id.inputTextAverageRating);
         viewModel = new ViewModelProvider(this).get(RatedMoviesViewModel.class);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -62,6 +64,8 @@ public class ProfileFragment extends Fragment implements OnMovieCardListener {
         recyclerView = view.findViewById(R.id.profile_recycle_view);
 
         ms = MovieService.getMovieService();
+
+        inputTextAverageRating.setText(ms.getAverageOverallRating()+"");
 
 
         configureRecycleView();

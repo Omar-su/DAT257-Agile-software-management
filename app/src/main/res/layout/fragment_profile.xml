@@ -132,8 +132,8 @@
 
     <TextView
         android:id="@+id/inputTextAverageRating"
-        android:layout_width="25dp"
-        android:layout_height="wrap_content"
+        android:layout_width="54dp"
+        android:layout_height="20dp"
         android:text="XX"
         android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="@+id/textAverageRating"
