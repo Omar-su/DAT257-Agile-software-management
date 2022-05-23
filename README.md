@@ -70,7 +70,7 @@ Link: https://www.figma.com/file/isUs2WyrVKVgE0rtTUPVfb/Prototyping?node-id=0%3A
 <h2 id="trello"> Trello</h2>
 Trello was used as a planning tool for our project. We have used two different trello boards, one for project planning and one as our scrum board. <br><br>
 
-Here is the link to the Trello workspace: LINK
+Here is the link to the Trello workspace: [Trello Backlog](https://trello.com/b/6arqg1PY/user-stories)
 
 <!-- Setup -->
 <h2 id="getting-started"> How to run the Application? </h2>
@@ -106,7 +106,7 @@ You will also find two maps the indvidual reflection map and the team reflection
 <h2 id="links"> Links </h2>
 <ol>
 
-  <li><a href=""> Backlog (Trello) </a></li>
+  <li><a href="https://trello.com/b/6arqg1PY/user-stories"> Backlog (Trello) </a></li>
 
 </ol>
 
