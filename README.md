@@ -58,6 +58,8 @@ Documents: Contains all of the documents for thw project. This includes:<br>
   <li>Social contract</li>
   <li>Folder containing our team relfections</li>
   <li>Folder containing individual reflections for each team member</li>
+  <li>Final Report</li>
+
 </ul> 
 
 <!-- Figma -->
